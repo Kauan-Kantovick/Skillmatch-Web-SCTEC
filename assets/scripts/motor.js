@@ -1,46 +1,49 @@
 //==============================CLASSE-Candidato=========================================
 
 class Candidato {
-    constructor(nome, area, habilidades, modeloTrabalho, anosExperiencia) {
-        this.nome = nome;
-        this.area = area;
-        this.habilidades = habilidades;
-        this.modeloTrabalho = modeloTrabalho;
-        this.anosExperiencia = anosExperiencia;
+    constructor(Nome, Area, EstiloTrabalho, Habilidades, TempoExperiencia) {
+        this.Nome = Nome;
+        this.Area = Area;
+        this.EstiloTrabalho = EstiloTrabalho;
+        this.Habilidades = Habilidades;
+        this.TempoExperiencia = TempoExperiencia;
     };
     Apresentacao() {
         console.log(`
-            Olá, meu nome é ${this.nome}, trabalho na área de ${this.area} com o modelo de trabalho ${this.modeloTrabalho}, minhas habilidades são ${this.habilidades} e tenho ${this.anosExperiencia} anos de experiência.`);
+            Olá, meu nome é ${this.Nome}, trabalho na área de ${this.Area} com o modelo de trabalho ${this.EstiloTrabalho}, minhas Habilidades são ${this.Habilidades} e tenho ${this.TempoExperiencia} anos de experiência.`);
     };
 }
 
-const Candidato_1 = new Candidato("Ana", "Front-End", ["JavaScript", "GitHub", "Lógica de Programação"], "Híbrido", 3);
+const Candidato_1 = new Candidato("Ana", "Front-End", "Híbrido", ["JavaScript", "GitHub", "Lógica de Programação"]);
 
-Candidato_1.Apresentacao();
+const {Nome, Area, EstiloTrabalho, Habilidades, TempoExperiencia} = Candidato_1;
+
+Candidato_1.Apresentacao({Nome, Area, EstiloTrabalho, Habilidades, TempoExperiencia});
 
 //==============================CLASSE-VAGAS=========================================
 
 class Vaga {
-    constructor(id, empresa, cargo, requisitos, salario, modeloTrabalho) {
+    constructor(id, Empresa, Cargo, Requisitos, Salario, ModeloTrabalho) {
         this.id = id;
-        this.empresa = empresa;
-        this.cargo = cargo;
-        this.requisitos = requisitos;
-        this.salario = salario;
-        this.modeloTrabalho = modeloTrabalho;
+        this.Empresa = Empresa;
+        this.Cargo = Cargo;
+        this.Requisitos = Requisitos;
+        this.Salario = Salario;
+        this.ModeloTrabalho = ModeloTrabalho;
     }
 }
 
 class VagaTecnologia extends Vaga {
-    constructor(id, empresa, cargo, requisitos, salario, modeloTrabalho, anosExperiencia = 0) {
-        super(id, empresa, cargo, requisitos, salario, modeloTrabalho);
-        this.anosExperiencia = anosExperiencia;
+    constructor(Id, Empresa, Cargo, Requisitos, Salario, ModeloTrabalho, AnosExperiencia = 0) {
+        super(Id, Empresa, Cargo, Requisitos, Salario, ModeloTrabalho);
+        this.AnosExperiencia = AnosExperiencia;
     };
     Apresentacao() {
         console.log(`
-            A empresa ${this.empresa} está buscando um candidato para o cargo de ${this.cargo}, com o modelo de trabalho ${this.modeloTrabalho} e salário na faixa de R$${this.salario}, são necessários as habilidades: ${this.requisitos} e com ${this.anosExperiencia} ano(s) de experiência na área.`);
+            A empresa ${this.Empresa} está buscando um candidato para o Cargo de ${this.Cargo}, com o modelo de trabalho ${this.ModeloTrabalho} e salário na faixa de R$${this.Salario}, são necessários as Habilidades: ${this.Requisitos} e com ${this.AnosExperiencia} ano(s) de experiência na área.`);
     };
 }
+
 
 const Vagas = [
     new VagaTecnologia(1, "TechStart", "Desenvolvedor Front-End Júnior", ["JavaScript", "GitHub", "Lógica de Programação", "Objetos"], 2800, "Remoto", 1),
@@ -49,7 +52,9 @@ const Vagas = [
     new VagaTecnologia(4, "ABACATE", "Estágiario de POO", ["JavaScript", "Objetos", "Lógica de Programação"], 2200, "Híbrido", 3)
 ];
 
-Vagas[3].Apresentacao();
+const {Id, Empresa, Cargo, Requisitos, Salario, ModeloTrabalho, AnosExperiencia} = Vagas[3];
+
+Vagas[3].Apresentacao({Id, Empresa, Cargo, Requisitos, Salario, ModeloTrabalho, AnosExperiencia});
 
 //==============================VISUALIZAR-VAGAS=========================================
 
@@ -66,12 +71,12 @@ const VisualizarVagas = (Vagas) => {
 
             Índice da Vaga ${i}:
             ID: ${Vagas[i].id},
-            EMPRESA: ${Vagas[i].empresa},
-            CARGO: ${Vagas[i].cargo},
-            REQUISITOS: ${Vagas[i].requisitos},
-            SALÁRIO: ${Vagas[i].salario},
-            MODELO DE TRABALHO: ${Vagas[i].modeloTrabalho},
-            ANOS DE EXPERIÊNCIA: ${Vagas[i].anosExperiencia}.
+            EMPRESA: ${Vagas[i].Empresa},
+            CARGO: ${Vagas[i].Cargo},
+            REQUISITOS: ${Vagas[i].Requisitos},
+            SALÁRIO: ${Vagas[i].Salario},
+            MODELO DE TRABALHO: ${Vagas[i].ModeloTrabalho},
+            ANOS DE EXPERIÊNCIA: ${Vagas[i].AnosExperiencia}.
         `;
 
         console.log(Mensagem);
@@ -88,18 +93,14 @@ VisualizarVagas(Vagas);
 let VagaSelecionada = 0;
 //prompt("Digite o ID da Vaga que deseja comparar com o perfil do Candidato: ");
 
-const RequisitosVaga = Vagas[VagaSelecionada].requisitos;
-
-const HabilidadesCandidato = Candidato_1.habilidades;
-
 //==============================COMPARAÇÃO=========================================
 
-const HabilidadesCompativeis = HabilidadesCandidato.filter(habilidade =>
-    RequisitosVaga.includes(habilidade)
+const HabilidadesCompativeis = Habilidades.filter(habilidade =>
+    Requisitos.includes(habilidade)
 );
 
-const HabilidadesFaltantes = RequisitosVaga.filter(requisito =>
-    HabilidadesCandidato.includes(requisito) === false
+const HabilidadesFaltantes = Requisitos.filter(requisito =>
+    Habilidades.includes(requisito) === false
 );
 
 //==============================FORMATAÇÃO=========================================
@@ -133,7 +134,7 @@ const CriarContadorAnalises = (() => {
 
 const RequisitosAtendidos = HabilidadesCompativeis.length;
 
-const TotalRequisitos = RequisitosVaga.length;
+const TotalRequisitos = Requisitos.length;
 
 const CalcularCompatibilidade = (valorA, valorB) => Math.round((valorA / valorB) * 100);
 
@@ -141,8 +142,8 @@ const TaxaCompatibilidade = CalcularCompatibilidade(RequisitosAtendidos, TotalRe
 
 const MensagemCompatibilidade = `
 =================== MENSAGEM DE COMPATIBILIDADE ====================
-    Empresa: ${Vagas[VagaSelecionada].empresa}
-    Cargo: ${Vagas[VagaSelecionada].cargo}
+    Empresa: ${Vagas[VagaSelecionada].Empresa}
+    Cargo: ${Vagas[VagaSelecionada].Cargo}
     Compatibilidade: ${TaxaCompatibilidade}%
     Habilidades Compatíveis:${HabilidadesCompativeisFormatadas}
     Habilidades Faltantes: ${("\n") + HabilidadesFaltantesFormatadas.join("\n")}
@@ -185,12 +186,20 @@ const ClassificarCompatibilidade = (TaxaCompatibilidade) => {
 
 const VerificacaoCompatibilidade = ClassificarCompatibilidade(TaxaCompatibilidade);
 
-const ExibicaoCompatibilidade = `
+function ExibicaoCompatibilidade(VerificacaoCompatibilidade, TempoExperiencia, AnosExperiencia) {
+    if (TempoExperiencia >= AnosExperiencia) {
+        console.log(`
 =================== VERIFICAÇÃO DE COMPATIBILIDADE ====================
     ${VerificacaoCompatibilidade}
-`;
+`);
+    } else {
+        console.log(`A vaga a seguir não é compativel com o nível de experiência que o usuário possui, procure outra vaga!
+            `);
+        return process.exit(1);
+    };
+}
 
-console.log(ExibicaoCompatibilidade);
+ExibicaoCompatibilidade(VerificacaoCompatibilidade, TempoExperiencia, AnosExperiencia);
 
 //==============================RECOMENDAÇÃO-DE-ESTUDOS=========================================
 
@@ -209,9 +218,9 @@ const MelhorVaga = (Candidato, Vagas) => {
 
         CriarContadorAnalises.ContarAnalise();
 
-        const HabilidadesCompativeis = Candidato.habilidades.filter(habilidade => Vaga.requisitos.includes(habilidade));
+        const HabilidadesCompativeis = Candidato.Habilidades.filter(habilidade => Vaga.Requisitos.includes(habilidade));
 
-        const Compatibilidade = CalcularCompatibilidade(HabilidadesCompativeis.length, Vaga.requisitos.length);
+        const Compatibilidade = CalcularCompatibilidade(HabilidadesCompativeis.length, Vaga.Requisitos.length);
 
         if (Compatibilidade > MaiorCompatibilidade) {
             MaiorCompatibilidade = Compatibilidade;
@@ -220,7 +229,7 @@ const MelhorVaga = (Candidato, Vagas) => {
                 Vaga,
                 Compatibilidade,
                 HabilidadesCompativeis,
-                HabilidadesFaltantes: Vaga.requisitos.filter(requisito => !Candidato.habilidades.includes(requisito))
+                HabilidadesFaltantes: Vaga.Requisitos.filter(requisito => !Candidato.Habilidades.includes(requisito))
             };
         }
     }
@@ -233,8 +242,8 @@ const Recomendacao = MelhorVaga(Candidato_1, Vagas);
 console.log(`
 ================= MELHOR VAGA =================
 
-Empresa: ${Recomendacao.Vaga.empresa}
-Cargo: ${Recomendacao.Vaga.cargo}
+Empresa: ${Recomendacao.Vaga.Empresa}
+Cargo: ${Recomendacao.Vaga.Cargo}
 Compatibilidade: ${Recomendacao.Compatibilidade}%
 Classificação: ${ClassificarCompatibilidade(Recomendacao.Compatibilidade)}
 
@@ -251,10 +260,10 @@ CriarContadorAnalises.InformacoesAnalise();
 //==============================CALLBACK==================================================
 
 const AnaliseFinal = "Análise finalizada.";
-const NomeCandidato = Candidato_1.nome;
+const NomeCandidato = Candidato_1.Nome;
 
-function MensagemFinal(nome, analise) {
-    console.log(`${nome}, revise suas habilidades faltantes e atualize seu plano de estudos.`);
+function MensagemFinal(Nome, analise) {
+    console.log(`${Nome}, revise suas Habilidades faltantes e atualize seu plano de estudos.`);
     console.log(analise);
 }
 
