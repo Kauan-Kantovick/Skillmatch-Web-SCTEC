@@ -1,4 +1,4 @@
-//==============================CLASSE-Candidato=========================================
+//==============================CLASSE-CANDIDATO=========================================
 
 class Candidato {
     constructor(Nome, Area, EstiloTrabalho, Habilidades, TempoExperiencia) {
@@ -14,7 +14,7 @@ class Candidato {
     };
 }
 
-const Candidato_1 = new Candidato("Ana", "Front-End", "Híbrido", ["JavaScript", "GitHub", "Lógica de Programação"]);
+const Candidato_1 = new Candidato("Ana", "Front-End", "Híbrido", ["JavaScript", "GitHub", "Lógica de Programação"], 5);
 
 const {Nome, Area, EstiloTrabalho, Habilidades, TempoExperiencia} = Candidato_1;
 
@@ -203,12 +203,38 @@ ExibicaoCompatibilidade(VerificacaoCompatibilidade, TempoExperiencia, AnosExperi
 
 //==============================RECOMENDAÇÃO-DE-ESTUDOS=========================================
 
+console.log(RecomendacaoEstudos);
+
+const HabilidadesCompativeis = Candidato_1.Habilidades.filter(habilidade => Vaga.Requisitos.includes(habilidade));
+
+const Compatibilidade = CalcularCompatibilidade(HabilidadesCompativeis.length, Vaga.Requisitos.length);
+
+const RecomendacaoPiorVaga = (Candidato, Vagas) => {
+    let PiorVaga = {};
+    let MenorCompatibilidade = 101;
+    for (const Vaga of Vagas) {
+
+        CriarContadorAnalises.ContarAnalise();
+
+        if (Compatibilidade < MenorCompatibilidade) {
+            MenorCompatibilidade = Compatibilidade;
+
+            PiorVaga = {
+                HabilidadesFaltantes: Vaga.Requisitos.filter(requisito => !Candidato.Habilidades.includes(requisito))
+            };
+        }
+    }
+
+    return PiorVaga.HabilidadesFaltantes;
+};
+
+const RecomendacaoHabilidadesFaltantes = RecomendacaoPiorVaga(Candidato_1, Vagas);
+
 const RecomendacaoEstudos = `
 =================== RECOMENDAÇÃO DE ESTUDOS ====================
-    Priorize os estudos em: ${("\n") + HabilidadesFaltantesFormatadas.join("\n")} 
+    Priorize os estudos em: ${("\n") + RecomendacaoHabilidadesFaltantes.join("\n")} 
 `;
 
-console.log(RecomendacaoEstudos);
 //==============================MELHOR-VAGA==================================================
 
 const MelhorVaga = (Candidato, Vagas) => {
@@ -217,10 +243,6 @@ const MelhorVaga = (Candidato, Vagas) => {
     for (const Vaga of Vagas) {
 
         CriarContadorAnalises.ContarAnalise();
-
-        const HabilidadesCompativeis = Candidato.Habilidades.filter(habilidade => Vaga.Requisitos.includes(habilidade));
-
-        const Compatibilidade = CalcularCompatibilidade(HabilidadesCompativeis.length, Vaga.Requisitos.length);
 
         if (Compatibilidade > MaiorCompatibilidade) {
             MaiorCompatibilidade = Compatibilidade;
@@ -237,7 +259,7 @@ const MelhorVaga = (Candidato, Vagas) => {
     return MelhorCompatibilidade;
 };
 
-const Recomendacao = MelhorVaga(Candidato_1, Vagas);
+const Recomendacao = MelhorVaga(Candidato_1, Vagas, HabilidadesCompativeis, Compatibilidade);
 
 console.log(`
 ================= MELHOR VAGA =================
