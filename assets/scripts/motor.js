@@ -103,10 +103,10 @@ const Vagas = [
     new VagaTecnologia(7, "SoftVision", "Estágio em Desenvolvimento Web", ["HTML", "CSS", "JavaScript", "Lógica de Programação"], 1700, "Presencial"),
     new VagaTecnologia(8, "DataFlow", "Desenvolvedor Back-End", ["Node.js", "MySQL", "APIs", "GitHub"], 4200, "Remoto", 3),
     new VagaTecnologia(9, "NextCode", "Desenvolvedor Front-End Pleno", ["JavaScript", "HTML", "CSS", "React", "Git"], 5000, "Híbrido", 4),
-    new VagaTecnologia(10, "InovaTech", "Desenvolvedor JavaScript", ["JavaScript", "Funções", "Arrays", "Objetos", "GitHub"], 3200, "Presencial", 2)
+    new VagaTecnologia(10, "InovaTech", "Desenvolvedor JavaScript", ["JavaScript", "Funções", "Arrays", "Objetos", "GitHub"], 3200, "Presencial", 2),
 ];
 
-console.log(Vagas[0].GetId(), Vagas[0].GetEmpresa(), Vagas[0].GetCargo(), Vagas[0].GetRequisitos(), Vagas[0].GetSalario(), Vagas[0].GetModeloTrabalho(), Vagas[0].GetAnosExperiencia(), Vagas[0].ApresentacaoVaga());
+// console.log(Vagas[0].GetId(), Vagas[0].GetEmpresa(), Vagas[0].GetCargo(), Vagas[0].GetRequisitos(), Vagas[0].GetSalario(), Vagas[0].GetModeloTrabalho(), Vagas[0].GetAnosExperiencia(), Vagas[0].ApresentacaoVaga());
 
 // - Instâncias:
 
@@ -248,81 +248,114 @@ ExibicaoCompatibilidade(VerificacaoCompatibilidade, Candidato_1, VagaSelecionada
 
 //==============================RECOMENDAÇÃO-DE-ESTUDOS=========================================
 
-const Compatibilidade = CalcularCompatibilidade(RequisitosAtendidos, TotalRequisitos);
-
-// console.log(Compatibilidade);
-/*
 const RecomendacaoEstudos = (Candidato, Vagas) => {
 
-    let MaioresRequisitos = {};
+    let RequisitosUrgentes = {};
     
     let MenorCompatibilidade = 101;
 
     for (const VagaTecnologia of Vagas) {
 
+//        console.log("Entrou no for");
+
+        let RequisitosVagaAtual = VagaTecnologia.GetRequisitos();
+
+//        console.log(RequisitosVagaAtual);
+
+        let HabilidadesCompativeisVaga = HabilidadesCandidato.filter(habilidade => RequisitosVagaAtual.includes(habilidade));
+
+//        console.log(HabilidadesCompativeisVaga);
+
+        let HabilidadesIncompativeisVaga = RequisitosVagaAtual.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
+
+//        console.log(HabilidadesIncompativeisVaga);
+
+        let TotalRequisitosAtual = RequisitosVagaAtual.length;
+    
+//        console.log(TotalRequisitosAtual);
+
+        let TotalCompativeis = HabilidadesCompativeisVaga.length;
+        
+        let CompatibilidadeCandidato = CalcularCompatibilidade(TotalCompativeis, TotalRequisitosAtual);
+
+//        console.log("Compatibilidade:", CompatibilidadeCandidato);
+
+//        console.log(CompatibilidadeCandidato < MenorCompatibilidade);
+
         CriarContadorAnalises.ContarAnalise();
 
-        if (Compatibilidade < MenorCompatibilidade) {
-            MenorCompatibilidade = Compatibilidade;
+        if (CompatibilidadeCandidato < MenorCompatibilidade) {
+            MenorCompatibilidade = CompatibilidadeCandidato;
 
-            MaioresRequisitos = {
-                HabilidadesFaltantes
+            let HabilidadesImcompativeisFormatas = HabilidadesIncompativeisVaga.map(habilidade => `    -${habilidade}`);
+
+            RequisitosUrgentes = {
+                CompatibilidadeCandidato,
+                HabilidadesImcompativeisFormatas,
+                VagaTecnologia
             };
 
         }
     }
-    return MaioresRequisitos;
+    return RequisitosUrgentes;
 };
 
 const RecomendacaoPior = RecomendacaoEstudos(Candidato_1, Vagas);
-*/
+
 // console.log(RecomendacaoPior);
 
 const RecomendacaoMensagem = `
 =================== RECOMENDAÇÃO DE ESTUDOS ====================
-    Priorize os estudos em: ${("\n") + `    -` + HabilidadesFaltantesFormatadas.join("\n")} 
+    Priorize os estudos em: ${("\n") + RecomendacaoPior.HabilidadesImcompativeisFormatas.join ("\n")} 
 `;
 
-CriarContadorAnalises.InformacoesAnalise();
-
 console.log(RecomendacaoMensagem);
-/*
-para cada vaga
 
-      calcular requisitos atendidos
-
-      calcular total de requisitos
-
-      calcular compatibilidade
-
-      descobrir habilidades faltantes
-
-      se essa compatibilidade for menor
-
-             guardar:
-                    compatibilidade
-                    habilidades faltantes
-                    vaga
 //==============================MELHOR-VAGA==================================================
+
 const MelhorVaga = (Candidato, Vagas) => {
 
     let RecomendacaoMelhorVaga = {};
+
     let MaiorCompatibilidade = -1;
 
-    for (const Vaga of Vagas) {
+    for (const VagaTecnologia of Vagas) {
+
+        let RequisitosVagaAtual = VagaTecnologia.GetRequisitos();
+
+//      console.log(RequisitosVagaAtual);
+
+        let HabilidadesCompativeisVaga = HabilidadesCandidato.filter(habilidade => RequisitosVagaAtual.includes(habilidade));
+
+//      console.log(HabilidadesCompativeisVaga);
+
+        let HabilidadesIncompativeisVaga = RequisitosVagaAtual.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
+
+//      console.log(HabilidadesIncompativeisVaga);
+
+        let TotalRequisitosAtual = RequisitosVagaAtual.length;
+    
+//      console.log(TotalRequisitosAtual);
+
+        let TotalCompativeis = HabilidadesCompativeisVaga.length;
+        
+        let CompatibilidadeCandidato = CalcularCompatibilidade(TotalCompativeis, TotalRequisitosAtual);
 
         CriarContadorAnalises.ContarAnalise();
 
-        if (Compatibilidade > MaiorCompatibilidade) {
-            MaiorCompatibilidade = Compatibilidade;
+        if (CompatibilidadeCandidato > MaiorCompatibilidade) {
+            MaiorCompatibilidade = CompatibilidadeCandidato;
 
-            RecomendacaoMelhorVaga = {
-                Vaga,
-                Compatibilidade,
-                HabilidadesCompativeis,
-                HabilidadesFaltantes
-            };
+            let HabilidadesCompativeisFormatas = HabilidadesCompativeisVaga.map(habilidade => `    -${habilidade}`);
 
+            let HabilidadesImcompativeisFormatas = HabilidadesIncompativeisVaga.map(habilidade => `    -${habilidade}`);
+               
+                RecomendacaoMelhorVaga = {
+                    VagaTecnologia,
+                    CompatibilidadeCandidato,
+                    HabilidadesCompativeisFormatas,
+                    HabilidadesImcompativeisFormatas
+                };
         }
     }
     return RecomendacaoMelhorVaga;
@@ -335,21 +368,21 @@ const Recomendacao = MelhorVaga(Candidato_1, Vagas);
 console.log(`
 ================= MELHOR VAGA =================
 
-empresa: ${Recomendacao.Vaga.GetEmpresa()}
-cargo: ${Recomendacao.Vaga.GetCargo()}
-Compatibilidade: ${Recomendacao.Compatibilidade}%
-Classificação: ${ClassificarCompatibilidade(Recomendacao.Compatibilidade)}
+Empresa: ${Recomendacao.VagaTecnologia.GetEmpresa()}
+Cargo: ${Recomendacao.VagaTecnologia.GetCargo()}
+Compatibilidade: ${Recomendacao.CompatibilidadeCandidato}%
+Classificação: ${ClassificarCompatibilidade(Recomendacao.CompatibilidadeCandidato)}
 
 Habilidades Compatíveis:
-${Recomendacao.HabilidadesCompativeis.join("\n")}
+${Recomendacao.HabilidadesCompativeisFormatas.join("\n")}
 
 Habilidades Faltantes:
-${Recomendacao.HabilidadesFaltantes.join("\n")}
+${Recomendacao.HabilidadesImcompativeisFormatas.join("\n")}
 
 `);
 
 CriarContadorAnalises.InformacoesAnalise();
-*/
+
 //==============================CALLBACK==================================================
 
 const AnaliseFinal = "Análise finalizada.";
