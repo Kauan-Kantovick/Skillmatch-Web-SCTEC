@@ -67,6 +67,9 @@ class Vaga {
     GetModeloTrabalho() {
         return this.modeloTrabalho;
     };
+    ApresentacaoVaga() {
+        return `A empresa ${this.empresa} está contratando para o cargo de ${this.cargo} (ID: ${this.id}). Procuramos profissionais com os requisitos: ${this.requisitos}. Oferecemos salário de ${this.salario} e modelo de trabalho ${this.modeloTrabalho}.`;
+    }
 }
 
 class VagaTecnologia extends Vaga {
@@ -77,6 +80,9 @@ class VagaTecnologia extends Vaga {
     GetAnosExperiencia(){
         return this.anosExperiencia;
     };
+    ApresentacaoVaga() {
+        return `A empresa ${this.empresa} está contratando para o cargo de ${this.cargo} (ID: ${this.id}). É necessário possuir ${this.anosExperiencia} de experiência e conhecimentos em ${this.requisitos}. Oferecemos salário de ${this.salario} e modelo de trabalho ${this.modeloTrabalho}.`;
+    }
 }
 
 //==============================UTILIZAÇÃO-CLASSES=========================================
@@ -100,7 +106,7 @@ const Vagas = [
     new VagaTecnologia(10, "InovaTech", "Desenvolvedor JavaScript", ["JavaScript", "Funções", "Arrays", "Objetos", "GitHub"], 3200, "Presencial", 2)
 ];
 
-// console.log(Vagas[0].GetId(), Vagas[0].GetEmpresa(), Vagas[0].GetCargo(), Vagas[0].GetRequisitos(), Vagas[0].GetSalario(), Vagas[0].GetModeloTrabalho(), Vagas[0].GetAnosExperiencia());
+console.log(Vagas[0].GetId(), Vagas[0].GetEmpresa(), Vagas[0].GetCargo(), Vagas[0].GetRequisitos(), Vagas[0].GetSalario(), Vagas[0].GetModeloTrabalho(), Vagas[0].GetAnosExperiencia(), Vagas[0].ApresentacaoVaga());
 
 // - Instâncias:
 
