@@ -4,12 +4,12 @@
 3 - Fluxo do sistema
     3.1 - Capturar as vagas cadastradas (10 vagas) - async/await/fetch
     3.2 - Contador de análises
-    3.3 - Filtrar as vagas que são para que aquele usuario (tempo de experiencia - 3 vagas)
-    3.4 - Calcular a compatibilidade de cada vaga filtrada para aquele usuario
+    3.3 - *Filtrar as vagas que são para que aquele usuario (tempo de experiencia - 3 vagas)
+    3.4 - Calcular a compatibilidade de cada vaga *filtrada para aquele usuario
     3.5 - Classifica essa compatibilidade
     3.6 - Faz e exibe o cálulo de compatibilidade com a vaga escolhida
     3.7 - Destaca a melhor dentre as filtradas
-    3.8 - Recomendação de estudos das habilidades faltantes da pior vaga
+    3.8 - Recomendação de estudos das habilidades faltantes *da pior vaga
     3.9 - Callback e total de análises
 */
 //==============================CLASSE-CANDIDATO=========================================
@@ -242,28 +242,74 @@ ExibicaoCompatibilidade(VerificacaoCompatibilidade, Candidato_1, VagaSelecionada
 
 //==============================RECOMENDAÇÃO-DE-ESTUDOS=========================================
 
-const RecomendacaoEstudos = `
+const Compatibilidade = CalcularCompatibilidade(RequisitosAtendidos, TotalRequisitos);
+
+// console.log(Compatibilidade);
+
+const RecomendacaoEstudos = (Candidato, Vagas) => {
+
+    let MaioresRequisitos = {};
+    let MenorCompatibilidade = 101;
+
+    for (const VagaTecnologia of Vagas) {
+
+        CriarContadorAnalises.ContarAnalise();
+
+        if (Compatibilidade < MenorCompatibilidade) {
+            MenorCompatibilidade = Compatibilidade;
+
+            MaioresRequisitos = {
+                HabilidadesFaltantes
+            };
+
+        }
+    }
+    return MaioresRequisitos;
+};
+
+const RecomendacaoPior = RecomendacaoEstudos(Candidato_1, Vagas);
+
+// console.log(RecomendacaoPior);
+
+const RecomendacaoMensagem = `
 =================== RECOMENDAÇÃO DE ESTUDOS ====================
-    Priorize os estudos em: ${("\n") + HabilidadesFaltantesFormatadas.join("\n")} 
+    Priorize os estudos em: ${("\n") + `    -` + RecomendacaoPior.HabilidadesFaltantes.join("\n")} 
 `;
 
-console.log(RecomendacaoEstudos);
+CriarContadorAnalises.InformacoesAnalise();
 
+console.log(RecomendacaoMensagem);
+/*
+para cada vaga
+
+      calcular requisitos atendidos
+
+      calcular total de requisitos
+
+      calcular compatibilidade
+
+      descobrir habilidades faltantes
+
+      se essa compatibilidade for menor
+
+             guardar:
+                    compatibilidade
+                    habilidades faltantes
+                    vaga
 //==============================MELHOR-VAGA==================================================
-
 const MelhorVaga = (Candidato, Vagas) => {
-    let MelhorVaga = {};
+
+    let RecomendacaoMelhorVaga = {};
     let MaiorCompatibilidade = -1;
+
     for (const Vaga of Vagas) {
 
         CriarContadorAnalises.ContarAnalise();
 
-        const Compatibilidade = CalcularCompatibilidade(RequisitosAtendidos, TotalRequisitos);
-
         if (Compatibilidade > MaiorCompatibilidade) {
             MaiorCompatibilidade = Compatibilidade;
 
-            MelhorVaga = {
+            RecomendacaoMelhorVaga = {
                 Vaga,
                 Compatibilidade,
                 HabilidadesCompativeis,
@@ -272,7 +318,7 @@ const MelhorVaga = (Candidato, Vagas) => {
 
         }
     }
-    return MelhorVaga;
+    return RecomendacaoMelhorVaga;
 };
 
 const Recomendacao = MelhorVaga(Candidato_1, Vagas);
@@ -339,3 +385,4 @@ async function IniciarBusca() {
 }
 
 IniciarBusca();
+*/
