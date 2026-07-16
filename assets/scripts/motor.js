@@ -245,10 +245,11 @@ ExibicaoCompatibilidade(VerificacaoCompatibilidade, Candidato_1, VagaSelecionada
 const Compatibilidade = CalcularCompatibilidade(RequisitosAtendidos, TotalRequisitos);
 
 // console.log(Compatibilidade);
-
+/*
 const RecomendacaoEstudos = (Candidato, Vagas) => {
 
     let MaioresRequisitos = {};
+    
     let MenorCompatibilidade = 101;
 
     for (const VagaTecnologia of Vagas) {
@@ -268,12 +269,12 @@ const RecomendacaoEstudos = (Candidato, Vagas) => {
 };
 
 const RecomendacaoPior = RecomendacaoEstudos(Candidato_1, Vagas);
-
+*/
 // console.log(RecomendacaoPior);
 
 const RecomendacaoMensagem = `
 =================== RECOMENDAÇÃO DE ESTUDOS ====================
-    Priorize os estudos em: ${("\n") + `    -` + RecomendacaoPior.HabilidadesFaltantes.join("\n")} 
+    Priorize os estudos em: ${("\n") + `    -` + HabilidadesFaltantesFormatadas.join("\n")} 
 `;
 
 CriarContadorAnalises.InformacoesAnalise();
@@ -342,7 +343,7 @@ ${Recomendacao.HabilidadesFaltantes.join("\n")}
 `);
 
 CriarContadorAnalises.InformacoesAnalise();
-
+*/
 //==============================CALLBACK==================================================
 
 const AnaliseFinal = "Análise finalizada.";
@@ -385,4 +386,3 @@ async function IniciarBusca() {
 }
 
 IniciarBusca();
-*/
