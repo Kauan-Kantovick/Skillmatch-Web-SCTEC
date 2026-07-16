@@ -9,7 +9,7 @@
     3.5 - Classifica essa compatibilidade
     3.6 - Faz e exibe o cálulo de compatibilidade com a vaga escolhida
     3.7 - Destaca a melhor dentre as filtradas
-    3.8 - Recomendação de estudos das habilidades faltantes *da pior vaga
+    3.8 - Recomendação de estudos das habilidades faltantes da pior vaga
     3.9 - Callback e total de análises
 */
 //==============================CLASSE-CANDIDATO=========================================
@@ -94,7 +94,7 @@ const Candidato_1 = new Candidato("Ana", "Front-End", "Híbrido", ["JavaScript",
 // console.log(Candidato_1.GetNome(), Candidato_1.GetArea(), Candidato_1.GetEstiloTrabalho(), Candidato_1.GetHabilidades(), Candidato_1.GetTempoExperiencia());
 
 const Vagas = [
-    new VagaTecnologia(1, "TechStart", "Desenvolvedor Front-End Júnior", ["JavaScript", "GitHub", "Lógica de Programação", "Objetos"], 2800, "Remoto", 1),
+    new VagaTecnologia(1, "TechStart", "Desenvolvedor Front-End Júnior", ["JavaScript", "GitHub", "Lógica de Programação"], 2800, "Remoto", 1),
     new VagaTecnologia(2, "CodeLab", "Estágio em Front-End", ["JavaScript", "Kanban", "GitHub"], 1800, "Híbrido"),
     new VagaTecnologia(3, "WebSolutions", "Desenvolvedor JavaScript Júnior", ["JavaScript", "Arrays", "Objetos", "Funções"], 3000, "Presencial", 2),
     new VagaTecnologia(4, "ABACATE", "Estágiario de POO", ["JavaScript", "Objetos", "Lógica de Programação"], 2200, "Híbrido", 3),
@@ -187,7 +187,7 @@ const MensagemCompatibilidade = `
     cargo: ${VagaSelecionada.GetCargo()}
     Compatibilidade: ${TaxaCompatibilidade}%
     Habilidades Compatíveis:${HabilidadesCompativeisFormatadas}
-    Habilidades Faltantes: ${("\n") + HabilidadesFaltantesFormatadas.join("\n")}
+    ${HabilidadesFaltantesFormatadas.length > 0 ? `Habilidades Faltantes: ${("\n") + HabilidadesFaltantesFormatadas.join("\n")}` : ``} 
 `;
 
 // console.log(MensagemCompatibilidade);
@@ -376,8 +376,7 @@ Classificação: ${ClassificarCompatibilidade(Recomendacao.CompatibilidadeCandid
 Habilidades Compatíveis:
 ${Recomendacao.HabilidadesCompativeisFormatas.join("\n")}
 
-Habilidades Faltantes:
-${Recomendacao.HabilidadesImcompativeisFormatas.join("\n")}
+${Recomendacao.HabilidadesImcompativeisFormatas.length > 0 ? `Habilidades Faltantes:${("\n") + Recomendacao.HabilidadesImcompativeisFormatas.join("\n")}` : ``} 
 
 `);
 
