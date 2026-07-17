@@ -2,6 +2,8 @@ console.log("Conexão com ui.js");
 
 const formulario = document.getElementById("FormCandidato");
 
+const mensagem = document.getElementById("textoHTML");
+
 formulario.addEventListener("submit", (evento) => {
     evento.preventDefault();
     console.log("Formulário enviado!");
@@ -19,30 +21,42 @@ formulario.addEventListener("submit", (evento) => {
         //     : console.log(candidato.nome);
 
         if (candidato.nome.length <= 2) {
-            alert(`Nome: ${candidato.nome} é muito pequeno(a), insira um nome maior.`);
+            mensagem.textContent = `Nome: "${candidato.nome}" é muito pequeno(a), insira um nome maior.`;
+            mensagem.classList.add('Texto-vermelho');
+            mensagem.classList.remove('Texto-verde');
             return;
         } else if (candidato.nome.length >= 31) {
-            alert(`Nome: ${candidato.nome} é muito grande, insira um nome menor.`);
+            mensagem.textContent = `Nome: "${candidato.nome}" é muito grande, insira um nome menor.`;
+            mensagem.classList.add('Texto-vermelho');
+            mensagem.classList.remove('Texto-verde');            
             return;
         } else {
             console.log(candidato.nome);
         }
 
         if (candidato.area.length <= 3) {
-            alert(`Área: ${candidato.area} é muito pequeno(a), insira uma nome de área maior.`);
+            mensagem.textContent = `Área: "${candidato.area}" é muito pequeno(a), insira uma nome de área maior.`;
+            mensagem.classList.add('Texto-vermelho');
+            mensagem.classList.remove('Texto-verde');
             return;
         } else if (candidato.area.length >= 31) {
-            alert(`Área: ${candidato.area} é muito grande, insira um nome de área menor.`);
+            mensagem.textContent = `Área: "${candidato.area}" é muito grande, insira um nome de área menor.`;
+            mensagem.classList.add('Texto-vermelho');
+            mensagem.classList.remove('Texto-verde');
             return;
         } else {
             console.log(candidato.area);
         }
 
         if (candidato.habilidades.length <= 3) {
-            alert(`habilidade(s): ${candidato.habilidades} é muito pequeno(a), insira uma habilidade maior ou mais habilidades.`);
+            mensagem.textContent = `habilidade(s): "${candidato.habilidades}" é muito pequeno(a), insira uma habilidade maior ou mais habilidades.`;
+            mensagem.classList.add('Texto-vermelho');
+            mensagem.classList.remove('Texto-verde');
             return;
         } else if (candidato.habilidades.length >= 51) {
-            alert(`habilidade(s): ${candidato.habilidades} é muito grande, insira uma habilidade menor ou menos habilidades.`);
+            mensagem.textContent = `habilidade(s): "${candidato.habilidades}" é muito grande, insira uma habilidade menor ou menos habilidades.`;
+            mensagem.classList.add('Texto-vermelho');
+            mensagem.classList.remove('Texto-verde');
             return;
         } else {
             console.log(candidato.habilidades);
@@ -51,6 +65,10 @@ formulario.addEventListener("submit", (evento) => {
         console.log(Number(candidato.anosExperiencia));
 
         console.log("Formulário validado com sucesso!");
+
+        mensagem.textContent = "Cadastro realizado com sucesso!";
+        mensagem.classList.add('Texto-verde');
+        mensagem.classList.remove('Texto-vermelho');        
     }
     Validacao();   
 });
