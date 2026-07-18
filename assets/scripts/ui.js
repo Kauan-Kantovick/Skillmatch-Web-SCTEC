@@ -1,86 +1,148 @@
 console.log("Conexão com ui.js");
 
-const formulario = document.getElementById("FormCandidato");
+import {BuscarVagas} from "./dados.js";
 
-const mensagem = document.getElementById("textoHTML");
+export const Formulario = document.getElementById("FormCandidato");
 
-formulario.addEventListener("submit", (evento) => {
-    evento.preventDefault();
-    console.log("Formulário enviado!");
+export const Mensagem = document.getElementById("MensagemUsuário");
 
-    const candidato = {
-        nome: document.getElementById('CampoNome').value,
-        area: document.getElementById('CampoArea').value,
-        habilidades: document.getElementById('CampoHabilidades').value,
-        anosExperiencia: document.getElementById('CampoAnos').value                
-    };
-    
-    function Validacao() {
-        // candidato.nome.length <= 2 && candidato.nome.length >= 30 ?
-        //     alert("Nome inválido! Nome muito extenso/pequeno.")
-        //     : console.log(candidato.nome);
+export const SessaoCards = document.getElementById("SessãoVagas");
 
-        if (candidato.nome.length <= 2) {
-            mensagem.textContent = `Nome: "${candidato.nome}" é muito pequeno(a), insira um nome maior.`;
-            mensagem.classList.add('Texto-vermelho');
-            mensagem.classList.remove('Texto-verde');
-            return;
-        } else if (candidato.nome.length >= 31) {
-            mensagem.textContent = `Nome: "${candidato.nome}" é muito grande, insira um nome menor.`;
-            mensagem.classList.add('Texto-vermelho');
-            mensagem.classList.remove('Texto-verde');            
-            return;
-        } else {
-            console.log(candidato.nome);
+const Vagas = await BuscarVagas();
+
+export function Candidato() {
+    Formulario.addEventListener("submit", (evento) => {
+        evento.preventDefault();
+        console.log("Formulário enviado!");
+
+        const candidato = {
+            nome: document.getElementById('CampoNome').value,
+            area: document.getElementById('CampoArea').value,
+            habilidades: document.getElementById('CampoHabilidades').value,
+            anosExperiencia: document.getElementById('CampoAnos').value
+        };
+
+        function Validacao() {
+            // candidato.nome.length <= 2 && candidato.nome.length >= 30 ?
+            //     alert("Nome inválido! Nome muito extenso/pequeno.")
+            //     : console.log(candidato.nome);
+
+            if (candidato.nome.length <= 2) {
+                Mensagem.textContent = `Nome: "${candidato.nome}" é muito pequeno(a), insira um nome maior.`;
+                Mensagem.classList.add('Texto-vermelho');
+                Mensagem.classList.remove('Texto-verde');
+                return;
+            } else if (candidato.nome.length >= 31) {
+                Mensagem.textContent = `Nome: "${candidato.nome}" é muito grande, insira um nome menor.`;
+                Mensagem.classList.add('Texto-vermelho');
+                Mensagem.classList.remove('Texto-verde');
+                return;
+            } else {
+                console.log(candidato.nome);
+            }
+
+            if (candidato.area.length <= 3) {
+                Mensagem.textContent = `Área: "${candidato.area}" é muito pequeno(a), insira uma nome de área maior.`;
+                Mensagem.classList.add('Texto-vermelho');
+                Mensagem.classList.remove('Texto-verde');
+                return;
+            } else if (candidato.area.length >= 31) {
+                Mensagem.textContent = `Área: "${candidato.area}" é muito grande, insira um nome de área menor.`;
+                Mensagem.classList.add('Texto-vermelho');
+                Mensagem.classList.remove('Texto-verde');
+                return;
+            } else {
+                console.log(candidato.area);
+            }
+
+            if (candidato.habilidades.length <= 3) {
+                Mensagem.textContent = `habilidade(s): "${candidato.habilidades}" é muito pequeno(a), insira uma habilidade maior ou mais habilidades.`;
+                Mensagem.classList.add('Texto-vermelho');
+                Mensagem.classList.remove('Texto-verde');
+                return;
+            } else if (candidato.habilidades.length >= 51) {
+                Mensagem.textContent = `habilidade(s): "${candidato.habilidades}" é muito grande, insira uma habilidade menor ou menos habilidades.`;
+                Mensagem.classList.add('Texto-vermelho');
+                Mensagem.classList.remove('Texto-verde');
+                return;
+            } else {
+                console.log(candidato.habilidades);
+            }
+
+            console.log(Number(candidato.anosExperiencia));
+
+            console.log("Formulário validado com sucesso!");
+
+            Mensagem.textContent = "Cadastro realizado com sucesso!";
+            Mensagem.classList.add('Texto-verde');
+            Mensagem.classList.remove('Texto-vermelho');
         }
 
-        if (candidato.area.length <= 3) {
-            mensagem.textContent = `Área: "${candidato.area}" é muito pequeno(a), insira uma nome de área maior.`;
-            mensagem.classList.add('Texto-vermelho');
-            mensagem.classList.remove('Texto-verde');
-            return;
-        } else if (candidato.area.length >= 31) {
-            mensagem.textContent = `Área: "${candidato.area}" é muito grande, insira um nome de área menor.`;
-            mensagem.classList.add('Texto-vermelho');
-            mensagem.classList.remove('Texto-verde');
-            return;
-        } else {
-            console.log(candidato.area);
-        }
+        Validacao();
 
-        if (candidato.habilidades.length <= 3) {
-            mensagem.textContent = `habilidade(s): "${candidato.habilidades}" é muito pequeno(a), insira uma habilidade maior ou mais habilidades.`;
-            mensagem.classList.add('Texto-vermelho');
-            mensagem.classList.remove('Texto-verde');
-            return;
-        } else if (candidato.habilidades.length >= 51) {
-            mensagem.textContent = `habilidade(s): "${candidato.habilidades}" é muito grande, insira uma habilidade menor ou menos habilidades.`;
-            mensagem.classList.add('Texto-vermelho');
-            mensagem.classList.remove('Texto-verde');
-            return;
-        } else {
-            console.log(candidato.habilidades);
-        }
-    
-        console.log(Number(candidato.anosExperiencia));
+        // function MostrarCandidato(candidato) {
+        //     let texto = document.createElement("p");
 
-        console.log("Formulário validado com sucesso!");
+        //     texto.textContent = `${candidato.nome}`;
 
-        mensagem.textContent = "Cadastro realizado com sucesso!";
-        mensagem.classList.add('Texto-verde');
-        mensagem.classList.remove('Texto-vermelho');        
-    }
+        //     let caixa = document.getElementById("container");
+        //     caixa.appendChild(texto);
+        // }
 
-    Validacao();   
+        // MostrarCandidato(candidato);
+    });
+};
 
-    function MostrarCandidato (candidato) {
-        let texto = document.createElement("p");
+// async function exibirArray() {
+//     console.log(Vagas);
+//     console.log(Vagas[0]);
+//     console.log(Vagas[0].id);
+// }
 
-        texto.textContent = `${candidato.nome}`;
+// exibirArray();
 
-        let caixa = document.getElementById("container");
-        caixa.appendChild(texto);
-    }
+export async function CriarCardsVaga () {
+    Vagas.forEach(Vaga => {
+        let Card = document.createElement("div");
+        let Texto = document.createElement("p");
 
-    MostrarCandidato(candidato);
-});
+        Card.classList.add("Card");
+        Texto.classList.add("Texto");
+
+        Texto.textContent = `
+            Id: ${Vaga.id} 
+            empresa: ${Vaga.empresa}
+            cargo: ${Vaga.cargo}
+            requisitos: ${Vaga.requisitos}
+            salario: ${Vaga.salario}
+            modeloTrabalho: ${Vaga.modeloTrabalho}
+            anosExperiencia: ${Vaga.anosExperiencia}
+        `;
+
+        SessaoCards.appendChild(Card);
+        Card.appendChild(Texto);
+    });
+}
+
+CriarCardsVaga();
+
+// CriarCardsVaga();
+
+    // for (const Vaga of Vagas) {
+    //     console.log(Vaga.empresa);
+    // }
+
+
+// {
+//     "id": 1,
+//     "empresa": "TechStart",
+//     "cargo": "Desenvolvedor Front-End Júnior",
+//     "requisitos": [
+//       "JavaScript",
+//       "GitHub",
+//       "Lógica de Programação"
+//     ],
+//     "salario": 2800,
+//     "modeloTrabalho": "Remoto",
+//     "anosExperiencia": 1
+//   },
