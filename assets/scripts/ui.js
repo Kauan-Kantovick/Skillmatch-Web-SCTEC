@@ -70,5 +70,17 @@ formulario.addEventListener("submit", (evento) => {
         mensagem.classList.add('Texto-verde');
         mensagem.classList.remove('Texto-vermelho');        
     }
+
     Validacao();   
+
+    function MostrarCandidato (candidato) {
+        let texto = document.createElement("p");
+
+        texto.textContent = `${candidato.nome}`;
+
+        let caixa = document.getElementById("container");
+        caixa.appendChild(texto);
+    }
+
+    MostrarCandidato(candidato);
 });
