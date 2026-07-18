@@ -13,7 +13,7 @@
     3.9 - Callback e total de análises
 */
 //==============================CLASSE-CANDIDATO=========================================
-class Candidato {
+export class Candidato {
     constructor(nome, area, estiloTrabalho, habilidades, tempoExperiencia) {
         this.nome = nome;
         this.area = area;
@@ -40,7 +40,7 @@ class Candidato {
 
 //==============================CLASSE-VAGAS=========================================
 
-class Vaga {
+export class Vaga {
     constructor(id, empresa, cargo, requisitos, salario, modeloTrabalho) {
         this.id = id;
         this.empresa = empresa;
@@ -72,7 +72,7 @@ class Vaga {
     }
 }
 
-class VagaTecnologia extends Vaga {
+export class VagaTecnologia extends Vaga {
     constructor(id, empresa, cargo, requisitos, salario, modeloTrabalho, anosExperiencia = 0) {
         super(id, empresa, cargo, requisitos, salario, modeloTrabalho);
         this.anosExperiencia = anosExperiencia;
