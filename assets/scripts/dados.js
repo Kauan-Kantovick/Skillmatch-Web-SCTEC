@@ -1,3 +1,5 @@
+console.log("Conexão com dados.js");
+
 import { VagaTecnologia } from "./motor.js";
 
 export async function BuscarVagas() {
@@ -6,7 +8,7 @@ export async function BuscarVagas() {
 
     try {
 
-        const Resposta = await fetch("./assets/data/vagas.json");
+        const Resposta = await fetch("/assets/data/vagas.json");
 
         if (!Resposta.ok) {
 
