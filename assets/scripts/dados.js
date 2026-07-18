@@ -1,6 +1,37 @@
-const sla = await fetch("http://127.0.0.1:5500/")
+import { VagaTecnologia } from "./motor.js";
 
-localStorage.setItem('nome:kauan', JSON.stringify(kauan));
+export async function BuscarVagas() {
 
-const kauan = JSON.parse(localStorage.getItem("nome:kauan"));
-console.log("LocaStorage");
+    console.log("Carregando vagas…");
+
+    const Resposta = await fetch("./assets/data/vagas.json");
+
+    if (!Resposta.ok) {
+
+        throw new Error("Erro ao carregar as vagas.");
+    
+    }
+
+    const VagasJson = await Resposta.json();   
+
+    if (VagasJson.length === 0) {
+        console.log("Nenhuma vaga encontrada.");
+        return [];
+    }
+
+    console.log("Vagas encontradas com sucesso!");
+
+    const Vagas = VagasJson.map(vaga =>
+        new VagaTecnologia(
+            vaga.id,
+            vaga.empresa,
+            vaga.cargo,
+            vaga.requisitos,
+            vaga.salario,
+            vaga.modalidade,
+            vaga.anosExperiencia
+        )
+    );
+
+    return Vagas;
+}
