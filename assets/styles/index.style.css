@@ -4,3 +4,18 @@
 
 .Texto-vermelho {color: red;}
 .Texto-verde {color: green;}
+
+.Card {
+    display: flex;
+    flex-direction: row;
+    margin: 15px;
+    background-color: brown;
+    flex-wrap: wrap;
+    height: 150px;
+    width: 100%;
+    gap: 30px;
+}
+
+.Texto {
+    color: white;
+}
