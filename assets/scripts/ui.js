@@ -1,6 +1,5 @@
-console.log("Conexão com ui.js");
-
 import {BuscarVagas} from "./dados.js";
+import {Candidato} from "./motor.js";
 
 export const Formulario = document.getElementById("FormCandidato");
 
@@ -10,7 +9,7 @@ export const SessaoCards = document.getElementById("SessãoVagas");
 
 const Vagas = await BuscarVagas();
 
-export function Candidato() {
+export function CandidatoFormulario() {
     Formulario.addEventListener("submit", (evento) => {
         evento.preventDefault();
         console.log("Formulário enviado!");
@@ -24,9 +23,6 @@ export function Candidato() {
         };
 
         function Validacao() {
-            // candidato.nome.length <= 2 && candidato.nome.length >= 30 ?
-            //     alert("Nome inválido! Nome muito extenso/pequeno.")
-            //     : console.log(candidato.nome);
 
             if (candidato.nome.length <= 2) {
                 Mensagem.textContent = `Nome: "${candidato.nome}" é muito pequeno(a), insira um nome maior.`;
@@ -81,16 +77,16 @@ export function Candidato() {
 
         Validacao();
 
-        // function MostrarCandidato(candidato) {
-        //     let texto = document.createElement("p");
+        const ObjetoCandidato = (candidato) =>
+        new Candidato (
+            candidato.nome,
+            candidato.area,
+            candidato.habilidades,
+            candidato.modeloTrabalho,
+            candidato.anosExperiencia
+        );
 
-        //     texto.textContent = `${candidato.nome}`;
-
-        //     let caixa = document.getElementById("container");
-        //     caixa.appendChild(texto);
-        // }
-
-        // MostrarCandidato(candidato);
+        return ObjetoCandidato();
     });
 };
 

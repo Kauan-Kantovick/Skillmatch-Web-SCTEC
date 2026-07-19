@@ -12,6 +12,12 @@
     3.8 - Recomendação de estudos das habilidades faltantes da pior vaga
     3.9 - Callback e total de análises
 */
+
+import { CandidatoFormulario } from "./ui.js";
+import { BuscarVagas } from "./dados.js";
+
+const Candidato_1 = await CandidatoFormulario();
+const Vagas = await BuscarVagas();
 //==============================CLASSE-CANDIDATO=========================================
 export class Candidato {
     constructor(nome, area, estiloTrabalho, habilidades, tempoExperiencia) {
@@ -89,28 +95,17 @@ export class VagaTecnologia extends Vaga {
 
 // - Objetos de classe:
 
-const Candidato_1 = new Candidato("Ana", "Front-End", "Híbrido", ["JavaScript", "GitHub", "Lógica de Programação"], 5);
-
 // console.log(Candidato_1.GetNome(), Candidato_1.GetArea(), Candidato_1.GetEstiloTrabalho(), Candidato_1.GetHabilidades(), Candidato_1.GetTempoExperiencia());
-
-const Vagas = [
-    new VagaTecnologia(1, "TechStart", "Desenvolvedor Front-End Júnior", ["JavaScript", "GitHub", "Lógica de Programação"], 2800, "Remoto", 1),
-    new VagaTecnologia(2, "CodeLab", "Estágio em Front-End", ["JavaScript", "Kanban", "GitHub"], 1800, "Híbrido"),
-    new VagaTecnologia(3, "WebSolutions", "Desenvolvedor JavaScript Júnior", ["JavaScript", "Arrays", "Objetos", "Funções"], 3000, "Presencial", 2),
-    new VagaTecnologia(4, "ABACATE", "Estágiario de POO", ["JavaScript", "Objetos", "Lógica de Programação"], 2200, "Híbrido", 3),
-    new VagaTecnologia(5, "DevSphere", "Desenvolvedor Back-End Júnior", ["Node.js", "JavaScript", "APIs", "GitHub"], 3400, "Remoto", 1),
-    new VagaTecnologia(6, "CloudTech", "Desenvolvedor Full Stack Júnior", ["JavaScript", "HTML", "CSS", "Node.js", "GitHub"], 3800, "Híbrido", 2),
-    new VagaTecnologia(7, "SoftVision", "Estágio em Desenvolvimento Web", ["HTML", "CSS", "JavaScript", "Lógica de Programação"], 1700, "Presencial"),
-    new VagaTecnologia(8, "DataFlow", "Desenvolvedor Back-End", ["Node.js", "MySQL", "APIs", "GitHub"], 4200, "Remoto", 3),
-    new VagaTecnologia(9, "NextCode", "Desenvolvedor Front-End Pleno", ["JavaScript", "HTML", "CSS", "React", "Git"], 5000, "Híbrido", 4),
-    new VagaTecnologia(10, "InovaTech", "Desenvolvedor JavaScript", ["JavaScript", "Funções", "Arrays", "Objetos", "GitHub"], 3200, "Presencial", 2),
-];
 
 // console.log(Vagas[0].GetId(), Vagas[0].GetEmpresa(), Vagas[0].GetCargo(), Vagas[0].GetRequisitos(), Vagas[0].GetSalario(), Vagas[0].GetModeloTrabalho(), Vagas[0].GetAnosExperiencia(), Vagas[0].ApresentacaoVaga());
 
 // - Instâncias:
 
+// Candidato_1 = dados referentes ao preenchimento do formulário
+
+
 const IndiceVaga = 0;
+// Todas as vagas
 
 const VagaSelecionada = Vagas[IndiceVaga];
 
@@ -190,6 +185,8 @@ const MensagemCompatibilidade = `
     ${HabilidadesFaltantesFormatadas.length > 0 ? `Habilidades Faltantes: ${("\n") + HabilidadesFaltantesFormatadas.join("\n")}` : ``} 
 `;
 
+// vai aparecer embaixo dos dados das vagas
+
 // console.log(MensagemCompatibilidade);
 
 const VerificarMensagem = (TaxaCompatibilidade, CriarContadorAnalises, MensagemCompatibilidade) => {
@@ -200,6 +197,8 @@ const VerificarMensagem = (TaxaCompatibilidade, CriarContadorAnalises, MensagemC
         console.log(`ERRO`);
     }
 }
+
+// Fazer validação de outra forma
 
 VerificarMensagem(TaxaCompatibilidade, CriarContadorAnalises, MensagemCompatibilidade);
 
@@ -227,6 +226,9 @@ const ClassificarCompatibilidade = (TaxaCompatibilidade) => {
     }
 }
 
+// vai aparecer embaixo dos dados das vagas
+// validação erro/deixa assim mesmo
+
 const VerificacaoCompatibilidade = ClassificarCompatibilidade(TaxaCompatibilidade);
 
 //console.log(VerificacaoCompatibilidade);
@@ -243,6 +245,8 @@ function ExibicaoCompatibilidade(VerificacaoCompatibilidade, Candidato_1, VagaSe
         return process.exit(1);
     };
 }
+
+// vai aparecer embaixo dos dados das vagas e vai bloquear os outros dados caso a experiência minima não seja atingida
 
 ExibicaoCompatibilidade(VerificacaoCompatibilidade, Candidato_1, VagaSelecionada);
 
@@ -303,6 +307,8 @@ const RecomendacaoEstudos = (Candidato, Vagas) => {
 const RecomendacaoPior = RecomendacaoEstudos(Candidato_1, Vagas);
 
 // console.log(RecomendacaoPior);
+
+// será exibida a mensagem em um campo separado onde ira ser um foco a parte 
 
 const RecomendacaoMensagem = `
 =================== RECOMENDAÇÃO DE ESTUDOS ====================
@@ -380,6 +386,8 @@ ${Recomendacao.HabilidadesImcompativeisFormatas.length > 0 ? `Habilidades Faltan
 
 `);
 
+// vai dazer com que apareça na melhor vaga uma estrelinha
+
 CriarContadorAnalises.InformacoesAnalise();
 
 //==============================CALLBACK==================================================
@@ -398,29 +406,3 @@ function FinalizarAnalise(callback) {
 
 FinalizarAnalise(MensagemFinal);
 
-//==============================PROMISE-ASYNC/AWAIT==================================================
-function SimulacaoBusca() {
-    return new Promise((resolve, reject) => {
-
-        console.log("Buscando Vagas...");
-
-        setTimeout(() => {
-
-            if (true) {
-                resolve(Vagas.length);
-            } else {
-                reject("Nenhuma Vaga encontrada.");
-            }
-        }, 2000);
-    });
-}
-
-async function IniciarBusca() {
-    const VagasCarregadas = await SimulacaoBusca();
-    console.log(`
-        Vagas carregadas com sucesso!
-        Total de ${VagasCarregadas} Vagas encontradas.
-        `);
-}
-
-IniciarBusca();
