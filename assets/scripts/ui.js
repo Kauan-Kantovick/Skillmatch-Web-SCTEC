@@ -19,6 +19,7 @@ export function Candidato() {
             nome: document.getElementById('CampoNome').value,
             area: document.getElementById('CampoArea').value,
             habilidades: document.getElementById('CampoHabilidades').value,
+            modeloTrabalho: document.getElementById('CampoModelo').value,
             anosExperiencia: document.getElementById('CampoAnos').value
         };
 
@@ -70,7 +71,7 @@ export function Candidato() {
             }
 
             console.log(Number(candidato.anosExperiencia));
-
+            console.log(candidato.modeloTrabalho);
             console.log("Formulário validado com sucesso!");
 
             Mensagem.textContent = "Cadastro realizado com sucesso!";
@@ -92,14 +93,6 @@ export function Candidato() {
         // MostrarCandidato(candidato);
     });
 };
-
-// async function exibirArray() {
-//     console.log(Vagas);
-//     console.log(Vagas[0]);
-//     console.log(Vagas[0].id);
-// }
-
-// exibirArray();
 
 export async function CriarCardsVaga () {
     Vagas.forEach(Vaga => {
@@ -125,24 +118,3 @@ export async function CriarCardsVaga () {
 }
 
 CriarCardsVaga();
-
-// CriarCardsVaga();
-
-    // for (const Vaga of Vagas) {
-    //     console.log(Vaga.empresa);
-    // }
-
-
-// {
-//     "id": 1,
-//     "empresa": "TechStart",
-//     "cargo": "Desenvolvedor Front-End Júnior",
-//     "requisitos": [
-//       "JavaScript",
-//       "GitHub",
-//       "Lógica de Programação"
-//     ],
-//     "salario": 2800,
-//     "modeloTrabalho": "Remoto",
-//     "anosExperiencia": 1
-//   },
