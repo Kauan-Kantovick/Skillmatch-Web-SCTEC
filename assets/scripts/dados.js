@@ -58,8 +58,8 @@ export async function BuscarVagas() {
 
     } catch (erro) {
         console.error("Erro:", erro.message);
-        Mensagem.textContent = "Erro:", erro.message;
-        Mensagem.classList.add("Texto-verde")
+        Mensagem.textContent = "Erro: consulte o console para mais informações";
+        Mensagem.classList.add("Texto-vermelho")
         SessaoCards.appendChild(Mensagem);
     }
 }
