@@ -10,11 +10,11 @@ export const SessaoCards = document.getElementById("SessãoVagas");
 
 // - Importações e instâncias
 
-import {BuscarVagas} from "./dados.js";
+import {FuncaoBuscarVagas} from "./dados.js";
 
-import {Candidato} from "./motor.js";
+import {ClasseCandidato} from "./motor.js";
 
-// const Vagas = await BuscarVagas();
+// const Vagas = await FuncaoBuscarVagas();
 
 // - Função CandidatoFormulario
 
@@ -87,7 +87,7 @@ export function CandidatoFormulario() {
         Validacao();
 
         const ObjetoCandidato = (candidato) =>
-        new Candidato (
+        new ClasseCandidato (
             candidato.nome,
             candidato.area,
             candidato.habilidades,

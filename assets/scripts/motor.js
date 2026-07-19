@@ -2,13 +2,13 @@
 
 // - Importações
 
-import { CandidatoFormulario } from "./ui.js";
-import { BuscarVagas } from "./dados.js";
+import { FuncaoCandidatoFormulario } from "./main.js";
+import { FuncaoBuscarVagas } from "./main.js";
 
 // - Instâncias externas
 
-const Candidato_1 = await CandidatoFormulario();
-const Vagas = await BuscarVagas();
+const Candidato_1 = await FuncaoCandidatoFormulario();
+const Vagas = await FuncaoBuscarVagas();
 
 //==============================CLASSE-CANDIDATO=========================================
 
