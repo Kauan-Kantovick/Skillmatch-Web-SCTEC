@@ -1,5 +1,6 @@
-import {BuscarVagas} from "./dados.js";
-import {Candidato} from "./motor.js";
+//==============================CANDIDATO-FORMULÁRIO=========================================
+
+// - Exportações
 
 export const Formulario = document.getElementById("FormCandidato");
 
@@ -7,7 +8,15 @@ export const Mensagem = document.getElementById("MensagemUsuário");
 
 export const SessaoCards = document.getElementById("SessãoVagas");
 
-const Vagas = await BuscarVagas();
+// - Importações e instâncias
+
+import {BuscarVagas} from "./dados.js";
+
+import {Candidato} from "./motor.js";
+
+// const Vagas = await BuscarVagas();
+
+// - Função CandidatoFormulario
 
 export function CandidatoFormulario() {
     Formulario.addEventListener("submit", (evento) => {
@@ -89,6 +98,8 @@ export function CandidatoFormulario() {
         return ObjetoCandidato();
     });
 };
+
+// - Função CriarCardsVaga
 
 export async function CriarCardsVaga () {
     Vagas.forEach(Vaga => {

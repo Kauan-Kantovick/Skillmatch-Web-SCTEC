@@ -1,6 +1,12 @@
+//==============================BUSCAR-VAGAS=========================================
+
+// - Importações
+
 import { VagaTecnologia } from "./motor.js";
 import { SessaoCards } from "./ui.js";
 import { Mensagem } from "./ui.js";
+
+// - Função BuscarVagas
 
 export async function BuscarVagas() {
 
@@ -65,4 +71,5 @@ export async function BuscarVagas() {
         SessaoCards.appendChild(Mensagem);
     }
 }
+
 BuscarVagas();
