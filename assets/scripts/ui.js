@@ -10,11 +10,11 @@ export const SessaoCards = document.getElementById("SessãoVagas");
 
 // - Importações e instâncias
 
-import {FuncaoBuscarVagas} from "./dados.js";
+import {BuscarVagas} from "./dados.js";
 
-import {ClasseCandidato} from "./motor.js";
+import {ClasseCandidato} from "./main.js";
 
-// const Vagas = await FuncaoBuscarVagas();
+const Vagas = await BuscarVagas();
 
 // - Função CandidatoFormulario
 
@@ -101,8 +101,8 @@ export function CandidatoFormulario() {
 
 // - Função CriarCardsVaga
 
-export async function CriarCardsVaga () {
-    Vagas.forEach(Vaga => {
+export async function CriarCardsVaga (vagas) {
+    vagas.forEach(Vaga => {
         let Card = document.createElement("div");
         let Texto = document.createElement("p");
 

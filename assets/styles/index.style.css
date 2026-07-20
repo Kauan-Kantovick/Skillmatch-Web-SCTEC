@@ -4,14 +4,10 @@
 
 .Texto-vermelho {
     color: red;
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: flex-start;
 }
+
 .Texto-verde {
     color: green;
-    display: block;
 }
 
 .Card {
@@ -28,4 +24,3 @@
 .Texto {
     color: white;
 }
-

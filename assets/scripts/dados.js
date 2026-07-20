@@ -2,9 +2,9 @@
 
 // - Importações
 
-import { ClasseVagaTecnologia } from "./main.js";
-import { HTMLSessaoCards } from "./main.js";
-import { HTMLMensagem } from "./main.js";
+import { VagaTecnologia } from "./motor.js";
+import { SessaoCards } from "./ui.js";
+import { Mensagem } from "./ui.js";
 
 // - Função BuscarVagas
 
@@ -14,43 +14,43 @@ export async function BuscarVagas() {
 
     try {
 
-        const Resposta = await fetch("/assets/data/vagas.json");
+        const Resposta = await fetch("/assets/data/vagas.json");;
 
         if (!Resposta.ok) {
-            HTMLMensagem.textContent = "Erro ao carregar as vagas.";
-            HTMLMensagem.classList.remove("Texto-verde");
-            HTMLMensagem.classList.add("Texto-vermelho")
-            HTMLSessaoCards.appendChild(HTMLMensagem);
+            Mensagem.textContent = "Erro ao carregar as vagas.";
+            Mensagem.classList.remove("Texto-verde");
+            Mensagem.classList.add("Texto-vermelho")
+            SessaoCards.appendChild(Mensagem);
             throw new Error("Erro ao carregar as vagas.");
         }
 
         const VagasJson = await Resposta.json();
 
         if (VagasJson.length === 0) {
-            HTMLMensagem.textContent = "Nenhuma vaga encontrada.";
-            HTMLMensagem.classList.remove("Texto-verde");
-            HTMLMensagem.classList.add("Texto-vermelho")
-            HTMLSessaoCards.appendChild(HTMLMensagem);
+            Mensagem.textContent = "Nenhuma vaga encontrada.";
+            Mensagem.classList.remove("Texto-verde");
+            Mensagem.classList.add("Texto-vermelho")
+            SessaoCards.appendChild(Mensagem);
             return [];
         }
 
         if (!Array.isArray(VagasJson)) {
-            HTMLMensagem.textContent = "Arquivo json em formato inválido.";
-            HTMLMensagem.classList.remove("Texto-verde");
-            HTMLMensagem.classList.add("Texto-vermelho")
-            HTMLSessaoCards.appendChild(HTMLMensagem);
+            Mensagem.textContent = "Arquivo json em formato inválido.";
+            Mensagem.classList.remove("Texto-verde");
+            Mensagem.classList.add("Texto-vermelho")
+            SessaoCards.appendChild(Mensagem);
             throw new Error("Arquivo json em formato inválido.");
         }
 
         console.log("Vagas encontradas com sucesso!");
 
-        HTMLMensagem.textContent = "Vagas encontradas com sucesso!";
-        HTMLMensagem.classList.remove("Texto-vermelho");
-        HTMLMensagem.classList.add("Texto-verde")
-        HTMLSessaoCards.appendChild(HTMLMensagem);
+        Mensagem.textContent = "Vagas encontradas com sucesso!";
+        Mensagem.classList.remove("Texto-vermelho");
+        Mensagem.classList.add("Texto-verde")
+        SessaoCards.appendChild(Mensagem);
 
-        const Vagas = VagasJson.map(vaga =>
-            new ClasseVagaTecnologia(
+        const vagas = VagasJson.map(vaga =>
+            new VagaTecnologia(
                 vaga.id,
                 vaga.empresa,
                 vaga.cargo,
@@ -61,15 +61,13 @@ export async function BuscarVagas() {
             )
         );
 
-    return Vagas;
+    return vagas;
 
     } catch (erro) {
         console.error("Erro:", erro.message);
-        HTMLMensagem.textContent = "Erro: consulte o console para mais informações";
-        HTMLMensagem.classList.remove("Texto-verde");
-        HTMLMensagem.classList.add("Texto-vermelho");
-        HTMLSessaoCards.appendChild(HTMLMensagem);
+        Mensagem.textContent = "Erro: consulte o console para mais informações";
+        Mensagem.classList.remove("Texto-verde");
+        Mensagem.classList.add("Texto-vermelho");
+        SessaoCards.appendChild(Mensagem);
     }
 }
-
-BuscarVagas();
