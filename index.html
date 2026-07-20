@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillmatch - Sistema de compatibilidade</title>
+    <link rel="stylesheet" href="./assets/styles/index.style.css">
+    <meta name="description" content="Site do projeto Skillmatch">
+</head>
+
+<body>
+    <header>
+        <h1>Sistema Skillmatch</h1>
+        <img src="./assets/img/papelada.png" alt="Ícone de papelada" style="height: 100px; max-width: 100%;">
+        <h2>Sessões da página</h2>
+        <nav>
+            <img src="./assets/img/definicoes.svg" alt="Ícone de engrenagem" style="height: 30px; max-width: 100%;">
+            <a href="#SessãoForm" tabindex="0" aria-label="Menu: Área de Formulário">Formulário</a>
+            <a href="#SessãoVagas" aria-label="Menu: Área de Vagas">Vagas</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="SessãoForm">
+            <form method="" id="FormCandidato">
+                <h3>Formulário</h3>
+                <fieldset>
+                    <legend>Dados Pessoais:</legend>
+                    <label for="CampoNome" aria-label="Formulário: Insira o seu nome">
+                        <input type="text" value="" name="CampoNome" id="CampoNome" placeholder="Insira o seu nome"
+                            required min="3" max="80">
+                    </label>
+                    <label for="CampoArea" aria-label="Formulário: Insira a sua área profissional">
+                        <input type="text" value="" name="CampoArea" id="CampoArea"
+                            placeholder="Insira a sua área profissional" required min="4" max="30">
+                    </label>
+                    <label for="CampoHabilidades" aria-label="Formulário: Insira as suas habilidades profissionais">
+                        <input type="text" value="" name="CampoHabilidades" id="CampoHabilidades"
+                            placeholder="Insira as suas habilidades profissionais" required min="4" max="50">
+                    </label>
+                    <label for="CampoModelo">
+                        <select name="CampoModelo" id="CampoModelo" required>
+                            <option value="">Selecione...</option>
+                            <option value="Presencial">Presencial</option>
+                            <option value="Híbrido">Híbrido</option>
+                            <option value="Remoto">Remoto</option>
+                        </select>
+                        <label for="CampoAnos" aria-label="Formulário: Insira os seus anos de experiência">
+                            <input type="number" value="0" name="CampoAnos" id="CampoAnos"
+                                placeholder="Anos de experiência" required min="0" max="99">
+                        </label>
+                    </label>
+                    <button type="submit" id="SubmitCandidato">Enviar</button>
+                </fieldset>
+            </form>
+            <p id="MensagemUsuário" aria-live="polite"></p>
+        </section>
+        <section id="SessãoVagas"></section>
+    </main>
+
+    <footer>
+        <p>© Todos os direitos reservados.</p>
+    </footer>
+
+    <script type="module" src="/assets/scripts/main.js"></script>
+
+</body>
+
+</html>
