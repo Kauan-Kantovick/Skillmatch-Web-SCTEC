@@ -14,11 +14,9 @@ import {BuscarVagas} from "./dados.js";
 
 import {ClasseCandidato} from "./main.js";
 
-const Vagas = await BuscarVagas();
-
 // - Função CandidatoFormulario
 
-export function CandidatoFormulario() {
+export function CandidatoFormulario(callback) {
     Formulario.addEventListener("submit", (evento) => {
         evento.preventDefault();
         console.log("Formulário enviado!");
@@ -95,9 +93,24 @@ export function CandidatoFormulario() {
             candidato.anosExperiencia
         );
 
-        return ObjetoCandidato();
+        callback(ObjetoCandidato(candidato));
     });
 };
+
+// - Função MostrarMensagem
+
+export function MostrarMensagem(texto, tipo) {
+
+    Mensagem.textContent = texto;
+
+    Mensagem.classList.remove("Texto-verde", "Texto-vermelho");
+
+    Mensagem.classList.add(
+        tipo === "erro"
+            ? "Texto-vermelho"
+            : "Texto-verde"
+    );
+}
 
 // - Função CriarCardsVaga
 

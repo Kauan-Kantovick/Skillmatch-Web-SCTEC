@@ -3,12 +3,12 @@
 // - Importações
 
 import { FuncaoCandidatoFormulario } from "./main.js";
-import { FuncaoBuscarVagas } from "./main.js";
+import { BuscarVagas } from "./dados.js";
 
 // - Instâncias externas
 
-const Candidato_1 = await FuncaoCandidatoFormulario();
-const Vagas = await FuncaoBuscarVagas();
+const Candidato_1 = FuncaoCandidatoFormulario();
+const Vagas = await BuscarVagas();
 
 //==============================CLASSE-CANDIDATO=========================================
 
@@ -41,7 +41,7 @@ export class Candidato {
 
 // - Classe Vaga
 
-export class Vaga {
+class Vaga {
     constructor(id, empresa, cargo, requisitos, salario, modeloTrabalho) {
         this.id = id;
         this.empresa = empresa;
