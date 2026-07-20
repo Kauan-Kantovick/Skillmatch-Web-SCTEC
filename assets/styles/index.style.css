@@ -2,8 +2,13 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.Texto-vermelho {color: red;}
-.Texto-verde {color: green;}
+.Texto-vermelho {
+    color: red;
+}
+
+.Texto-verde {
+    color: green;
+}
 
 .Card {
     display: flex;

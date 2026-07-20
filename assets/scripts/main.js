@@ -1,14 +1,31 @@
-console.log("Conexão com main.js");
+//==============================IMPORTAÇÕES-E-EXPORTAÇÕES=========================================
+
+// - Importações: Funções
 
 import { BuscarVagas } from "./dados.js";
 
-const vagas = await BuscarVagas();
+import {CandidatoFormulario} from "./ui.js";
 
-console.log(vagas);
+import {vagas} from "./ui.js";
 
-import {Candidato} from "./ui.js";
-import {Formulario} from "./ui.js";
+import {MostrarMensagem} from "./ui.js";
 
-const ExecutarCandidato = await Candidato;
+CandidatoFormulario((candidato) => {
+    console.log(candidato);
+});
 
-Candidato();
+try {
+
+    MostrarMensagem(
+        "Vagas carregadas com sucesso!",
+        "sucesso"
+    );
+
+} catch (erro) {
+
+    MostrarMensagem(
+        erro.message,
+        "erro"
+    );
+
+}
