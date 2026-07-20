@@ -1,14 +1,6 @@
 //==============================IMPORTAÇÕES-E-INSTÂNCIAS-EXTERNAS=========================================
 
-// - Importações
 
-import { FuncaoCandidatoFormulario } from "./main.js";
-import { BuscarVagas } from "./dados.js";
-
-// - Instâncias externas
-
-const Candidato_1 = FuncaoCandidatoFormulario();
-const Vagas = await BuscarVagas();
 
 //==============================CLASSE-CANDIDATO=========================================
 
@@ -89,6 +81,15 @@ export class VagaTecnologia extends Vaga {
 }
 
 //==============================UTILIZAÇÃO-CLASSES=========================================
+// - Importações
+/*
+import { FuncaoCandidatoFormulario } from "./main.js";
+import { BuscarVagas } from "./dados.js";
+
+// - Instâncias externas
+
+const Candidato_1 = FuncaoCandidatoFormulario();
+const Vagas = await BuscarVagas();
 
 // - Instâncias objetos
 
@@ -357,3 +358,4 @@ function FinalizarAnalise(callback) {
 }
 
 FinalizarAnalise(MensagemFinal);
+*/

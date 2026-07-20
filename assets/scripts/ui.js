@@ -114,8 +114,10 @@ export function MostrarMensagem(texto, tipo) {
 
 // - Função CriarCardsVaga
 
+export const vagas = await BuscarVagas();
+
 export async function CriarCardsVaga (vagas) {
-    vagas.forEach(Vaga => {
+    vagas.forEach(vaga => {
         let Card = document.createElement("div");
         let Texto = document.createElement("p");
 
@@ -123,13 +125,13 @@ export async function CriarCardsVaga (vagas) {
         Texto.classList.add("Texto");
 
         Texto.textContent = `
-            Id: ${Vaga.id} 
-            empresa: ${Vaga.empresa}
-            cargo: ${Vaga.cargo}
-            requisitos: ${Vaga.requisitos}
-            salario: ${Vaga.salario}
-            modeloTrabalho: ${Vaga.modeloTrabalho}
-            anosExperiencia: ${Vaga.anosExperiencia}
+            Id: ${vaga.GetId()} 
+            empresa: ${vaga.GetEmpresa()}
+            cargo: ${vaga.GetCargo()}
+            requisitos: ${vaga.GetRequisitos()}
+            salario: ${vaga.GetSalario()}
+            modeloTrabalho: ${vaga.GetModeloTrabalho()}
+            anosExperiencia: ${vaga.GetAnosExperiencia()}
         `;
 
         SessaoCards.appendChild(Card);
@@ -137,4 +139,4 @@ export async function CriarCardsVaga (vagas) {
     });
 }
 
-CriarCardsVaga();
+CriarCardsVaga(vagas);

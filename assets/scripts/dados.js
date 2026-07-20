@@ -30,19 +30,19 @@ export async function BuscarVagas() {
 
         console.log("Vagas encontradas com sucesso!");
 
-        const vagas = VagasJson.map(vaga =>
+        const Vagas = VagasJson.map(Vaga =>
             new VagaTecnologia(
-                vaga.id,
-                vaga.empresa,
-                vaga.cargo,
-                vaga.requisitos,
-                vaga.salario,
-                vaga.modeloTrabalho,
-                vaga.anosExperiencia
+                Vaga.id,
+                Vaga.empresa,
+                Vaga.cargo,
+                Vaga.requisitos,
+                Vaga.salario,
+                Vaga.modeloTrabalho,
+                Vaga.anosExperiencia
             )
         );
 
-    return vagas;
+    return Vagas;
 
     } catch (erro) {
         console.error("Erro:", erro.message);
