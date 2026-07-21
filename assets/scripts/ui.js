@@ -4,31 +4,39 @@
 
 export const Formulario = document.getElementById("FormCandidato");
 
-export const Mensagem = document.getElementById("MensagemUsuário");
+export const Mensagem = document.getElementById("MensagemUsuario");
 
-export const SessaoCards = document.getElementById("SessãoVagas");
+export const MensagemJson = document.getElementById("MensagemJson");
+
+export const SessaoCards = document.getElementById("SessaoVagas");
 
 // - Importações e instâncias
 
-import {BuscarVagas} from "./dados.js";
+import { BuscarVagas } from "./dados.js";
 
-import {Candidato} from "./motor.js";
+import { Candidato } from "./motor.js";
 
 // - Função CandidatoFormulario
 
 export function CandidatoFormulario(callback) {
     Formulario.addEventListener("submit", (evento) => {
         evento.preventDefault();
-    
+
         console.log("Formulário enviado!");
 
+        const habilidadesMarcadas = document.querySelectorAll(
+            'input[name="Habilidade"]:checked'
+        );
+        
         const candidato = {
             nome: document.getElementById('CampoNome').value,
             area: document.getElementById('CampoArea').value,
-            habilidades: document.getElementById('CampoHabilidades').value,
+            habilidades: Array.from(habilidadesMarcadas).map((checkbox) => checkbox.value),
             modeloTrabalho: document.getElementById('CampoModelo').value,
             anosExperiencia: document.getElementById('CampoAnos').value
         };
+
+        console.log(candidato);
 
         function Validacao() {
 
@@ -56,18 +64,6 @@ export function CandidatoFormulario(callback) {
                 return false;
             }
 
-            if (candidato.habilidades.length <= 3) {
-                Mensagem.textContent = `habilidade(s): "${candidato.habilidades}" é muito pequeno(a), insira uma habilidade maior ou mais habilidades.`;
-                Mensagem.classList.add('Texto-vermelho');
-                Mensagem.classList.remove('Texto-verde');
-                return false;
-            } else if (candidato.habilidades.length >= 51) {
-                Mensagem.textContent = `habilidade(s): "${candidato.habilidades}" é muito grande, insira uma habilidade menor ou menos habilidades.`;
-                Mensagem.classList.add('Texto-vermelho');
-                Mensagem.classList.remove('Texto-verde');
-                return false;
-            }
-
             console.log("Formulário validado com sucesso!");
 
             Mensagem.textContent = "Cadastro realizado com sucesso!";
@@ -77,18 +73,18 @@ export function CandidatoFormulario(callback) {
             return true;
 
         }
-        
+
         Validacao();
 
         const ObjetoCandidato = (candidato) =>
-        new Candidato (
-            candidato.nome,
-            candidato.area,
-            candidato.habilidades,
-            candidato.modeloTrabalho,
-            candidato.anosExperiencia
-        );
-        
+            new Candidato(
+                candidato.nome,
+                candidato.area,
+                candidato.habilidades,
+                candidato.modeloTrabalho,
+                candidato.anosExperiencia
+            );
+
         if (!Validacao()) {
             return false;
         }
@@ -97,26 +93,19 @@ export function CandidatoFormulario(callback) {
     });
 };
 
-// - Função MostrarMensagem
+// - Função ExibirMensagemErro
 
-export function MostrarMensagem(texto, tipo) {
-
-    Mensagem.textContent = texto;
-
-    Mensagem.classList.remove("Texto-verde", "Texto-vermelho");
-
-    Mensagem.classList.add(
-        tipo === "erro"
-            ? "Texto-vermelho"
-            : "Texto-verde"
-    );
+export function ExibirMensagemErro(mensagem, tema) {
+    MensagemJson.textContent = mensagem;
+    MensagemJson.classList.remove("Texto-verde", "Texto-vermelho");
+    MensagemJson.classList.add(tema);
 }
 
 // - Função CriarCardsVaga
 
 export const vagas = await BuscarVagas();
 
-export async function CriarCardsVaga (vagas) {
+export async function CriarCardsVaga(vagas) {
     vagas.forEach(vaga => {
         let Card = document.createElement("div");
         let Texto = document.createElement("p");

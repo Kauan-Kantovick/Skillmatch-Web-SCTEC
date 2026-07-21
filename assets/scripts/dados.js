@@ -4,6 +4,8 @@
 
 import { VagaTecnologia } from "./motor.js";
 
+import { ExibirMensagemErro } from "./ui.js";
+
 // - Função BuscarVagas
 
 export async function BuscarVagas() {
@@ -15,17 +17,26 @@ export async function BuscarVagas() {
         const Resposta = await fetch("/assets/data/vagas.json");;
 
         if (!Resposta.ok) {
-            throw new Error("Erro ao carregar as vagas.");
+            ExibirMensagemErro(
+                "Erro ao carregar as vagas.",
+                "Texto-vermelho"
+            );
         }
 
         const VagasJson = await Resposta.json();
 
         if (VagasJson.length === 0) {
-            throw new Error("Nenhuma vaga encontrada.");
+            ExibirMensagemErro(
+                "Nenhuma vaga encontrada.",
+                "Texto-vermelho"
+            );
         }
 
         if (!Array.isArray(VagasJson)) {
-            throw new Error("Arquivo json em formato inválido.");
+            ExibirMensagemErro(
+                "Arquivo json em formato inválido.",
+                "Texto-vermelho"
+            );
         }
 
         console.log("Vagas encontradas com sucesso!");
@@ -42,7 +53,7 @@ export async function BuscarVagas() {
             )
         );
 
-    return Vagas;
+        return Vagas;
 
     } catch (erro) {
         console.error("Erro:", erro.message);

@@ -83,7 +83,7 @@ export class VagaTecnologia extends Vaga {
 //==============================UTILIZAÇÃO-CLASSES=========================================
 // - Importações
 /*
-import { FuncaoCandidatoFormulario } from "./main.js";
+
 import { BuscarVagas } from "./dados.js";
 
 // - Instâncias externas

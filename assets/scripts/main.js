@@ -8,7 +8,7 @@ import {CandidatoFormulario} from "./ui.js";
 
 import {vagas} from "./ui.js";
 
-import {MostrarMensagem} from "./ui.js";
+import {ExibirMensagemErro} from "./ui.js";
 
 CandidatoFormulario((candidato) => {
     console.log(candidato);
@@ -16,16 +16,16 @@ CandidatoFormulario((candidato) => {
 
 try {
 
-    MostrarMensagem(
+    ExibirMensagemErro(
         "Vagas carregadas com sucesso!",
-        "sucesso"
+        "Texto-verde"
     );
 
 } catch (erro) {
 
-    MostrarMensagem(
+    ExibirMensagemErro(
         erro.message,
-        "erro"
+        "Texto-vermelho"
     );
 
 }
