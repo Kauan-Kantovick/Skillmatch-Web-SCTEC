@@ -10,6 +10,12 @@ import {vagas} from "./ui.js";
 
 import {ExibirMensagemErro} from "./ui.js";
 
+// - Importações: Exportações
+
+export const BuscandoVagas = BuscarVagas();
+
+export const DadosCandidato = CandidatoFormulario();
+
 CandidatoFormulario((candidato) => {
     console.log(candidato);
 });

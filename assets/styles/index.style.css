@@ -12,13 +12,14 @@
 
 .Card {
     display: flex;
-    flex-direction: row;
-    margin: 15px;
+    justify-content: center;
+    margin: 5px;
     background-color: brown;
     flex-wrap: wrap;
-    height: 150px;
+    align-content: center;
+    height: 100px;
     width: 100%;
-    gap: 30px;
+    gap: 0, 30px;
 }
 
 .Texto {
