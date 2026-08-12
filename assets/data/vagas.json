@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "empresa": "TechStart",
+    "cargo": "Desenvolvedor Front-End Júnior",
+    "requisitos": [
+      "JavaScript",
+      "GitHub",
+      "Lógica de Programação"
+    ],
+    "salario": 2800,
+    "modeloTrabalho": "Remoto",
+    "anosExperiencia": 1
+  },
+  {
+    "id": 2,
+    "empresa": "CodeLab",
+    "cargo": "Estágio em Front-End",
+    "requisitos": [
+      "JavaScript",
+      "Kanban",
+      "GitHub"
+    ],
+    "salario": 1800,
+    "modeloTrabalho": "Híbrido",
+    "anosExperiencia": 0
+  },
+  {
+    "id": 3,
+    "empresa": "WebSolutions",
+    "cargo": "Desenvolvedor JavaScript Júnior",
+    "requisitos": [
+      "JavaScript",
+      "Arrays",
+      "Objetos",
+      "Funções"
+    ],
+    "salario": 3000,
+    "modeloTrabalho": "Presencial",
+    "anosExperiencia": 2
+  },
+  {
+    "id": 4,
+    "empresa": "ABACATE",
+    "cargo": "Estágiario de POO",
+    "requisitos": [
+      "JavaScript",
+      "Objetos",
+      "Lógica de Programação"
+    ],
+    "salario": 2200,
+    "modeloTrabalho": "Híbrido",
+    "anosExperiencia": 3
+  },
+  {
+    "id": 5,
+    "empresa": "DevSphere",
+    "cargo": "Desenvolvedor Back-End Júnior",
+    "requisitos": [
+      "Node.js",
+      "JavaScript",
+      "APIs",
+      "GitHub"
+    ],
+    "salario": 3400,
+    "modeloTrabalho": "Remoto",
+    "anosExperiencia": 1
+  },
+  {
+    "id": 6,
+    "empresa": "CloudTech",
+    "cargo": "Desenvolvedor Full Stack Júnior",
+    "requisitos": [
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Node.js",
+      "GitHub"
+    ],
+    "salario": 3800,
+    "modeloTrabalho": "Híbrido",
+    "anosExperiencia": 2
+  },
+  {
+    "id": 7,
+    "empresa": "SoftVision",
+    "cargo": "Estágio em Desenvolvimento Web",
+    "requisitos": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Lógica de Programação"
+    ],
+    "salario": 1700,
+    "modeloTrabalho": "Presencial",
+    "anosExperiencia": 0
+  },
+  {
+    "id": 8,
+    "empresa": "DataFlow",
+    "cargo": "Desenvolvedor Back-End",
+    "requisitos": [
+      "Node.js",
+      "MySQL",
+      "APIs",
+      "GitHub"
+    ],
+    "salario": 4200,
+    "modeloTrabalho": "Remoto",
+    "anosExperiencia": 3
+  },
+  {
+    "id": 9,
+    "empresa": "NextCode",
+    "cargo": "Desenvolvedor Front-End Pleno",
+    "requisitos": [
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "React",
+      "Git"
+    ],
+    "salario": 5000,
+    "modeloTrabalho": "Híbrido",
+    "anosExperiencia": 4
+  },
+  {
+    "id": 10,
+    "empresa": "InovaTech",
+    "cargo": "Desenvolvedor JavaScript",
+    "requisitos": [
+      "JavaScript",
+      "Funções",
+      "Arrays",
+      "Objetos",
+      "GitHub"
+    ],
+    "salario": 3200,
+    "modeloTrabalho": "Presencial",
+    "anosExperiencia": 2
+  }
+]

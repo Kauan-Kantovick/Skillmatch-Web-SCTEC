@@ -1,19 +1,12 @@
-/*
-1 - Definicao das classes (POO, metodos, heranca)
-2 - A utiizacao das classes e demais instâncias
-3 - Fluxo do sistema
-    3.1 - Capturar as vagas cadastradas (10 vagas) - async/await/fetch
-    3.2 - Contador de análises
-    3.3 - *Filtrar as vagas que são para que aquele usuario (tempo de experiencia - 3 vagas)
-    3.4 - Calcular a compatibilidade de cada vaga *filtrada para aquele usuario
-    3.5 - Classifica essa compatibilidade
-    3.6 - Faz e exibe o cálulo de compatibilidade com a vaga escolhida
-    3.7 - Destaca a melhor dentre as filtradas
-    3.8 - Recomendação de estudos das habilidades faltantes da pior vaga
-    3.9 - Callback e total de análises
-*/
+//==============================IMPORTAÇÕES-E-INSTÂNCIAS-EXTERNAS=========================================
+
+import {BuscandoVagas} from "./main.js";
+
+import {DadosCandidato} from "./main.js";
+
 //==============================CLASSE-CANDIDATO=========================================
-class Candidato {
+
+export class Candidato {
     constructor(nome, area, estiloTrabalho, habilidades, tempoExperiencia) {
         this.nome = nome;
         this.area = area;
@@ -39,6 +32,8 @@ class Candidato {
 }
 
 //==============================CLASSE-VAGAS=========================================
+
+// - Classe Vaga
 
 class Vaga {
     constructor(id, empresa, cargo, requisitos, salario, modeloTrabalho) {
@@ -72,7 +67,9 @@ class Vaga {
     }
 }
 
-class VagaTecnologia extends Vaga {
+// - Classe VagaTecnologia
+
+export class VagaTecnologia extends Vaga {
     constructor(id, empresa, cargo, requisitos, salario, modeloTrabalho, anosExperiencia = 0) {
         super(id, empresa, cargo, requisitos, salario, modeloTrabalho);
         this.anosExperiencia = anosExperiencia;
@@ -85,65 +82,72 @@ class VagaTecnologia extends Vaga {
     }
 }
 
+
 //==============================UTILIZAÇÃO-CLASSES=========================================
 
-// - Objetos de classe:
+// async function Dados (){
 
-const Candidato_1 = new Candidato("Ana", "Front-End", "Híbrido", ["JavaScript", "GitHub", "Lógica de Programação"], 5);
+//     let Vagas = await BuscandoVagas;
+//     let Candidato_1 = await DadosCandidato;
 
-// console.log(Candidato_1.GetNome(), Candidato_1.GetArea(), Candidato_1.GetEstiloTrabalho(), Candidato_1.GetHabilidades(), Candidato_1.GetTempoExperiencia());
+//     return Vagas, Candidato_1;
+// }
 
-const Vagas = [
-    new VagaTecnologia(1, "TechStart", "Desenvolvedor Front-End Júnior", ["JavaScript", "GitHub", "Lógica de Programação"], 2800, "Remoto", 1),
-    new VagaTecnologia(2, "CodeLab", "Estágio em Front-End", ["JavaScript", "Kanban", "GitHub"], 1800, "Híbrido"),
-    new VagaTecnologia(3, "WebSolutions", "Desenvolvedor JavaScript Júnior", ["JavaScript", "Arrays", "Objetos", "Funções"], 3000, "Presencial", 2),
-    new VagaTecnologia(4, "ABACATE", "Estágiario de POO", ["JavaScript", "Objetos", "Lógica de Programação"], 2200, "Híbrido", 3),
-    new VagaTecnologia(5, "DevSphere", "Desenvolvedor Back-End Júnior", ["Node.js", "JavaScript", "APIs", "GitHub"], 3400, "Remoto", 1),
-    new VagaTecnologia(6, "CloudTech", "Desenvolvedor Full Stack Júnior", ["JavaScript", "HTML", "CSS", "Node.js", "GitHub"], 3800, "Híbrido", 2),
-    new VagaTecnologia(7, "SoftVision", "Estágio em Desenvolvimento Web", ["HTML", "CSS", "JavaScript", "Lógica de Programação"], 1700, "Presencial"),
-    new VagaTecnologia(8, "DataFlow", "Desenvolvedor Back-End", ["Node.js", "MySQL", "APIs", "GitHub"], 4200, "Remoto", 3),
-    new VagaTecnologia(9, "NextCode", "Desenvolvedor Front-End Pleno", ["JavaScript", "HTML", "CSS", "React", "Git"], 5000, "Híbrido", 4),
-    new VagaTecnologia(10, "InovaTech", "Desenvolvedor JavaScript", ["JavaScript", "Funções", "Arrays", "Objetos", "GitHub"], 3200, "Presencial", 2),
-];
+// Dados();
 
-// console.log(Vagas[0].GetId(), Vagas[0].GetEmpresa(), Vagas[0].GetCargo(), Vagas[0].GetRequisitos(), Vagas[0].GetSalario(), Vagas[0].GetModeloTrabalho(), Vagas[0].GetAnosExperiencia(), Vagas[0].ApresentacaoVaga());
+// const RequisitosVaga = (Vagas) => {
+//     Vagas.forEach(vaga => {
+//         vaga.GetRequisitos();
+//     });
+// };
 
-// - Instâncias:
+function Dados() {
+    return new Promise((resolve, reject) => {
 
-const IndiceVaga = 0;
+        console.log("Procurando dados do usuário");
 
-const VagaSelecionada = Vagas[IndiceVaga];
+        setTimeout((BuscandoVagas, DadosCandidato) => {
 
-// console.log(VagaSelecionada);
+            console.log("Dentro do Timeout");
 
-const HabilidadesCandidato = Candidato_1.GetHabilidades();
+            if(BuscandoVagas.nome === "Raia") {
+                resolve(BuscandoVagas(), DadosCandidato())
+                console.log("sdal");
+            } else {
+                reject(console.log("Dados não encontrados"));
+            }
+        });
+    });
+}
 
-// console.log(HabilidadesCandidato);
+async function IniciandoBusca() {
+    const ProcuraDados = Dados(BuscandoVagas, DadosCandidato);
+    console.log(`
+        Dados obtidos com sucesso
+    `);
+    return ProcuraDados;
+}
 
-const RequisitosVaga = VagaSelecionada.GetRequisitos();
+IniciandoBusca();
 
-// console.log(RequisitosVaga);
+console.log(IniciandoBusca());
 
-const HabilidadesCompativeis = HabilidadesCandidato.filter(habilidade => RequisitosVaga.includes(habilidade));
+//const HabilidadesCandidato = Candidato_1.GetHabilidades();
 
-// console.log(HabilidadesCompativeis);
+// - Instâncias comparações
 
-const HabilidadesFaltantes = RequisitosVaga.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
+//const HabilidadesCompativeis = HabilidadesCandidato.filter(habilidade => RequisitosVaga.includes(habilidade));
 
-// console.log(HabilidadesFaltantes);
+//const HabilidadesFaltantes = RequisitosVaga.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
 
-// - Formatação
+// - Instâncias formatações
 
-const HabilidadesCompativeisFormatadas = HabilidadesCompativeis.map(habilidade => ` ${habilidade}`);
+//const HabilidadesCompativeisFormatadas = HabilidadesCompativeis.map(habilidade => ` ${habilidade}`);
 
-// console.log(HabilidadesCompativeisFormatadas);
-
-const HabilidadesFaltantesFormatadas = HabilidadesFaltantes.map(habilidade => `    -${habilidade}`);
-
-// console.log(HabilidadesFaltantesFormatadas);
+//const HabilidadesFaltantesFormatadas = HabilidadesFaltantes.map(habilidade => `    -${habilidade}`);
 
 //==============================CONTADOR-DE-ANÁLISES==============================
-
+/*
 const CriarContadorAnalises = (() => {
     let Contador = 0;
 
@@ -159,27 +163,19 @@ const CriarContadorAnalises = (() => {
     }
 })();
 
-// CriarContadorAnalises.ContarAnalise();
-
-// CriarContadorAnalises.InformacoesAnalise();
-
 //==============================CÁLCULO-E-MENSAGEM-DE-COMPATIBILIDADE=====================================
+
+// - Instâncias tamanho dos objetos 
 
 const RequisitosAtendidos = HabilidadesCompativeis.length;
 
-// console.log(RequisitosAtendidos);
-
 const TotalRequisitos = RequisitosVaga.length;
 
-// console.log(TotalRequisitos);
+// - Função CalcularCompatibilidade
 
 const CalcularCompatibilidade = (valorA, valorB) => Math.round((valorA / valorB) * 100);
 
-// console.log(CalcularCompatibilidade(50, 100));
-
 const TaxaCompatibilidade = CalcularCompatibilidade(RequisitosAtendidos, TotalRequisitos);
-
-// console.log(TaxaCompatibilidade);
 
 const MensagemCompatibilidade = `
 =================== MENSAGEM DE COMPATIBILIDADE ====================
@@ -190,7 +186,9 @@ const MensagemCompatibilidade = `
     ${HabilidadesFaltantesFormatadas.length > 0 ? `Habilidades Faltantes: ${("\n") + HabilidadesFaltantesFormatadas.join("\n")}` : ``} 
 `;
 
-// console.log(MensagemCompatibilidade);
+// vai aparecer embaixo dos dados das vagas
+
+// - Validaçâo Função CalcularCompatibilidade
 
 const VerificarMensagem = (TaxaCompatibilidade, CriarContadorAnalises, MensagemCompatibilidade) => {
     if (TaxaCompatibilidade >= 0 && TaxaCompatibilidade <= 100){
@@ -201,9 +199,13 @@ const VerificarMensagem = (TaxaCompatibilidade, CriarContadorAnalises, MensagemC
     }
 }
 
+// Fazer validação de outra forma
+
 VerificarMensagem(TaxaCompatibilidade, CriarContadorAnalises, MensagemCompatibilidade);
 
 //==============================CLASSIFICAÇÃO-DE-COMPATIBILIDADE============================
+
+// - Função ClassificarCompatibilidade
 
 const ClassificarCompatibilidade = (TaxaCompatibilidade) => {
     if (TaxaCompatibilidade === 100) {
@@ -227,9 +229,12 @@ const ClassificarCompatibilidade = (TaxaCompatibilidade) => {
     }
 }
 
+// vai aparecer embaixo dos dados das vagas
+// validação erro ou deixa assim mesmo
+
 const VerificacaoCompatibilidade = ClassificarCompatibilidade(TaxaCompatibilidade);
 
-//console.log(VerificacaoCompatibilidade);
+// - Validação função ClassificarCompatibilidade
 
 function ExibicaoCompatibilidade(VerificacaoCompatibilidade, Candidato_1, VagaSelecionada) {
     if (Candidato_1.GetTempoExperiencia() >= VagaSelecionada.GetAnosExperiencia()) {
@@ -244,9 +249,13 @@ function ExibicaoCompatibilidade(VerificacaoCompatibilidade, Candidato_1, VagaSe
     };
 }
 
+// vai aparecer embaixo dos dados das vagas e vai bloquear os outros dados caso a experiência minima não seja atingida
+
 ExibicaoCompatibilidade(VerificacaoCompatibilidade, Candidato_1, VagaSelecionada);
 
 //==============================RECOMENDAÇÃO-DE-ESTUDOS=========================================
+
+// - Função RecomendacaoEstudos
 
 const RecomendacaoEstudos = (Candidato, Vagas) => {
 
@@ -256,31 +265,17 @@ const RecomendacaoEstudos = (Candidato, Vagas) => {
 
     for (const VagaTecnologia of Vagas) {
 
-//        console.log("Entrou no for");
-
         let RequisitosVagaAtual = VagaTecnologia.GetRequisitos();
-
-//        console.log(RequisitosVagaAtual);
 
         let HabilidadesCompativeisVaga = HabilidadesCandidato.filter(habilidade => RequisitosVagaAtual.includes(habilidade));
 
-//        console.log(HabilidadesCompativeisVaga);
-
         let HabilidadesIncompativeisVaga = RequisitosVagaAtual.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
-
-//        console.log(HabilidadesIncompativeisVaga);
 
         let TotalRequisitosAtual = RequisitosVagaAtual.length;
     
-//        console.log(TotalRequisitosAtual);
-
         let TotalCompativeis = HabilidadesCompativeisVaga.length;
         
         let CompatibilidadeCandidato = CalcularCompatibilidade(TotalCompativeis, TotalRequisitosAtual);
-
-//        console.log("Compatibilidade:", CompatibilidadeCandidato);
-
-//        console.log(CompatibilidadeCandidato < MenorCompatibilidade);
 
         CriarContadorAnalises.ContarAnalise();
 
@@ -302,7 +297,9 @@ const RecomendacaoEstudos = (Candidato, Vagas) => {
 
 const RecomendacaoPior = RecomendacaoEstudos(Candidato_1, Vagas);
 
-// console.log(RecomendacaoPior);
+// será exibida a mensagem em um campo separado onde ira ser um foco a parte 
+
+// - Mensagem da RecomendacaoEstudos
 
 const RecomendacaoMensagem = `
 =================== RECOMENDAÇÃO DE ESTUDOS ====================
@@ -312,6 +309,8 @@ const RecomendacaoMensagem = `
 console.log(RecomendacaoMensagem);
 
 //==============================MELHOR-VAGA==================================================
+
+// - Função MelhorVaga
 
 const MelhorVaga = (Candidato, Vagas) => {
 
@@ -323,19 +322,11 @@ const MelhorVaga = (Candidato, Vagas) => {
 
         let RequisitosVagaAtual = VagaTecnologia.GetRequisitos();
 
-//      console.log(RequisitosVagaAtual);
-
         let HabilidadesCompativeisVaga = HabilidadesCandidato.filter(habilidade => RequisitosVagaAtual.includes(habilidade));
-
-//      console.log(HabilidadesCompativeisVaga);
 
         let HabilidadesIncompativeisVaga = RequisitosVagaAtual.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
 
-//      console.log(HabilidadesIncompativeisVaga);
-
         let TotalRequisitosAtual = RequisitosVagaAtual.length;
-    
-//      console.log(TotalRequisitosAtual);
 
         let TotalCompativeis = HabilidadesCompativeisVaga.length;
         
@@ -363,7 +354,7 @@ const MelhorVaga = (Candidato, Vagas) => {
 
 const Recomendacao = MelhorVaga(Candidato_1, Vagas);
 
-// console.log(Recomendacao);
+// - Mensagem da MelhorVaga
 
 console.log(`
 ================= MELHOR VAGA =================
@@ -397,30 +388,4 @@ function FinalizarAnalise(callback) {
 }
 
 FinalizarAnalise(MensagemFinal);
-
-//==============================PROMISE-ASYNC/AWAIT==================================================
-function SimulacaoBusca() {
-    return new Promise((resolve, reject) => {
-
-        console.log("Buscando Vagas...");
-
-        setTimeout(() => {
-
-            if (true) {
-                resolve(Vagas.length);
-            } else {
-                reject("Nenhuma Vaga encontrada.");
-            }
-        }, 2000);
-    });
-}
-
-async function IniciarBusca() {
-    const VagasCarregadas = await SimulacaoBusca();
-    console.log(`
-        Vagas carregadas com sucesso!
-        Total de ${VagasCarregadas} Vagas encontradas.
-        `);
-}
-
-IniciarBusca();
+*/

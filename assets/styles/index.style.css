@@ -1,0 +1,27 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.Texto-vermelho {
+    color: red;
+}
+
+.Texto-verde {
+    color: green;
+}
+
+.Card {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    background-color: brown;
+    flex-wrap: wrap;
+    align-content: center;
+    height: 100px;
+    width: 100%;
+    gap: 0, 30px;
+}
+
+.Texto {
+    color: white;
+}
