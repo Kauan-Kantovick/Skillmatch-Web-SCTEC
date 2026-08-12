@@ -1,6 +1,8 @@
 //==============================IMPORTAÇÕES-E-INSTÂNCIAS-EXTERNAS=========================================
 
+import {BuscandoVagas} from "./main.js";
 
+import {DadosCandidato} from "./main.js";
 
 //==============================CLASSE-CANDIDATO=========================================
 
@@ -80,44 +82,72 @@ export class VagaTecnologia extends Vaga {
     }
 }
 
+
 //==============================UTILIZAÇÃO-CLASSES=========================================
-// - Importações
-/*
-import { FuncaoCandidatoFormulario } from "./main.js";
-import { BuscarVagas } from "./dados.js";
 
-// - Instâncias externas
+// async function Dados (){
 
-const Candidato_1 = FuncaoCandidatoFormulario();
-const Vagas = await BuscarVagas();
+//     let Vagas = await BuscandoVagas;
+//     let Candidato_1 = await DadosCandidato;
 
-// - Instâncias objetos
+//     return Vagas, Candidato_1;
+// }
 
-const IndiceVaga = 0;
-// Todas as vagas
+// Dados();
 
-const VagaSelecionada = Vagas[IndiceVaga];
+// const RequisitosVaga = (Vagas) => {
+//     Vagas.forEach(vaga => {
+//         vaga.GetRequisitos();
+//     });
+// };
 
-// - Instâncias funcionalidades
+function Dados() {
+    return new Promise((resolve, reject) => {
 
-const HabilidadesCandidato = Candidato_1.GetHabilidades();
+        console.log("Procurando dados do usuário");
 
-const RequisitosVaga = VagaSelecionada.GetRequisitos();
+        setTimeout((BuscandoVagas, DadosCandidato) => {
+
+            console.log("Dentro do Timeout");
+
+            if(BuscandoVagas.nome === "Raia") {
+                resolve(BuscandoVagas(), DadosCandidato())
+                console.log("sdal");
+            } else {
+                reject(console.log("Dados não encontrados"));
+            }
+        });
+    });
+}
+
+async function IniciandoBusca() {
+    const ProcuraDados = Dados(BuscandoVagas, DadosCandidato);
+    console.log(`
+        Dados obtidos com sucesso
+    `);
+    return ProcuraDados;
+}
+
+IniciandoBusca();
+
+console.log(IniciandoBusca());
+
+//const HabilidadesCandidato = Candidato_1.GetHabilidades();
 
 // - Instâncias comparações
 
-const HabilidadesCompativeis = HabilidadesCandidato.filter(habilidade => RequisitosVaga.includes(habilidade));
+//const HabilidadesCompativeis = HabilidadesCandidato.filter(habilidade => RequisitosVaga.includes(habilidade));
 
-const HabilidadesFaltantes = RequisitosVaga.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
+//const HabilidadesFaltantes = RequisitosVaga.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
 
 // - Instâncias formatações
 
-const HabilidadesCompativeisFormatadas = HabilidadesCompativeis.map(habilidade => ` ${habilidade}`);
+//const HabilidadesCompativeisFormatadas = HabilidadesCompativeis.map(habilidade => ` ${habilidade}`);
 
-const HabilidadesFaltantesFormatadas = HabilidadesFaltantes.map(habilidade => `    -${habilidade}`);
+//const HabilidadesFaltantesFormatadas = HabilidadesFaltantes.map(habilidade => `    -${habilidade}`);
 
 //==============================CONTADOR-DE-ANÁLISES==============================
-
+/*
 const CriarContadorAnalises = (() => {
     let Contador = 0;
 

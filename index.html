@@ -16,13 +16,13 @@
         <h2>Sessões da página</h2>
         <nav>
             <img src="./assets/img/definicoes.svg" alt="Ícone de engrenagem" style="height: 30px; max-width: 100%;">
-            <a href="#SessãoForm" tabindex="0" aria-label="Menu: Área de Formulário">Formulário</a>
-            <a href="#SessãoVagas" aria-label="Menu: Área de Vagas">Vagas</a>
+            <a href="#SessaoForm" tabindex="0" aria-label="Menu: Área de Formulário">Formulário</a>
+            <a href="#SessaoVagas" aria-label="Menu: Área de Vagas">Vagas</a>
         </nav>
     </header>
 
     <main>
-        <section id="SessãoForm">
+        <section id="SessaoForm">
             <form method="" id="FormCandidato">
                 <h3>Formulário</h3>
                 <fieldset>
@@ -35,10 +35,72 @@
                         <input type="text" value="" name="CampoArea" id="CampoArea"
                             placeholder="Insira a sua área profissional" required min="4" max="30">
                     </label>
-                    <label for="CampoHabilidades" aria-label="Formulário: Insira as suas habilidades profissionais">
-                        <input type="text" value="" name="CampoHabilidades" id="CampoHabilidades"
-                            placeholder="Insira as suas habilidades profissionais" required min="4" max="50">
+                    
+                    <label for="JavaScript" aria-label="Formulário: Escolha as suas habilidades profissionais">
+                        <input type="checkbox" value="JavaScript" name="Habilidade" id="JavaScript">
+                        JavaScript
                     </label>
+
+                    <label for="GitHub" aria-label="Formulário: Escolha as suas habilidades profissionais">
+                        <input type="checkbox" value="GitHub" name="Habilidade" id="GitHub">
+                    GitHub
+                    </label>
+
+                    <label for="LogicaProgramacao" aria-label="Formulário: Escolha as suas habilidades profissionais">
+                        <input type="checkbox" value="Lógica de Programação" name="Habilidade" id="LogicaProgramacao">
+                        Lógica de Programação
+                    </label>
+
+                    <label for="Kanban" aria-label="Formulário: Escolha as suas habilidades profissionais">
+                        <input type="checkbox" value="Kanban" name="Habilidade" id="Kanban">
+                        Kanban
+                    </label>
+
+                    <label for="Arrays" aria-label="Formulário: Escolha as suas habilidades profissionais">
+                        <input type="checkbox" value="Arrays" name="Habilidade" id="Arrays">
+                        Arrays
+                    </label>
+
+                    <label for="Objetos" aria-label="Formulário: Escolha as suas habilidades profissionais">
+                        <input type="checkbox" value="Objetos" name="Habilidade" id="Objetos">
+                        Objetos
+                    </label>
+
+                    <label for="Funcoes" aria-label="Formulário: Escolha as suas habilidades profissionais">
+                        <input type="checkbox" value="Funções" name="Habilidade" id="Funcoes">
+                        Funções
+                    </label>
+
+                    <label for="NodeJS" aria-label="Formulário: Escolha as suas habilidades profissionais">
+                        <input type="checkbox" value="Node.js" name="Habilidade" id="NodeJS">
+                        Node.js
+                    </label>
+
+                    <label for="APIs" aria-label="Formulário: Escolha as suas habilidades profissionais">
+                        <input type="checkbox" value="APIs" name="Habilidade" id="APIs">
+                        APIs
+                    </label>
+
+                    <label for="HTML" aria-label="Formulário: Escolha as suas habilidades profissionais">
+                        <input type="checkbox" value="HTML" name="Habilidade" id="HTML">
+                        HTML
+                    </label>
+
+                    <label for="CSS" aria-label="Formulário: Escolha as suas habilidades profissionais">
+                        <input type="checkbox" value="CSS" name="Habilidade" id="CSS">
+                        CSS
+                    </label>
+
+                    <label for="React" aria-label="Formulário: Escolha as suas habilidades profissionais">
+                        <input type="checkbox" value="React" name="Habilidade" id="React">
+                        React
+                    </label>
+
+                    <label for="Git" aria-label="Formulário: Escolha as suas habilidades profissionais">
+                        <input type="checkbox" value="Git" name="Habilidade" id="Git">
+                        Git
+                    </label>
+
                     <label for="CampoModelo">
                         <select name="CampoModelo" id="CampoModelo" required>
                             <option value="">Selecione...</option>
@@ -54,9 +116,10 @@
                     <button type="submit" id="SubmitCandidato">Enviar</button>
                 </fieldset>
             </form>
-            <p id="MensagemUsuário" aria-live="polite"></p>
+            <p id="MensagemJson" aria-live="polite"></p>
+            <p id="MensagemUsuario" aria-live="polite"></p>
         </section>
-        <section id="SessãoVagas"></section>
+        <section id="SessaoVagas"></section>
     </main>
 
     <footer>
