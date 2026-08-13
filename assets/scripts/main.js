@@ -6,13 +6,9 @@ import { BuscarVagas } from "./dados.js";
 
 import {CandidatoFormulario} from "./ui.js";
 
-import {vagas} from "./ui.js";
-
 import {ExibirMensagemErro} from "./ui.js";
 
 // - Importações: Exportações
-
-export const BuscandoVagas = BuscarVagas();
 
 export const DadosCandidato = CandidatoFormulario();
 

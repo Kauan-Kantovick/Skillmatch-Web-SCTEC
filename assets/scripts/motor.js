@@ -1,7 +1,5 @@
 //==============================IMPORTAÇÕES-E-INSTÂNCIAS-EXTERNAS=========================================
 
-import {BuscandoVagas} from "./main.js";
-
 import {DadosCandidato} from "./main.js";
 
 //==============================CLASSE-CANDIDATO=========================================
@@ -101,36 +99,36 @@ export class VagaTecnologia extends Vaga {
 //     });
 // };
 
-function Dados() {
-    return new Promise((resolve, reject) => {
+// function Dados() {
+//     return new Promise((resolve, reject) => {
 
-        console.log("Procurando dados do usuário");
+//         console.log("Procurando dados do usuário");
 
-        setTimeout((BuscandoVagas, DadosCandidato) => {
+//         setTimeout((BuscandoVagas, DadosCandidato) => {
 
-            console.log("Dentro do Timeout");
+//             console.log("Dentro do Timeout");
 
-            if(BuscandoVagas.nome === "Raia") {
-                resolve(BuscandoVagas(), DadosCandidato())
-                console.log("sdal");
-            } else {
-                reject(console.log("Dados não encontrados"));
-            }
-        });
-    });
-}
+//             if(BuscandoVagas.nome === "Raia") {
+//                 resolve(BuscandoVagas(), DadosCandidato())
+//                 console.log("sdal");
+//             } else {
+//                 reject(console.log("Dados não encontrados"));
+//             }
+//         });
+//     });
+// }
 
-async function IniciandoBusca() {
-    const ProcuraDados = Dados(BuscandoVagas, DadosCandidato);
-    console.log(`
-        Dados obtidos com sucesso
-    `);
-    return ProcuraDados;
-}
+// async function IniciandoBusca() {
+//     const ProcuraDados = Dados(BuscandoVagas, DadosCandidato);
+//     console.log(`
+//         Dados obtidos com sucesso
+//     `);
+//     return ProcuraDados;
+// }
 
-IniciandoBusca();
+// IniciandoBusca();
 
-console.log(IniciandoBusca());
+// console.log(IniciandoBusca());
 
 //const HabilidadesCandidato = Candidato_1.GetHabilidades();
 
