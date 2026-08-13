@@ -86,7 +86,7 @@ export function CandidatoFormulario(callback) {
             );
 
         if (!Validacao()) {
-            return false;
+            return;
         }
 
         callback(ObjetoCandidato(candidato));

@@ -1,7 +1,4 @@
 //==============================IMPORTAÇÕES-E-INSTÂNCIAS-EXTERNAS=========================================
-
-import {DadosCandidato} from "./main.js";
-
 //==============================CLASSE-CANDIDATO=========================================
 
 export class Candidato {

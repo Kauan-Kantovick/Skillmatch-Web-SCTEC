@@ -10,8 +10,6 @@ import {ExibirMensagemErro} from "./ui.js";
 
 // - Importações: Exportações
 
-export const DadosCandidato = CandidatoFormulario();
-
 CandidatoFormulario((candidato) => {
     console.log(candidato);
 });
