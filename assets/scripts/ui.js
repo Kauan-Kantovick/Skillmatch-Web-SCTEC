@@ -36,8 +36,8 @@ export function CandidatoFormulario(callback) {
             anosExperiencia: document.getElementById('CampoAnos').value
         };
 
-        console.log(candidato);
-
+        console.log("Validando formulário...");
+        
         function Validacao() {
 
             if (candidato.nome.length <= 2) {
@@ -73,8 +73,6 @@ export function CandidatoFormulario(callback) {
             return true;
 
         }
-
-        Validacao();
 
         const ObjetoCandidato = (candidato) =>
             new Candidato(
