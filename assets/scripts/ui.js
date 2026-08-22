@@ -64,6 +64,13 @@ export function CandidatoFormulario(callback) {
                 return false;
             }
 
+            if (habilidadesMarcadas.length == 0) {
+                Mensagem.textContent = `Escolha ao menos uma habilidade.`;
+                Mensagem.classList.add('Texto-vermelho');
+                Mensagem.classList.remove('Texto-verde');
+                return false;
+            }
+
             console.log("Formulário validado com sucesso!");
 
             Mensagem.textContent = "Cadastro realizado com sucesso!";
