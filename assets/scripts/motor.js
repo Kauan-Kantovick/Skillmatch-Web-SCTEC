@@ -2,11 +2,11 @@
 //==============================CLASSE-CANDIDATO=========================================
 
 export class Candidato {
-    constructor(nome, area, estiloTrabalho, habilidades, tempoExperiencia) {
+    constructor(nome, area, habilidades, estiloTrabalho, tempoExperiencia) {
         this.nome = nome;
         this.area = area;
-        this.estiloTrabalho = estiloTrabalho;
         this.habilidades = habilidades;
+        this.estiloTrabalho = estiloTrabalho;
         this.tempoExperiencia = tempoExperiencia;
     };
     GetNome(){
