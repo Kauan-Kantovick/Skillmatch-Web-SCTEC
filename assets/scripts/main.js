@@ -14,6 +14,11 @@ import { MostrarCalculoComparacao } from "./ui.js";
 
 import { VagasJson } from "./ui.js";
 
+import { ClassificarCompatibilidade } from "./motor.js";
+
+import { IdentificaMaiorCompatibilidade } from "./ui.js";
+
+
 // - Importações: Exportações
 
 let i = 0;
@@ -21,6 +26,7 @@ let i = 0;
 CandidatoFormulario((candidato) => {
     console.log(candidato);
     MostrarCalculoComparacao(candidato, VagasJson, i);
+    IdentificaMaiorCompatibilidade(candidato, VagasJson, i);
 });
 
 try {

@@ -16,6 +16,8 @@ import { BuscarVagas } from "./dados.js";
 
 import { CalculoCompatibilidade, Candidato } from "./motor.js";
 
+import { ClassificarCompatibilidade } from "./motor.js";
+
 // - Função CandidatoFormulario
 
 export function CandidatoFormulario(callback) {
@@ -100,8 +102,6 @@ export function CandidatoFormulario(callback) {
 
 // - Função ExibirMensagemErro
 
-// executar o calculo após o ususario botar os seus dados no site
-
 export function ExibirMensagemErro(mensagem, tema) {
     MensagemJson.textContent = mensagem;
     MensagemJson.classList.remove("Texto-verde", "Texto-vermelho");
@@ -165,13 +165,51 @@ export async function MostrarCalculoComparacao(candidato, vagas, controlador) {
 
         let Texto = document.createElement("p");     
 
+        let TaxaCompatibilidade = CalculoCompatibilidade(HabilidadesCompativeis.length, RequisitosVaga.length);
+
         Texto.textContent = `
-        Esta é a sua porcentagem de compatibilidade com a vaga atual: ${CalculoCompatibilidade(HabilidadesCompativeis.length, RequisitosVaga.length)}%
-        ${HabilidadesFaltantes.length == 0 ? "" : "Essas são as habilidades que faltam para você alcançar 100% com a vaga:" + HabilidadesFaltantes } 
+        Esta é a sua porcentagem de compatibilidade com a vaga atual: ${TaxaCompatibilidade}%
+        ${HabilidadesFaltantes.length == 0 ? "" : "| Habilidades faltantes:" + HabilidadesFaltantes} 
+        | Nível de compatibilidade: ${ClassificarCompatibilidade(TaxaCompatibilidade)}
         `;
 
         controlador++;
 
         CardAtual.appendChild(Texto);
+
+        return TaxaCompatibilidade
     });
 }
+
+export async function IdentificaMaiorCompatibilidade(candidato, vagas, controlador) {
+
+    console.log(`Função "IdentificaMaiorCompatibilidade"`);
+
+    let RecomendacaoMelhorVaga = document.getElementById(controlador);
+
+    let MaiorCompatibilidade = -1;
+
+    vagas.forEach(vaga => {        
+   
+        let HabilidadesCandidato = candidato.GetHabilidades();
+        let RequisitosVaga = vaga.GetRequisitos();
+
+        let HabilidadesCompativeis = HabilidadesCandidato.filter(habilidade => RequisitosVaga.includes(habilidade));
+
+        const RequisitosAtendidos = HabilidadesCompativeis.length;
+        const TotalRequisitos = RequisitosVaga.length;
+
+        let CompatibilidadeCandidato = CalculoCompatibilidade(RequisitosAtendidos, TotalRequisitos);
+
+        if (CompatibilidadeCandidato > MaiorCompatibilidade) {
+        
+            MaiorCompatibilidade = CompatibilidadeCandidato;
+
+            RecomendacaoMelhorVaga.classList.add("MelhorVaga");
+
+        }
+
+        controlador++;
+    });
+}
+// ele vai entrar nas vagas com a maior compatibilidade e, após isso vai mudar a sua cor - e aparecer primeiro (opcional)

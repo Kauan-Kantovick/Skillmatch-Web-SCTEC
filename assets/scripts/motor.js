@@ -106,31 +106,46 @@ export const CriarContadorAnalises = (() => {
 
 //==============================UTILIZAÇÃO-CLASSES=========================================
 
-//const HabilidadesCandidato = Candidato_1.GetHabilidades();
-
-// - Instâncias comparações
-
-//const HabilidadesCompativeis = HabilidadesCandidato.filter(habilidade => RequisitosVaga.includes(habilidade));
-
-//const HabilidadesFaltantes = RequisitosVaga.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
-
-// - Instâncias formatações
-
-//const HabilidadesCompativeisFormatadas = HabilidadesCompativeis.map(habilidade => ` ${habilidade}`);
-
-//const HabilidadesFaltantesFormatadas = HabilidadesFaltantes.map(habilidade => `    -${habilidade}`);
-
-//==============================CÁLCULO-E-MENSAGEM-DE-COMPATIBILIDADE=====================================
-
-// - Instâncias tamanho dos objetos 
-
-// const RequisitosAtendidos = HabilidadesCompativeis.length;
-
-// const TotalRequisitos = RequisitosVaga.length;
-
 // - Função CalcularCompatibilidade
 
 export const CalculoCompatibilidade = (valorA, valorB) => Math.round((valorA / valorB) * 100);
+
+export const ClassificarCompatibilidade = (TaxaCompatibilidade) => {
+    if (TaxaCompatibilidade === 100) {
+        let Total = `Total`;
+        return Total;
+    } else if (TaxaCompatibilidade <= 99 && TaxaCompatibilidade >= 80) {
+        let Alta = `Alto`;
+        return Alta;
+    } else if (TaxaCompatibilidade <= 79 && TaxaCompatibilidade >= 50) {
+        let Moderada = `Moderado`;
+        return Moderada;
+    } else if (TaxaCompatibilidade <= 49 && TaxaCompatibilidade >= 1) {
+        let Baixa = `Baixo`;
+        return Baixa;
+    } else if (TaxaCompatibilidade === 0) {
+        let Nenhuma = `Nenhum`;
+        return Nenhuma;
+    } else {
+        let Erro = `Erro`;
+        return Erro;
+    }
+}
+
+// function ExibicaoCompatibilidade(VerificacaoCompatibilidade, Candidato_1, VagaSelecionada) {
+//     if (Candidato_1.GetTempoExperiencia() >= VagaSelecionada.GetAnosExperiencia()) {
+//         console.log(`
+// =================== VERIFICAÇÃO DE COMPATIBILIDADE ====================
+//     ${VerificacaoCompatibilidade}
+// `);
+//     } else {
+//         console.log(`A vaga a seguir não é compativel com o nível de experiência que o usuário possui, procure outra vaga!
+//             `);
+//         return process.exit(1);
+//     };
+// }
+
+// ExibicaoCompatibilidade(VerificacaoCompatibilidade, Candidato_1, VagaSelecionada);
 
 // const TaxaCompatibilidade = CalcularCompatibilidade(RequisitosAtendidos, TotalRequisitos);
 /*
