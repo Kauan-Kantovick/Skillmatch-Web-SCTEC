@@ -10,6 +10,8 @@ export const MensagemJson = document.getElementById("MensagemJson");
 
 export const SessaoCards = document.getElementById("SessaoVagas");
 
+export const Footer = document.getElementById("RodaPe");
+
 // - Importações e instâncias
 
 import { BuscarVagas } from "./dados.js";
@@ -212,4 +214,42 @@ export async function IdentificaMaiorCompatibilidade(candidato, vagas, controlad
         controlador++;
     });
 }
+
+// ele vai entrar nas vagas com a maior compatibilidade e, após isso vai mudar a sua cor - e aparecer primeiro (opcional)
+
+export async function RecomendacaoEstudos (candidato, vagas) {
+
+    let RequisitosUrgentes = {};
+    
+    let MenorCompatibilidade = 101;
+
+    let Texto = document.createElement("p");
+
+    vagas.forEach(vaga => {
+
+        let HabilidadesCandidato = candidato.GetHabilidades();
+        let RequisitosVaga = vaga.GetRequisitos();
+
+        let HabilidadesCompativeis = HabilidadesCandidato.filter(habilidade => RequisitosVaga.includes(habilidade));
+        let HabilidadesIncompativeisVaga = RequisitosVaga.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
+
+        const RequisitosAtendidos = HabilidadesCompativeis.length;
+        const TotalRequisitos = RequisitosVaga.length;
+        
+        let CompatibilidadeCandidato = CalculoCompatibilidade(RequisitosAtendidos, TotalRequisitos);
+
+        if (CompatibilidadeCandidato < MenorCompatibilidade) {
+            MenorCompatibilidade = CompatibilidadeCandidato;
+
+            RequisitosUrgentes = HabilidadesIncompativeisVaga;
+            
+            Texto.textContent = `
+            Prioridades de estudo: ${RequisitosUrgentes}
+            `;
+        }
+    })
+
+    Footer.appendChild(Texto);
+};
+
 // ele vai entrar nas vagas com a maior compatibilidade e, após isso vai mudar a sua cor - e aparecer primeiro (opcional)

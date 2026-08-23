@@ -18,6 +18,9 @@ import { ClassificarCompatibilidade } from "./motor.js";
 
 import { IdentificaMaiorCompatibilidade } from "./ui.js";
 
+import { RecomendacaoEstudos } from "./ui.js";
+
+import { Footer } from "./ui.js";
 
 // - Importações: Exportações
 
@@ -27,6 +30,7 @@ CandidatoFormulario((candidato) => {
     console.log(candidato);
     MostrarCalculoComparacao(candidato, VagasJson, i);
     IdentificaMaiorCompatibilidade(candidato, VagasJson, i);
+    RecomendacaoEstudos(candidato, VagasJson);
 });
 
 try {
