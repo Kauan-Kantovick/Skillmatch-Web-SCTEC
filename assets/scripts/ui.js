@@ -14,7 +14,7 @@ export const SessaoCards = document.getElementById("SessaoVagas");
 
 import { BuscarVagas } from "./dados.js";
 
-import { Candidato } from "./motor.js";
+import { CalculoCompatibilidade, Candidato } from "./motor.js";
 
 // - Função CandidatoFormulario
 
@@ -100,6 +100,8 @@ export function CandidatoFormulario(callback) {
 
 // - Função ExibirMensagemErro
 
+// executar o calculo após o ususario botar os seus dados no site
+
 export function ExibirMensagemErro(mensagem, tema) {
     MensagemJson.textContent = mensagem;
     MensagemJson.classList.remove("Texto-verde", "Texto-vermelho");
@@ -108,29 +110,68 @@ export function ExibirMensagemErro(mensagem, tema) {
 
 // - Função CriarCardsVaga
 
-export const vagas = await BuscarVagas();
+export const VagasJson = await BuscarVagas();
 
 export async function CriarCardsVaga(vagas) {
+
+    let i = 0;
+
     vagas.forEach(vaga => {
         let Card = document.createElement("div");
         let Texto = document.createElement("p");
-
+        
         Card.classList.add("Card");
         Texto.classList.add("Texto");
 
         Texto.textContent = `
-            Id: ${vaga.GetId()} 
-            empresa: ${vaga.GetEmpresa()}
-            cargo: ${vaga.GetCargo()}
-            requisitos: ${vaga.GetRequisitos()}
-            salario: ${vaga.GetSalario()}
-            modeloTrabalho: ${vaga.GetModeloTrabalho()}
+            Id: ${vaga.GetId()} |
+            empresa: ${vaga.GetEmpresa()} |
+            cargo: ${vaga.GetCargo()} |
+            requisitos: ${vaga.GetRequisitos()} |
+            salario: ${vaga.GetSalario()} |
+            modeloTrabalho: ${vaga.GetModeloTrabalho()} |
             anosExperiencia: ${vaga.GetAnosExperiencia()}
         `;
+
+        Texto.id = i;
+
+        i++;
+
+        // Compatibilidade: ${HabilidadesCandidato ? CalculoCompatibilidade(HabilidadesCompativeis.length, RequisitosVaga.length) : "ERRO NO CALCULO"}
 
         SessaoCards.appendChild(Card);
         Card.appendChild(Texto);
     });
 }
 
-CriarCardsVaga(vagas);
+CriarCardsVaga(VagasJson);
+
+export async function MostrarCalculoComparacao(candidato, vagas, controlador) {
+
+    console.log(`Função "MostrarCalculoComparacao"`);
+
+    vagas.forEach(vaga => {        
+   
+        let HabilidadesCandidato = candidato.GetHabilidades();
+        let RequisitosVaga = vaga.GetRequisitos();
+
+        let HabilidadesCompativeis = HabilidadesCandidato.filter(habilidade => RequisitosVaga.includes(habilidade));
+        let HabilidadesFaltantes = RequisitosVaga.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
+
+        const RequisitosAtendidos = HabilidadesCompativeis.length;
+        const TotalRequisitos = RequisitosVaga.length;
+
+        let CardAtual = document.getElementById(controlador);
+
+        let Texto = document.createElement("p");     
+
+        Texto.textContent = `
+        Esta é a sua porcentagem de compatibilidade com a vaga atual: ${CalculoCompatibilidade(HabilidadesCompativeis.length, RequisitosVaga.length)}%
+        ${HabilidadesFaltantes.length == 0 ? "" : "Essas são as habilidades que faltam para você alcançar 100% com a vaga:" + HabilidadesFaltantes } 
+        `;
+
+        controlador++;
+
+        CardAtual.appendChild(Texto);
+    });
+}

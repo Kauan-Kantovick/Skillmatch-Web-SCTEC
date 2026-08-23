@@ -8,10 +8,19 @@ import {CandidatoFormulario} from "./ui.js";
 
 import {ExibirMensagemErro} from "./ui.js";
 
+import {CalculoCompatibilidade} from "./motor.js";
+
+import { MostrarCalculoComparacao } from "./ui.js";
+
+import { VagasJson } from "./ui.js";
+
 // - Importações: Exportações
+
+let i = 0;
 
 CandidatoFormulario((candidato) => {
     console.log(candidato);
+    MostrarCalculoComparacao(candidato, VagasJson, i);
 });
 
 try {
@@ -29,3 +38,5 @@ try {
     );
 
 }
+
+// IniciandoBusca();
