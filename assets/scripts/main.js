@@ -32,21 +32,3 @@ CandidatoFormulario((candidato) => {
     IdentificaMaiorCompatibilidade(candidato, VagasJson, i);
     RecomendacaoEstudos(candidato, VagasJson);
 });
-
-try {
-
-    ExibirMensagemErro(
-        "Vagas carregadas com sucesso!",
-        "Texto-verde"
-    );
-
-} catch (erro) {
-
-    ExibirMensagemErro(
-        erro.message,
-        "Texto-vermelho"
-    );
-
-}
-
-// IniciandoBusca();

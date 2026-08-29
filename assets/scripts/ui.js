@@ -245,6 +245,8 @@ export async function RecomendacaoEstudos (candidato, vagas) {
 
     let Texto = document.createElement("p");
 
+    Texto.classList.add("Texto-vermelho");
+
     vagas.forEach(vaga => {
 
         let HabilidadesCandidato = candidato.GetHabilidades();
@@ -271,7 +273,3 @@ export async function RecomendacaoEstudos (candidato, vagas) {
 
     Footer.appendChild(Texto);
 };
-
-// CriarContadorAnalises.InformacoesAnalise()
-
-// ele vai entrar nas vagas com a maior compatibilidade e, após isso vai mudar a sua cor, e cada cor significa o seu nível de
