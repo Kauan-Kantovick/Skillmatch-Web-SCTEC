@@ -187,12 +187,12 @@ export async function IdentificaMaiorCompatibilidade(candidato, vagas, controlad
 
     console.log(`Função "IdentificaMaiorCompatibilidade"`);
 
-    let RecomendacaoMelhorVaga = document.getElementById(controlador);
-
-    let MaiorCompatibilidade = -1;
+    let MaiorCompatibilidade = 75;
 
     vagas.forEach(vaga => {        
    
+        let RecomendacaoMelhorVaga = document.getElementById(controlador);
+    
         let HabilidadesCandidato = candidato.GetHabilidades();
         let RequisitosVaga = vaga.GetRequisitos();
 
@@ -203,19 +203,33 @@ export async function IdentificaMaiorCompatibilidade(candidato, vagas, controlad
 
         let CompatibilidadeCandidato = CalculoCompatibilidade(RequisitosAtendidos, TotalRequisitos);
 
-        if (CompatibilidadeCandidato > MaiorCompatibilidade) {
+        if (CompatibilidadeCandidato === 100) {
         
-            MaiorCompatibilidade = CompatibilidadeCandidato;
+            RecomendacaoMelhorVaga.classList.add("VagaCompTotal")
 
-            RecomendacaoMelhorVaga.classList.add("MelhorVaga");
+        } else if (CompatibilidadeCandidato <= 99 && CompatibilidadeCandidato >= 80) {
 
-        }
+            RecomendacaoMelhorVaga.classList.add("VagaCompAlta")
+
+        } else if (CompatibilidadeCandidato <= 79 && CompatibilidadeCandidato >= 50) {
+
+            RecomendacaoMelhorVaga.classList.add("VagaCompMedia")
+
+        } else if (CompatibilidadeCandidato <= 49 && CompatibilidadeCandidato >= 1) {
+
+            RecomendacaoMelhorVaga.classList.add("VagaCompBaixa")
+
+        } else if (CompatibilidadeCandidato === 0) {
+
+            RecomendacaoMelhorVaga.classList.add("VagaCompNula")
+
+        } 
 
         controlador++;
     });
 }
 
-// ele vai entrar nas vagas com a maior compatibilidade e, após isso vai mudar a sua cor - e aparecer primeiro (opcional)
+// ele vai entrar nas vagas com a maior compatibilidade/Nivel alto de compatibilidade e, após isso vai mudar a sua cor - e aparecer primeiro (opcional)
 
 export async function RecomendacaoEstudos (candidato, vagas) {
 
@@ -252,4 +266,4 @@ export async function RecomendacaoEstudos (candidato, vagas) {
     Footer.appendChild(Texto);
 };
 
-// ele vai entrar nas vagas com a maior compatibilidade e, após isso vai mudar a sua cor - e aparecer primeiro (opcional)
+// ele vai entrar nas vagas com a maior compatibilidade e, após isso vai mudar a sua cor, e cada cor significa o seu nível de

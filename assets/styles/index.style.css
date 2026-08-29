@@ -26,6 +26,22 @@
     color: white;
 }
 
-.MelhorVaga {
+.VagaCompTotal {
+    background-color: gold;
+}
+
+.VagaCompAlta {
     background-color: green;
+}
+
+.VagaCompMedia {
+    background-color: orangered;
+}
+
+.VagaCompBaixa {
+    background-color: red;
+}
+
+.VagaCompNula {
+    background-color: black;
 }
