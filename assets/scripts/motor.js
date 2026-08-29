@@ -99,7 +99,7 @@ export const CriarContadorAnalises = (() => {
         },
 
         InformacoesAnalise() {
-            return console.log(`Total de análises: ${Contador}`);
+            return console.log(`Total de vagas analisadas: ${Contador}`);
         }
     }
 })();

@@ -20,6 +20,8 @@ import { CalculoCompatibilidade, Candidato } from "./motor.js";
 
 import { ClassificarCompatibilidade } from "./motor.js";
 
+import { CriarContadorAnalises } from "./motor.js";
+
 // - Função CandidatoFormulario
 
 export function CandidatoFormulario(callback) {
@@ -91,7 +93,7 @@ export function CandidatoFormulario(callback) {
                 candidato.area,
                 candidato.habilidades,
                 candidato.modeloTrabalho,
-                candidato.anosExperiencia
+                candidato.anosExperiencia  
             );
 
         if (!Validacao()) {
@@ -154,6 +156,8 @@ export async function MostrarCalculoComparacao(candidato, vagas, controlador) {
 
     vagas.forEach(vaga => {        
    
+        CriarContadorAnalises.ContarAnalise();
+
         let HabilidadesCandidato = candidato.GetHabilidades();
         let RequisitosVaga = vaga.GetRequisitos();
 
@@ -181,6 +185,8 @@ export async function MostrarCalculoComparacao(candidato, vagas, controlador) {
 
         return TaxaCompatibilidade
     });
+
+    CriarContadorAnalises.InformacoesAnalise();
 }
 
 export async function IdentificaMaiorCompatibilidade(candidato, vagas, controlador) {
@@ -265,5 +271,7 @@ export async function RecomendacaoEstudos (candidato, vagas) {
 
     Footer.appendChild(Texto);
 };
+
+// CriarContadorAnalises.InformacoesAnalise()
 
 // ele vai entrar nas vagas com a maior compatibilidade e, após isso vai mudar a sua cor, e cada cor significa o seu nível de
