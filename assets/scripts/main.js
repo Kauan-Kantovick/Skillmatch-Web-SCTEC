@@ -2,33 +2,77 @@
 
 // - Importações: Funções
 
-import { BuscarVagas } from "./dados.js";
+import { BuscarVagas, Candidato } from "./dados.js";
 
-import {CandidatoFormulario} from "./ui.js";
+import { CandidatoFormulario } from "./ui.js";
 
-import {ExibirMensagemErro} from "./ui.js";
+import { CriarCardsVaga } from "./ui.js";
 
-import {CalculoCompatibilidade} from "./motor.js";
+import { ExibirMensagemErro } from "./ui.js";
 
-import { MostrarCalculoComparacao } from "./ui.js";
+export const VagasJson = await BuscarVagas();
 
-import { VagasJson } from "./ui.js";
+if (VagasJson === `Erro ao carregar as vagas`) {
+  ExibirMensagemErro(VagasJson, "Texto-vermelho");
+} else if (VagasJson === `Array Vazio`) {
+  ExibirMensagemErro(VagasJson, "Texto-vermelho");
+}
 
-import { ClassificarCompatibilidade } from "./motor.js";
-
-import { IdentificaMaiorCompatibilidade } from "./ui.js";
-
-import { RecomendacaoEstudos } from "./ui.js";
-
-import { Footer } from "./ui.js";
-
-// - Importações: Exportações
-
-let i = 0;
+CriarCardsVaga(VagasJson);
 
 CandidatoFormulario((candidato) => {
-    console.log(candidato);
-    MostrarCalculoComparacao(candidato, VagasJson, i);
-    IdentificaMaiorCompatibilidade(candidato, VagasJson, i);
-    RecomendacaoEstudos(candidato, VagasJson);
-});
+  console.log(candidato);
+}, Candidato);
+
+// console.log(Classe)
+// console.log(Candidato);
+// MostrarCalculoComparacao(candidato, VagasJson, i);
+// IdentificaMaiorCompatibilidade(candidato, VagasJson, i);
+// RecomendacaoEstudos(candidato, VagasJson);
+// SalvarCandidato(candidato);
+
+// function SalvarCandidato(dadosCandidato) {
+//   let CandidatoSalvo = {
+//     nome: dadosCandidato.nome,
+//     area: dadosCandidato.area,
+//     habilidades: dadosCandidato.habilidades,
+//   };
+
+//   localStorage.setItem("Usuário", JSON.stringify(CandidatoSalvo));
+// }
+
+//       window.addEventListener("DOMContentLoaded", () => {
+//         const respostaSalva = JSON.parse(localStorage.getItem("Usuário"));
+//         let i = 0;
+
+//         if (respostaSalva) {
+//           CandidatoFormulario((respostaSalva) => {
+//             console.log(respostaSalva);
+//             MostrarCalculoComparacao(respostaSalva, VagasJson, i);
+//             IdentificaMaiorCompatibilidade(respostaSalva, VagasJson, i);
+//             RecomendacaoEstudos(respostaSalva, VagasJson);
+//             SalvarCandidato(respostaSalva);
+//           });
+//         }
+//       });
+
+// window.addEventListener("DOMContentLoaded", () => {
+//   console.log("Página carregada");
+
+//   const respostaSalva = localStorage.getItem("Usuário");
+
+//   console.log("Resposta salva:", respostaSalva);
+
+//   if (respostaSalva !== null) {
+//     console.log("Executando função...");
+//     minhaFuncao(respostaSalva);
+//   }
+// });
+
+// window.addEventListener("DOMContentLoaded", () => {
+//   const respostaSalva = JSON.parse(localStorage.getItem("Usuário"));
+
+//   if (respostaSalva) {
+//     console.log(respostaSalva);
+//   }
+// });
