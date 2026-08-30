@@ -10,11 +10,17 @@ export const MensagemJson = document.getElementById("MensagemJson");
 
 export const SessaoCards = document.getElementById("SessaoVagas");
 
+export const Footer = document.getElementById("RodaPe");
+
 // - Importações e instâncias
 
 import { BuscarVagas } from "./dados.js";
 
-import { Candidato } from "./motor.js";
+import { CalculoCompatibilidade, Candidato } from "./motor.js";
+
+import { ClassificarCompatibilidade } from "./motor.js";
+
+import { CriarContadorAnalises } from "./motor.js";
 
 // - Função CandidatoFormulario
 
@@ -36,8 +42,8 @@ export function CandidatoFormulario(callback) {
             anosExperiencia: document.getElementById('CampoAnos').value
         };
 
-        console.log(candidato);
-
+        console.log("Validando formulário...");
+        
         function Validacao() {
 
             if (candidato.nome.length <= 2) {
@@ -64,6 +70,13 @@ export function CandidatoFormulario(callback) {
                 return false;
             }
 
+            if (habilidadesMarcadas.length == 0) {
+                Mensagem.textContent = `Escolha ao menos uma habilidade.`;
+                Mensagem.classList.add('Texto-vermelho');
+                Mensagem.classList.remove('Texto-verde');
+                return false;
+            }
+
             console.log("Formulário validado com sucesso!");
 
             Mensagem.textContent = "Cadastro realizado com sucesso!";
@@ -74,19 +87,17 @@ export function CandidatoFormulario(callback) {
 
         }
 
-        Validacao();
-
         const ObjetoCandidato = (candidato) =>
             new Candidato(
                 candidato.nome,
                 candidato.area,
                 candidato.habilidades,
                 candidato.modeloTrabalho,
-                candidato.anosExperiencia
+                candidato.anosExperiencia  
             );
 
         if (!Validacao()) {
-            return false;
+            return;
         }
 
         callback(ObjetoCandidato(candidato));
@@ -103,29 +114,162 @@ export function ExibirMensagemErro(mensagem, tema) {
 
 // - Função CriarCardsVaga
 
-export const vagas = await BuscarVagas();
+export const VagasJson = await BuscarVagas();
 
 export async function CriarCardsVaga(vagas) {
+
+    let i = 0;
+
     vagas.forEach(vaga => {
         let Card = document.createElement("div");
         let Texto = document.createElement("p");
-
+        
         Card.classList.add("Card");
         Texto.classList.add("Texto");
 
         Texto.textContent = `
-            Id: ${vaga.GetId()} 
-            empresa: ${vaga.GetEmpresa()}
-            cargo: ${vaga.GetCargo()}
-            requisitos: ${vaga.GetRequisitos()}
-            salario: ${vaga.GetSalario()}
-            modeloTrabalho: ${vaga.GetModeloTrabalho()}
+            Id: ${vaga.GetId()} |
+            empresa: ${vaga.GetEmpresa()} |
+            cargo: ${vaga.GetCargo()} |
+            requisitos: ${vaga.GetRequisitos()} |
+            salario: ${vaga.GetSalario()} |
+            modeloTrabalho: ${vaga.GetModeloTrabalho()} |
             anosExperiencia: ${vaga.GetAnosExperiencia()}
         `;
+
+        Texto.id = i;
+
+        i++;
+
+        // Compatibilidade: ${HabilidadesCandidato ? CalculoCompatibilidade(HabilidadesCompativeis.length, RequisitosVaga.length) : "ERRO NO CALCULO"}
 
         SessaoCards.appendChild(Card);
         Card.appendChild(Texto);
     });
 }
 
-CriarCardsVaga(vagas);
+CriarCardsVaga(VagasJson);
+
+export async function MostrarCalculoComparacao(candidato, vagas, controlador) {
+
+    console.log(`Função "MostrarCalculoComparacao"`);
+
+    vagas.forEach(vaga => {        
+   
+        CriarContadorAnalises.ContarAnalise();
+
+        let HabilidadesCandidato = candidato.GetHabilidades();
+        let RequisitosVaga = vaga.GetRequisitos();
+
+        let HabilidadesCompativeis = HabilidadesCandidato.filter(habilidade => RequisitosVaga.includes(habilidade));
+        let HabilidadesFaltantes = RequisitosVaga.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
+
+        const RequisitosAtendidos = HabilidadesCompativeis.length;
+        const TotalRequisitos = RequisitosVaga.length;
+
+        let CardAtual = document.getElementById(controlador);
+
+        let Texto = document.createElement("p");     
+
+        let TaxaCompatibilidade = CalculoCompatibilidade(HabilidadesCompativeis.length, RequisitosVaga.length);
+
+        Texto.textContent = `
+        Esta é a sua porcentagem de compatibilidade com a vaga atual: ${TaxaCompatibilidade}%
+        ${HabilidadesFaltantes.length == 0 ? "" : "| Habilidades faltantes:" + HabilidadesFaltantes} 
+        | Nível de compatibilidade: ${ClassificarCompatibilidade(TaxaCompatibilidade)}
+        `;
+
+        controlador++;
+
+        CardAtual.appendChild(Texto);
+
+        return TaxaCompatibilidade
+    });
+
+    CriarContadorAnalises.InformacoesAnalise();
+}
+
+export async function IdentificaMaiorCompatibilidade(candidato, vagas, controlador) {
+
+    console.log(`Função "IdentificaMaiorCompatibilidade"`);
+
+    let MaiorCompatibilidade = 75;
+
+    vagas.forEach(vaga => {        
+   
+        let RecomendacaoMelhorVaga = document.getElementById(controlador);
+    
+        let HabilidadesCandidato = candidato.GetHabilidades();
+        let RequisitosVaga = vaga.GetRequisitos();
+
+        let HabilidadesCompativeis = HabilidadesCandidato.filter(habilidade => RequisitosVaga.includes(habilidade));
+
+        const RequisitosAtendidos = HabilidadesCompativeis.length;
+        const TotalRequisitos = RequisitosVaga.length;
+
+        let CompatibilidadeCandidato = CalculoCompatibilidade(RequisitosAtendidos, TotalRequisitos);
+
+        if (CompatibilidadeCandidato === 100) {
+        
+            RecomendacaoMelhorVaga.classList.add("VagaCompTotal")
+
+        } else if (CompatibilidadeCandidato <= 99 && CompatibilidadeCandidato >= 80) {
+
+            RecomendacaoMelhorVaga.classList.add("VagaCompAlta")
+
+        } else if (CompatibilidadeCandidato <= 79 && CompatibilidadeCandidato >= 50) {
+
+            RecomendacaoMelhorVaga.classList.add("VagaCompMedia")
+
+        } else if (CompatibilidadeCandidato <= 49 && CompatibilidadeCandidato >= 1) {
+
+            RecomendacaoMelhorVaga.classList.add("VagaCompBaixa")
+
+        } else if (CompatibilidadeCandidato === 0) {
+
+            RecomendacaoMelhorVaga.classList.add("VagaCompNula")
+
+        } 
+
+        controlador++;
+    });
+}
+
+// ele vai entrar nas vagas com a maior compatibilidade/Nivel alto de compatibilidade e, após isso vai mudar a sua cor - e aparecer primeiro (opcional)
+
+export async function RecomendacaoEstudos (candidato, vagas) {
+
+    let RequisitosUrgentes = {};
+    
+    let MenorCompatibilidade = 101;
+
+    let Texto = document.createElement("p");
+
+    Texto.classList.add("Texto-vermelho");
+
+    vagas.forEach(vaga => {
+
+        let HabilidadesCandidato = candidato.GetHabilidades();
+        let RequisitosVaga = vaga.GetRequisitos();
+
+        let HabilidadesCompativeis = HabilidadesCandidato.filter(habilidade => RequisitosVaga.includes(habilidade));
+        let HabilidadesIncompativeisVaga = RequisitosVaga.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
+
+        const RequisitosAtendidos = HabilidadesCompativeis.length;
+        const TotalRequisitos = RequisitosVaga.length;
+        
+        let CompatibilidadeCandidato = CalculoCompatibilidade(RequisitosAtendidos, TotalRequisitos);
+
+        if (CompatibilidadeCandidato < MenorCompatibilidade) {
+            MenorCompatibilidade = CompatibilidadeCandidato;
+
+            RequisitosUrgentes = HabilidadesIncompativeisVaga;
+            
+            Texto.textContent = `
+            Prioridades de estudo: ${RequisitosUrgentes}
+            `;
+        }
+    })
+
+    Footer.appendChild(Texto);
+};

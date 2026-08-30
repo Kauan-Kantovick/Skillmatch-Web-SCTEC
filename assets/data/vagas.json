@@ -101,7 +101,7 @@
     "cargo": "Desenvolvedor Back-End",
     "requisitos": [
       "Node.js",
-      "MySQL",
+      "Git",
       "APIs",
       "GitHub"
     ],

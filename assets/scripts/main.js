@@ -6,32 +6,29 @@ import { BuscarVagas } from "./dados.js";
 
 import {CandidatoFormulario} from "./ui.js";
 
-import {vagas} from "./ui.js";
-
 import {ExibirMensagemErro} from "./ui.js";
+
+import {CalculoCompatibilidade} from "./motor.js";
+
+import { MostrarCalculoComparacao } from "./ui.js";
+
+import { VagasJson } from "./ui.js";
+
+import { ClassificarCompatibilidade } from "./motor.js";
+
+import { IdentificaMaiorCompatibilidade } from "./ui.js";
+
+import { RecomendacaoEstudos } from "./ui.js";
+
+import { Footer } from "./ui.js";
 
 // - Importações: Exportações
 
-export const BuscandoVagas = BuscarVagas();
-
-export const DadosCandidato = CandidatoFormulario();
+let i = 0;
 
 CandidatoFormulario((candidato) => {
     console.log(candidato);
+    MostrarCalculoComparacao(candidato, VagasJson, i);
+    IdentificaMaiorCompatibilidade(candidato, VagasJson, i);
+    RecomendacaoEstudos(candidato, VagasJson);
 });
-
-try {
-
-    ExibirMensagemErro(
-        "Vagas carregadas com sucesso!",
-        "Texto-verde"
-    );
-
-} catch (erro) {
-
-    ExibirMensagemErro(
-        erro.message,
-        "Texto-vermelho"
-    );
-
-}

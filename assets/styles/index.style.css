@@ -25,3 +25,24 @@
 .Texto {
     color: white;
 }
+
+.VagaCompTotal {
+    background-color: gold;
+    color: black;
+}
+
+.VagaCompAlta {
+    background-color: green;
+}
+
+.VagaCompMedia {
+    background-color: orangered;
+}
+
+.VagaCompBaixa {
+    background-color: red;
+}
+
+.VagaCompNula {
+    background-color: black;
+}

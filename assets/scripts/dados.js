@@ -18,7 +18,7 @@ export async function BuscarVagas() {
 
         if (!Resposta.ok) {
             ExibirMensagemErro(
-                "Erro ao carregar as vagas.",
+                "Ouver um erro ao carregar as vagas.",
                 "Texto-vermelho"
             );
         }
@@ -28,13 +28,6 @@ export async function BuscarVagas() {
         if (VagasJson.length === 0) {
             ExibirMensagemErro(
                 "Nenhuma vaga encontrada.",
-                "Texto-vermelho"
-            );
-        }
-
-        if (!Array.isArray(VagasJson)) {
-            ExibirMensagemErro(
-                "Arquivo json em formato inválido.",
                 "Texto-vermelho"
             );
         }

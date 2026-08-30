@@ -1,17 +1,22 @@
 //==============================IMPORTAÇÕES-E-INSTÂNCIAS-EXTERNAS=========================================
 
-import {BuscandoVagas} from "./main.js";
+// perfil do candidato
+// vagas de base
 
-import {DadosCandidato} from "./main.js";
+// import { perfilCandidato } from "./main.js"
+
+// import { arrayVagas } from "./main.js"
+
+// fazer as funções no motor, exportalas e depois só exibir os resultados no html
 
 //==============================CLASSE-CANDIDATO=========================================
 
 export class Candidato {
-    constructor(nome, area, estiloTrabalho, habilidades, tempoExperiencia) {
+    constructor(nome, area, habilidades, estiloTrabalho, tempoExperiencia) {
         this.nome = nome;
         this.area = area;
-        this.estiloTrabalho = estiloTrabalho;
         this.habilidades = habilidades;
+        this.estiloTrabalho = estiloTrabalho;
         this.tempoExperiencia = tempoExperiencia;
     };
     GetNome(){
@@ -82,73 +87,9 @@ export class VagaTecnologia extends Vaga {
     }
 }
 
-
-//==============================UTILIZAÇÃO-CLASSES=========================================
-
-// async function Dados (){
-
-//     let Vagas = await BuscandoVagas;
-//     let Candidato_1 = await DadosCandidato;
-
-//     return Vagas, Candidato_1;
-// }
-
-// Dados();
-
-// const RequisitosVaga = (Vagas) => {
-//     Vagas.forEach(vaga => {
-//         vaga.GetRequisitos();
-//     });
-// };
-
-function Dados() {
-    return new Promise((resolve, reject) => {
-
-        console.log("Procurando dados do usuário");
-
-        setTimeout((BuscandoVagas, DadosCandidato) => {
-
-            console.log("Dentro do Timeout");
-
-            if(BuscandoVagas.nome === "Raia") {
-                resolve(BuscandoVagas(), DadosCandidato())
-                console.log("sdal");
-            } else {
-                reject(console.log("Dados não encontrados"));
-            }
-        });
-    });
-}
-
-async function IniciandoBusca() {
-    const ProcuraDados = Dados(BuscandoVagas, DadosCandidato);
-    console.log(`
-        Dados obtidos com sucesso
-    `);
-    return ProcuraDados;
-}
-
-IniciandoBusca();
-
-console.log(IniciandoBusca());
-
-//const HabilidadesCandidato = Candidato_1.GetHabilidades();
-
-// - Instâncias comparações
-
-//const HabilidadesCompativeis = HabilidadesCandidato.filter(habilidade => RequisitosVaga.includes(habilidade));
-
-//const HabilidadesFaltantes = RequisitosVaga.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
-
-// - Instâncias formatações
-
-//const HabilidadesCompativeisFormatadas = HabilidadesCompativeis.map(habilidade => ` ${habilidade}`);
-
-//const HabilidadesFaltantesFormatadas = HabilidadesFaltantes.map(habilidade => `    -${habilidade}`);
-
 //==============================CONTADOR-DE-ANÁLISES==============================
-/*
-const CriarContadorAnalises = (() => {
+
+export const CriarContadorAnalises = (() => {
     let Contador = 0;
 
     return {
@@ -158,25 +99,56 @@ const CriarContadorAnalises = (() => {
         },
 
         InformacoesAnalise() {
-            return console.log(`Total de análises: ${Contador}`);
+            return console.log(`Total de vagas analisadas: ${Contador}`);
         }
     }
 })();
 
-//==============================CÁLCULO-E-MENSAGEM-DE-COMPATIBILIDADE=====================================
-
-// - Instâncias tamanho dos objetos 
-
-const RequisitosAtendidos = HabilidadesCompativeis.length;
-
-const TotalRequisitos = RequisitosVaga.length;
+//==============================UTILIZAÇÃO-CLASSES=========================================
 
 // - Função CalcularCompatibilidade
 
-const CalcularCompatibilidade = (valorA, valorB) => Math.round((valorA / valorB) * 100);
+export const CalculoCompatibilidade = (valorA, valorB) => Math.round((valorA / valorB) * 100);
 
-const TaxaCompatibilidade = CalcularCompatibilidade(RequisitosAtendidos, TotalRequisitos);
+export const ClassificarCompatibilidade = (TaxaCompatibilidade) => {
+    if (TaxaCompatibilidade === 100) {
+        let Total = `Total`;
+        return Total;
+    } else if (TaxaCompatibilidade <= 99 && TaxaCompatibilidade >= 80) {
+        let Alta = `Alto`;
+        return Alta;
+    } else if (TaxaCompatibilidade <= 79 && TaxaCompatibilidade >= 50) {
+        let Moderada = `Moderado`;
+        return Moderada;
+    } else if (TaxaCompatibilidade <= 49 && TaxaCompatibilidade >= 1) {
+        let Baixa = `Baixo`;
+        return Baixa;
+    } else if (TaxaCompatibilidade === 0) {
+        let Nenhuma = `Nenhum`;
+        return Nenhuma;
+    } else {
+        let Erro = `Erro`;
+        return Erro;
+    }
+}
 
+// function ExibicaoCompatibilidade(VerificacaoCompatibilidade, Candidato_1, VagaSelecionada) {
+//     if (Candidato_1.GetTempoExperiencia() >= VagaSelecionada.GetAnosExperiencia()) {
+//         console.log(`
+// =================== VERIFICAÇÃO DE COMPATIBILIDADE ====================
+//     ${VerificacaoCompatibilidade}
+// `);
+//     } else {
+//         console.log(`A vaga a seguir não é compativel com o nível de experiência que o usuário possui, procure outra vaga!
+//             `);
+//         return process.exit(1);
+//     };
+// }
+
+// ExibicaoCompatibilidade(VerificacaoCompatibilidade, Candidato_1, VagaSelecionada);
+
+// const TaxaCompatibilidade = CalcularCompatibilidade(RequisitosAtendidos, TotalRequisitos);
+/*
 const MensagemCompatibilidade = `
 =================== MENSAGEM DE COMPATIBILIDADE ====================
     empresa: ${VagaSelecionada.GetEmpresa()}
@@ -198,8 +170,6 @@ const VerificarMensagem = (TaxaCompatibilidade, CriarContadorAnalises, MensagemC
         console.log(`ERRO`);
     }
 }
-
-// Fazer validação de outra forma
 
 VerificarMensagem(TaxaCompatibilidade, CriarContadorAnalises, MensagemCompatibilidade);
 
@@ -388,4 +358,49 @@ function FinalizarAnalise(callback) {
 }
 
 FinalizarAnalise(MensagemFinal);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function Dados() {
+//     return new Promise((resolve, reject) => {
+
+//         console.log("Procurando dados do usuário");
+
+//         setTimeout((arrayVagas, perfilCandidato) => {
+
+//             console.log("Dentro do Timeout");
+
+//             if(perfilCandidato.nome === "Raia") {
+//                 resolve(arrayVagas(), perfilCandidato())
+//                 console.log("sdal");
+//             } else {
+//                 reject(console.log("Dados não encontrados"));
+//             }
+//         });
+//     });
+// }
+
+
+// export async function IniciandoBusca() {
+//     const ProcuraDados = Dados(arrayVagas, perfilCandidato);
+//     console.log(`
+//         Dados obtidos com sucesso
+//     `);
+//     return ProcuraDados;
+// }
+
+// IniciandoBusca();
 */
