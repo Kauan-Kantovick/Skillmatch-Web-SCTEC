@@ -1,79 +1,115 @@
 //==============================CONTADOR-DE-ANÁLISES==============================
 
 export const CriarContadorAnalises = (() => {
-    let Contador = 0;
+  let Contador = 0;
 
-    return {
-        ContarAnalise() {
-            Contador++;
-            return Contador;
-        },
+  return {
+    ContarAnalise() {
+      Contador++;
+      return Contador;
+    },
 
-        InformacoesAnalise() {
-            return console.log(`Total de vagas analisadas: ${Contador}`);
-        }
-    }
+    InformacoesAnalise() {
+      return console.log(`Total de vagas analisadas: ${Contador}`);
+    },
+  };
 })();
 
 //==============================UTILIZAÇÃO-CLASSES=========================================
 
 // - Função CalcularCompatibilidade
 
-export const CalculoCompatibilidade = (valorA, valorB) => Math.round((valorA / valorB) * 100);
+export const CalculoCompatibilidade = (valorA, valorB) =>
+  Math.round((valorA / valorB) * 100);
 
-export const ClassificarCompatibilidade = (TaxaCompatibilidade) => {
-    if (TaxaCompatibilidade === 100) {
-        let Total = `Total`;
-        return Total;
-    } else if (TaxaCompatibilidade <= 99 && TaxaCompatibilidade >= 80) {
-        let Alta = `Alto`;
-        return Alta;
-    } else if (TaxaCompatibilidade <= 79 && TaxaCompatibilidade >= 50) {
-        let Moderada = `Moderado`;
-        return Moderada;
-    } else if (TaxaCompatibilidade <= 49 && TaxaCompatibilidade >= 1) {
-        let Baixa = `Baixo`;
-        return Baixa;
-    } else if (TaxaCompatibilidade === 0) {
-        let Nenhuma = `Nenhum`;
-        return Nenhuma;
+export const ClassificarCompatibilidade = (arrayCompatibilidade) => {
+  let arrayResposta = [];
+
+  arrayCompatibilidade.forEach((TaxaCompatibilidade, index) => {
+    if (TaxaCompatibilidade.resultado === 100) {
+      let Total = `Total`;
+      arrayResposta.push({
+        id: index,
+        classificacao: Total
+      });
+    } else if (
+      TaxaCompatibilidade.resultado <= 99 &&
+      TaxaCompatibilidade.resultado >= 80
+    ) {
+      let Alta = `Alto`;
+      arrayResposta.push({
+        id: index,
+        classificacao: Alta
+      });
+    } else if (
+      TaxaCompatibilidade.resultado <= 79 &&
+      TaxaCompatibilidade.resultado >= 50
+    ) {
+      let Moderada = `Moderado`;
+      arrayResposta.push({
+        id: index,
+        classificacao: Moderada
+      });
+    } else if (
+      TaxaCompatibilidade.resultado <= 49 &&
+      TaxaCompatibilidade.resultado >= 1
+    ) {
+      let Baixa = `Baixo`;
+      arrayResposta.push({
+        id: index,
+        classificacao: Baixa
+      });
+    } else if (TaxaCompatibilidade.resultado === 0) {
+      let Nenhuma = `Nenhum`;
+      arrayResposta.push({
+        id: index,
+        classificacao: Nenhuma
+      });
     } else {
-        let Erro = `Erro`;
-        return Erro;
+      let Erro = `Erro`;
+      return Erro;
     }
-}
+  });
+  console.log(arrayResposta);
+
+  return arrayResposta;
+};
 
 export function MostrarCalculoComparacao(candidato, vagas) {
+  console.log(`Função "MostrarCalculoComparacao"`);
 
-    console.log(`Função "MostrarCalculoComparacao"`);
+  const ResultadosCompatibilidade = [];
 
-    const ResultadosCompatibilidade = [];
+  vagas.forEach((vaga, index) => {
+    CriarContadorAnalises.ContarAnalise();
 
-    vagas.forEach((vaga, index) => {
+    let HabilidadesCandidato = candidato.GetHabilidades();
+    let RequisitosVaga = vaga.GetRequisitos();
 
-        CriarContadorAnalises.ContarAnalise();
+    let HabilidadesCompativeis = HabilidadesCandidato.filter((habilidade) =>
+      RequisitosVaga.includes(habilidade),
+    );
 
-        let HabilidadesCandidato = candidato.GetHabilidades();
-        let RequisitosVaga = vaga.GetRequisitos();
+    const RequisitosAtendidos = HabilidadesCompativeis.length;
+    const TotalRequisitos = RequisitosVaga.length;
 
-        let HabilidadesCompativeis = HabilidadesCandidato.filter(habilidade => RequisitosVaga.includes(habilidade));
+    let TaxaCompatibilidade = CalculoCompatibilidade(
+      RequisitosAtendidos,
+      TotalRequisitos,
+    );
 
-        const RequisitosAtendidos = HabilidadesCompativeis.length;
-        const TotalRequisitos = RequisitosVaga.length;
-
-        let TaxaCompatibilidade = CalculoCompatibilidade(RequisitosAtendidos, TotalRequisitos);
-
-        ResultadosCompatibilidade.push({id: index, resultado: TaxaCompatibilidade})
+    ResultadosCompatibilidade.push({
+      id: index,
+      resultado: TaxaCompatibilidade,
     });
+  });
 
-    CriarContadorAnalises.InformacoesAnalise();
+  CriarContadorAnalises.InformacoesAnalise();
 
-    return ResultadosCompatibilidade;
+  return ResultadosCompatibilidade;
 }
 
-// export async function IdentificaMaiorCompatibilidade(candidato, vagas, controlador) {
-
-//     console.log(`Função "IdentificaMaiorCompatibilidade"`);
+// export async function IdentificaMaiorCompatibilidade(candidato, vagas) {
 
 //     vagas.forEach(vaga => {
 
@@ -111,7 +147,6 @@ export function MostrarCalculoComparacao(candidato, vagas) {
 
 //         // }
 
-//         controlador++;
 //     });
 // }
 
