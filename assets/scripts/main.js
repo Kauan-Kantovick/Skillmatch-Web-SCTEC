@@ -6,7 +6,7 @@ import { BuscarVagas, Candidato } from "./dados.js";
 
 import { CandidatoFormulario, CriarCardsVaga, ExibirMensagemErro, ExibeCalculoComparacao } from "./ui.js";
 
-import { MostrarCalculoComparacao} from "./motor.js";
+import { ClassificarCompatibilidade, MostrarCalculoComparacao} from "./motor.js";
 
 export const VagasJson = await BuscarVagas();
 
@@ -18,19 +18,14 @@ if (VagasJson === `Erro ao carregar as vagas`) {
 
 CriarCardsVaga(VagasJson);
 
-// MostrarCalculoComparacao(candidato, VagasJson, i);
-
 CandidatoFormulario((candidato) => {
-  // const instancia = MostrarCalculoComparacao(candidato, VagasJson, i);
 
   console.log(candidato);
   const resultado = MostrarCalculoComparacao(candidato, VagasJson);
   ExibeCalculoComparacao(resultado);
+  ClassificarCompatibilidade(resultado);
 }, Candidato);
 
-// console.log(Classe)
-// console.log(Candidato);
-// MostrarCalculoComparacao(candidato, VagasJson, i);
 // IdentificaMaiorCompatibilidade(candidato, VagasJson, i);
 // RecomendacaoEstudos(candidato, VagasJson);
 // SalvarCandidato(candidato);

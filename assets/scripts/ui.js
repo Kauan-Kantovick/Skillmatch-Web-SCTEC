@@ -146,6 +146,22 @@ export function ExibeCalculoComparacao(arrayResposta) {
   });
 }
 
+// export function EstilizaClassificacao (percentualClassificacao) {
+//     arrayResposta.forEach((resposta) => {
+//       let CardAtual = document.getElementById(resposta.id);
+
+//       let Texto = document.createElement("p");
+
+//       Texto.textContent = `
+//   Esta é a sua porcentagem de compatibilidade com a vaga atual: ${resposta.resultado}%
+//   `;
+
+//     CardAtual.appendChild(Texto);
+    
+//   });
+    
+// }
+
 // vai exibir para card de vaga a relação de porcentagem que ela possui com o perfil do candidato
 
 // export async function RecomendacaoEstudos (candidato, vagas) {
