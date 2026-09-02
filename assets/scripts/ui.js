@@ -146,6 +146,22 @@ export function ExibeCalculoComparacao(arrayResposta) {
   });
 }
 
+export function ExibeCalculoCompatibilidade(arrayResposta) {
+
+  arrayResposta.forEach((resposta) => {
+      let CardAtual = document.getElementById(resposta.id);
+
+      let Texto = document.createElement("span");
+
+      Texto.textContent = `
+  Classificação de compatibilidade: ${resposta.classificacao}
+  `;
+
+    CardAtual.appendChild(Texto);
+    
+  });
+}
+
 // export function EstilizaClassificacao (percentualClassificacao) {
 //     arrayResposta.forEach((resposta) => {
 //       let CardAtual = document.getElementById(resposta.id);

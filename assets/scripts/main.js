@@ -4,7 +4,7 @@
 
 import { BuscarVagas, Candidato } from "./dados.js";
 
-import { CandidatoFormulario, CriarCardsVaga, ExibirMensagemErro, ExibeCalculoComparacao } from "./ui.js";
+import { CandidatoFormulario, CriarCardsVaga, ExibirMensagemErro, ExibeCalculoComparacao, ExibeCalculoCompatibilidade } from "./ui.js";
 
 import { ClassificarCompatibilidade, MostrarCalculoComparacao} from "./motor.js";
 
@@ -21,9 +21,11 @@ CriarCardsVaga(VagasJson);
 CandidatoFormulario((candidato) => {
 
   console.log(candidato);
-  const resultado = MostrarCalculoComparacao(candidato, VagasJson);
-  ExibeCalculoComparacao(resultado);
-  ClassificarCompatibilidade(resultado);
+  const resultadoCalculo = MostrarCalculoComparacao(candidato, VagasJson);
+  const resultadoClassificacao = ClassificarCompatibilidade(resultadoCalculo);
+
+  ExibeCalculoComparacao(resultadoCalculo);
+  ExibeCalculoCompatibilidade(resultadoClassificacao);
 }, Candidato);
 
 // IdentificaMaiorCompatibilidade(candidato, VagasJson, i);
