@@ -70,7 +70,7 @@ export const ClassificarCompatibilidade = (arrayCompatibilidade) => {
       return Erro;
     }
   });
-  console.log(arrayResposta);
+  // console.log(arrayResposta);
 
   return arrayResposta;
 };
@@ -108,6 +108,8 @@ export function MostrarCalculoComparacao(candidato, vagas) {
 
   return ResultadosCompatibilidade;
 }
+
+// exibir a classificação de compatibilidade junto com a porcentagem
 
 // export async function IdentificaMaiorCompatibilidade(candidato, vagas) {
 
