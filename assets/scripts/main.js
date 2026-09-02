@@ -24,25 +24,22 @@ CandidatoFormulario((candidato) => {
   const resultadoCalculo = MostrarCalculoComparacao(candidato, VagasJson);
   console.log(resultadoCalculo);
   const resultadoClassificacao = ClassificarCompatibilidade(resultadoCalculo);
+  SalvarCandidato(candidato);
 
   ExibeCalculoComparacao(resultadoCalculo);
   ExibeCalculoCompatibilidade(resultadoClassificacao);
   ExibeRecomendacaoEstudos(resultadoCalculo);
 }, Candidato);
 
-// IdentificaMaiorCompatibilidade(candidato, VagasJson, i);
-// RecomendacaoEstudos(candidato, VagasJson);
-// SalvarCandidato(candidato);
+function SalvarCandidato(dadosCandidato) {
+  let CandidatoSalvo = {
+    nome: dadosCandidato.nome,
+    area: dadosCandidato.area,
+    habilidades: dadosCandidato.habilidades,
+  };
 
-// function SalvarCandidato(dadosCandidato) {
-//   let CandidatoSalvo = {
-//     nome: dadosCandidato.nome,
-//     area: dadosCandidato.area,
-//     habilidades: dadosCandidato.habilidades,
-//   };
-
-//   localStorage.setItem("Usuário", JSON.stringify(CandidatoSalvo));
-// }
+  localStorage.setItem("Usuário", JSON.stringify(CandidatoSalvo));
+}
 
 //       window.addEventListener("DOMContentLoaded", () => {
 //         const respostaSalva = JSON.parse(localStorage.getItem("Usuário"));
