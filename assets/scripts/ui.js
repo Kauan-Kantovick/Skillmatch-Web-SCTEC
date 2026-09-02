@@ -131,88 +131,45 @@ export async function CriarCardsVaga(vagas) {
 }
 
 export function ExibeCalculoComparacao(arrayResposta) {
-
   arrayResposta.forEach((resposta) => {
-      let CardAtual = document.getElementById(resposta.id);
+    let CardAtual = document.getElementById(resposta.id);
 
-      let Texto = document.createElement("p");
+    let Texto = document.createElement("p");
 
-      Texto.textContent = `
+    Texto.textContent = `
   Esta é a sua porcentagem de compatibilidade com a vaga atual: ${resposta.resultado}%
   `;
 
     CardAtual.appendChild(Texto);
-    
   });
 }
 
 export function ExibeCalculoCompatibilidade(arrayResposta) {
-
   arrayResposta.forEach((resposta) => {
-      let CardAtual = document.getElementById(resposta.id);
+    let CardAtual = document.getElementById(resposta.id);
 
-      let Texto = document.createElement("span");
+    let Texto = document.createElement("span");
 
-      Texto.textContent = `
+    Texto.textContent = `
   Classificação de compatibilidade: ${resposta.classificacao}
   `;
 
     CardAtual.appendChild(Texto);
-    
   });
 }
 
-// export function EstilizaClassificacao (percentualClassificacao) {
-//     arrayResposta.forEach((resposta) => {
-//       let CardAtual = document.getElementById(resposta.id);
+export function ExibeRecomendacaoEstudos(arrayResposta) {
+  arrayResposta.forEach((resposta) => {
 
-//       let Texto = document.createElement("p");
+    let Texto = document.createElement("p");
 
-//       Texto.textContent = `
-//   Esta é a sua porcentagem de compatibilidade com a vaga atual: ${resposta.resultado}%
-//   `;
+    Texto.classList.add("Texto-vermelho");
 
-//     CardAtual.appendChild(Texto);
-    
-//   });
-    
-// }
+    Texto.innerHTML = `
+  ${resposta.RecomendacaoEstudos == "" ? "" : `Recomendação de estudos, para a vaga com o index ${resposta.id} opte por estudar as seguintes tecnologias:
+  ${resposta.RecomendacaoEstudos}
+  `}`;
 
-// vai exibir para card de vaga a relação de porcentagem que ela possui com o perfil do candidato
-
-// export async function RecomendacaoEstudos (candidato, vagas) {
-
-//     let RequisitosUrgentes = {};
-
-//     let MenorCompatibilidade = 101;
-
-//     let Texto = document.createElement("p");
-
-//     Texto.classList.add("Texto-vermelho");
-
-//     vagas.forEach(vaga => {
-
-//         let HabilidadesCandidato = candidato.GetHabilidades();
-//         let RequisitosVaga = vaga.GetRequisitos();
-
-//         let HabilidadesCompativeis = HabilidadesCandidato.filter(habilidade => RequisitosVaga.includes(habilidade));
-//         let HabilidadesIncompativeisVaga = RequisitosVaga.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
-
-//         const RequisitosAtendidos = HabilidadesCompativeis.length;
-//         const TotalRequisitos = RequisitosVaga.length;
-
-//         let CompatibilidadeCandidato = CalculoCompatibilidade(RequisitosAtendidos, TotalRequisitos);
-
-//         if (CompatibilidadeCandidato < MenorCompatibilidade) {
-//             MenorCompatibilidade = CompatibilidadeCandidato;
-
-//             RequisitosUrgentes = HabilidadesIncompativeisVaga;
-
-//             Texto.textContent = `
-//             Prioridades de estudo: ${RequisitosUrgentes}
-//             `;
-//         }
-//     })
-
-//     Footer.appendChild(Texto);
-// };
+    Footer.appendChild(Texto);
+  });
+}

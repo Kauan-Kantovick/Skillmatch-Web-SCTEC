@@ -89,105 +89,26 @@ export function MostrarCalculoComparacao(candidato, vagas) {
     let HabilidadesCompativeis = HabilidadesCandidato.filter((habilidade) =>
       RequisitosVaga.includes(habilidade),
     );
+    
+    let HabilidadesIncompativeisVaga = RequisitosVaga.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
 
     const RequisitosAtendidos = HabilidadesCompativeis.length;
     const TotalRequisitos = RequisitosVaga.length;
 
     let TaxaCompatibilidade = CalculoCompatibilidade(
       RequisitosAtendidos,
-      TotalRequisitos,
+      TotalRequisitos
     );
 
     ResultadosCompatibilidade.push({
       id: index,
       resultado: TaxaCompatibilidade,
+      RecomendacaoEstudos: HabilidadesIncompativeisVaga
     });
+
   });
 
   CriarContadorAnalises.InformacoesAnalise();
 
   return ResultadosCompatibilidade;
 }
-
-// exibir a classificação de compatibilidade junto com a porcentagem
-
-// export async function IdentificaMaiorCompatibilidade(candidato, vagas) {
-
-//     vagas.forEach(vaga => {
-
-//         // let RecomendacaoMelhorVaga = document.getElementById(controlador);
-
-//         let HabilidadesCandidato = candidato.GetHabilidades();
-//         let RequisitosVaga = vaga.GetRequisitos();
-
-//         let HabilidadesCompativeis = HabilidadesCandidato.filter(habilidade => RequisitosVaga.includes(habilidade));
-
-//         const RequisitosAtendidos = HabilidadesCompativeis.length;
-//         const TotalRequisitos = RequisitosVaga.length;
-
-//         let CompatibilidadeCandidato = CalculoCompatibilidade(RequisitosAtendidos, TotalRequisitos);
-
-//         // if (CompatibilidadeCandidato === 100) {
-
-//         //     RecomendacaoMelhorVaga.classList.add("VagaCompTotal")
-
-//         // } else if (CompatibilidadeCandidato <= 99 && CompatibilidadeCandidato >= 80) {
-
-//         //     RecomendacaoMelhorVaga.classList.add("VagaCompAlta")
-
-//         // } else if (CompatibilidadeCandidato <= 79 && CompatibilidadeCandidato >= 50) {
-
-//         //     RecomendacaoMelhorVaga.classList.add("VagaCompMedia")
-
-//         // } else if (CompatibilidadeCandidato <= 49 && CompatibilidadeCandidato >= 1) {
-
-//         //     RecomendacaoMelhorVaga.classList.add("VagaCompBaixa")
-
-//         // } else if (CompatibilidadeCandidato === 0) {
-
-//         //     RecomendacaoMelhorVaga.classList.add("VagaCompNula")
-
-//         // }
-
-//     });
-// }
-
-// export async function RecomendacaoEstudos (candidato, vagas) {
-
-//     let RequisitosUrgentes = {};
-
-//     let MenorCompatibilidade = 101;
-
-//     // let Texto = document.createElement("p");
-
-//     // Texto.classList.add("Texto-vermelho");
-
-//     vagas.forEach(vaga => {
-
-//         let HabilidadesCandidato = candidato.GetHabilidades();
-//         let RequisitosVaga = vaga.GetRequisitos();
-
-//         let HabilidadesCompativeis = HabilidadesCandidato.filter(habilidade => RequisitosVaga.includes(habilidade));
-//         let HabilidadesIncompativeisVaga = RequisitosVaga.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
-
-//         const RequisitosAtendidos = HabilidadesCompativeis.length;
-//         const TotalRequisitos = RequisitosVaga.length;
-
-//         let CompatibilidadeCandidato = CalculoCompatibilidade(RequisitosAtendidos, TotalRequisitos);
-
-//         if (CompatibilidadeCandidato < MenorCompatibilidade) {
-//             MenorCompatibilidade = CompatibilidadeCandidato;
-
-//             RequisitosUrgentes = HabilidadesIncompativeisVaga;
-
-//             // Texto.textContent = `
-//             // Prioridades de estudo: ${RequisitosUrgentes}
-//             // `;
-
-//             return RequisitosUrgentes;
-//         }
-//     })
-
-//     console.log(RequisitosUrgentes);
-//     // Footer.appendChild(Texto);
-// };
