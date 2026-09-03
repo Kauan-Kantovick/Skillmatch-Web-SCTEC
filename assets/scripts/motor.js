@@ -1,406 +1,136 @@
-//==============================IMPORTAÇÕES-E-INSTÂNCIAS-EXTERNAS=========================================
-
-// perfil do candidato
-// vagas de base
-
-// import { perfilCandidato } from "./main.js"
-
-// import { arrayVagas } from "./main.js"
-
-// fazer as funções no motor, exportalas e depois só exibir os resultados no html
-
-//==============================CLASSE-CANDIDATO=========================================
-
-export class Candidato {
-    constructor(nome, area, habilidades, estiloTrabalho, tempoExperiencia) {
-        this.nome = nome;
-        this.area = area;
-        this.habilidades = habilidades;
-        this.estiloTrabalho = estiloTrabalho;
-        this.tempoExperiencia = tempoExperiencia;
-    };
-    GetNome(){
-        return this.nome;
-    };
-    GetArea(){
-        return this.area;
-    };
-    GetEstiloTrabalho(){
-        return this.estiloTrabalho;
-    };
-    GetHabilidades(){
-        return this.habilidades;
-    };
-    GetTempoExperiencia(){
-        return this.tempoExperiencia;
-    };
-}
-
-//==============================CLASSE-VAGAS=========================================
-
-// - Classe Vaga
-
-class Vaga {
-    constructor(id, empresa, cargo, requisitos, salario, modeloTrabalho) {
-        this.id = id;
-        this.empresa = empresa;
-        this.cargo = cargo;
-        this.requisitos = requisitos;
-        this.salario = salario;
-        this.modeloTrabalho = modeloTrabalho;
-    };
-    GetId() {
-        return this.id;
-    };
-    GetEmpresa() {
-        return this.empresa;
-    };
-    GetCargo() {
-        return this.cargo;
-    };
-    GetRequisitos() {
-        return this.requisitos;
-    };
-    GetSalario() {
-        return this.salario;
-    };
-    GetModeloTrabalho() {
-        return this.modeloTrabalho;
-    };
-    ApresentacaoVaga() {
-        return `A empresa ${this.empresa} está contratando para o cargo de ${this.cargo} (ID: ${this.id}). Procuramos profissionais com os requisitos: ${this.requisitos}. Oferecemos salário de ${this.salario} e modelo de trabalho ${this.modeloTrabalho}.`;
-    }
-}
-
-// - Classe VagaTecnologia
-
-export class VagaTecnologia extends Vaga {
-    constructor(id, empresa, cargo, requisitos, salario, modeloTrabalho, anosExperiencia = 0) {
-        super(id, empresa, cargo, requisitos, salario, modeloTrabalho);
-        this.anosExperiencia = anosExperiencia;
-    };
-    GetAnosExperiencia(){
-        return this.anosExperiencia;
-    };
-    ApresentacaoVaga() {
-        return `A empresa ${this.empresa} está contratando para o cargo de ${this.cargo} (ID: ${this.id}). É necessário possuir ${this.anosExperiencia} de experiência e conhecimentos em ${this.requisitos}. Oferecemos salário de ${this.salario} e modelo de trabalho ${this.modeloTrabalho}.`;
-    }
-}
-
 //==============================CONTADOR-DE-ANÁLISES==============================
 
 export const CriarContadorAnalises = (() => {
-    let Contador = 0;
+  let Contador = 0;
 
-    return {
-        ContarAnalise() {
-            Contador++;
-            return Contador;
-        },
+  return {
+    ContarAnalise() {
+      Contador++;
+      return Contador;
+    },
 
-        InformacoesAnalise() {
-            return console.log(`Total de vagas analisadas: ${Contador}`);
-        }
-    }
+    InformacoesAnalise() {
+      return console.log(`Total de vagas analisadas: ${Contador}`);
+    },
+  };
 })();
 
 //==============================UTILIZAÇÃO-CLASSES=========================================
 
 // - Função CalcularCompatibilidade
 
-export const CalculoCompatibilidade = (valorA, valorB) => Math.round((valorA / valorB) * 100);
+export const CalculoCompatibilidade = (valorA, valorB) =>
+  Math.round((valorA / valorB) * 100);
 
-export const ClassificarCompatibilidade = (TaxaCompatibilidade) => {
-    if (TaxaCompatibilidade === 100) {
-        let Total = `Total`;
-        return Total;
-    } else if (TaxaCompatibilidade <= 99 && TaxaCompatibilidade >= 80) {
-        let Alta = `Alto`;
-        return Alta;
-    } else if (TaxaCompatibilidade <= 79 && TaxaCompatibilidade >= 50) {
-        let Moderada = `Moderado`;
-        return Moderada;
-    } else if (TaxaCompatibilidade <= 49 && TaxaCompatibilidade >= 1) {
-        let Baixa = `Baixo`;
-        return Baixa;
-    } else if (TaxaCompatibilidade === 0) {
-        let Nenhuma = `Nenhum`;
-        return Nenhuma;
+export const ClassificarCompatibilidade = (arrayCompatibilidade) => {
+  let arrayResposta = [];
+
+  arrayCompatibilidade.forEach((TaxaCompatibilidade, index) => {
+    if (TaxaCompatibilidade.resultado === 100) {
+      let Total = `Total`;
+      arrayResposta.push({
+        id: index,
+        classificacao: Total,
+      });
+    } else if (
+      TaxaCompatibilidade.resultado <= 99 &&
+      TaxaCompatibilidade.resultado >= 80
+    ) {
+      let Alta = `Alto`;
+      arrayResposta.push({
+        id: index,
+        classificacao: Alta,
+      });
+    } else if (
+      TaxaCompatibilidade.resultado <= 79 &&
+      TaxaCompatibilidade.resultado >= 50
+    ) {
+      let Moderada = `Moderado`;
+      arrayResposta.push({
+        id: index,
+        classificacao: Moderada,
+      });
+    } else if (
+      TaxaCompatibilidade.resultado <= 49 &&
+      TaxaCompatibilidade.resultado >= 1
+    ) {
+      let Baixa = `Baixo`;
+      arrayResposta.push({
+        id: index,
+        classificacao: Baixa,
+      });
+    } else if (TaxaCompatibilidade.resultado === 0) {
+      let Nenhuma = `Nenhum`;
+      arrayResposta.push({
+        id: index,
+        classificacao: Nenhuma,
+      });
     } else {
-        let Erro = `Erro`;
-        return Erro;
+      let Erro = `Erro`;
+      return Erro;
     }
-}
+  });
+  // console.log(arrayResposta);
 
-// function ExibicaoCompatibilidade(VerificacaoCompatibilidade, Candidato_1, VagaSelecionada) {
-//     if (Candidato_1.GetTempoExperiencia() >= VagaSelecionada.GetAnosExperiencia()) {
-//         console.log(`
-// =================== VERIFICAÇÃO DE COMPATIBILIDADE ====================
-//     ${VerificacaoCompatibilidade}
-// `);
-//     } else {
-//         console.log(`A vaga a seguir não é compativel com o nível de experiência que o usuário possui, procure outra vaga!
-//             `);
-//         return process.exit(1);
-//     };
-// }
-
-// ExibicaoCompatibilidade(VerificacaoCompatibilidade, Candidato_1, VagaSelecionada);
-
-// const TaxaCompatibilidade = CalcularCompatibilidade(RequisitosAtendidos, TotalRequisitos);
-/*
-const MensagemCompatibilidade = `
-=================== MENSAGEM DE COMPATIBILIDADE ====================
-    empresa: ${VagaSelecionada.GetEmpresa()}
-    cargo: ${VagaSelecionada.GetCargo()}
-    Compatibilidade: ${TaxaCompatibilidade}%
-    Habilidades Compatíveis:${HabilidadesCompativeisFormatadas}
-    ${HabilidadesFaltantesFormatadas.length > 0 ? `Habilidades Faltantes: ${("\n") + HabilidadesFaltantesFormatadas.join("\n")}` : ``} 
-`;
-
-// vai aparecer embaixo dos dados das vagas
-
-// - Validaçâo Função CalcularCompatibilidade
-
-const VerificarMensagem = (TaxaCompatibilidade, CriarContadorAnalises, MensagemCompatibilidade) => {
-    if (TaxaCompatibilidade >= 0 && TaxaCompatibilidade <= 100){
-        CriarContadorAnalises.ContarAnalise();
-        return console.log(MensagemCompatibilidade);
-    } else {
-        console.log(`ERRO`);
-    }
-}
-
-VerificarMensagem(TaxaCompatibilidade, CriarContadorAnalises, MensagemCompatibilidade);
-
-//==============================CLASSIFICAÇÃO-DE-COMPATIBILIDADE============================
-
-// - Função ClassificarCompatibilidade
-
-const ClassificarCompatibilidade = (TaxaCompatibilidade) => {
-    if (TaxaCompatibilidade === 100) {
-        let Total = `Compatibilidade Total`;
-        return Total;
-    } else if (TaxaCompatibilidade <= 99 && TaxaCompatibilidade >= 80) {
-        let Alta = `Alta Compatibilidade`;
-        return Alta;
-    } else if (TaxaCompatibilidade <= 79 && TaxaCompatibilidade >= 50) {
-        let Moderada = `Compatibilidade Moderada`;
-        return Moderada;
-    } else if (TaxaCompatibilidade <= 49 && TaxaCompatibilidade >= 1) {
-        let Baixa = `Baixa Compatibilidade`;
-        return Baixa;
-    } else if (TaxaCompatibilidade === 0) {
-        let Nenhuma = `Nenhuma Compatibilidade`;
-        return Nenhuma;
-    } else {
-        let Erro = `Erro`;
-        return Erro;
-    }
-}
-
-// vai aparecer embaixo dos dados das vagas
-// validação erro ou deixa assim mesmo
-
-const VerificacaoCompatibilidade = ClassificarCompatibilidade(TaxaCompatibilidade);
-
-// - Validação função ClassificarCompatibilidade
-
-function ExibicaoCompatibilidade(VerificacaoCompatibilidade, Candidato_1, VagaSelecionada) {
-    if (Candidato_1.GetTempoExperiencia() >= VagaSelecionada.GetAnosExperiencia()) {
-        console.log(`
-=================== VERIFICAÇÃO DE COMPATIBILIDADE ====================
-    ${VerificacaoCompatibilidade}
-`);
-    } else {
-        console.log(`A vaga a seguir não é compativel com o nível de experiência que o usuário possui, procure outra vaga!
-            `);
-        return process.exit(1);
-    };
-}
-
-// vai aparecer embaixo dos dados das vagas e vai bloquear os outros dados caso a experiência minima não seja atingida
-
-ExibicaoCompatibilidade(VerificacaoCompatibilidade, Candidato_1, VagaSelecionada);
-
-//==============================RECOMENDAÇÃO-DE-ESTUDOS=========================================
-
-// - Função RecomendacaoEstudos
-
-const RecomendacaoEstudos = (Candidato, Vagas) => {
-
-    let RequisitosUrgentes = {};
-    
-    let MenorCompatibilidade = 101;
-
-    for (const VagaTecnologia of Vagas) {
-
-        let RequisitosVagaAtual = VagaTecnologia.GetRequisitos();
-
-        let HabilidadesCompativeisVaga = HabilidadesCandidato.filter(habilidade => RequisitosVagaAtual.includes(habilidade));
-
-        let HabilidadesIncompativeisVaga = RequisitosVagaAtual.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
-
-        let TotalRequisitosAtual = RequisitosVagaAtual.length;
-    
-        let TotalCompativeis = HabilidadesCompativeisVaga.length;
-        
-        let CompatibilidadeCandidato = CalcularCompatibilidade(TotalCompativeis, TotalRequisitosAtual);
-
-        CriarContadorAnalises.ContarAnalise();
-
-        if (CompatibilidadeCandidato < MenorCompatibilidade) {
-            MenorCompatibilidade = CompatibilidadeCandidato;
-
-            let HabilidadesImcompativeisFormatas = HabilidadesIncompativeisVaga.map(habilidade => `    -${habilidade}`);
-
-            RequisitosUrgentes = {
-                CompatibilidadeCandidato,
-                HabilidadesImcompativeisFormatas,
-                VagaTecnologia
-            };
-
-        }
-    }
-    return RequisitosUrgentes;
+  return arrayResposta;
 };
 
-const RecomendacaoPior = RecomendacaoEstudos(Candidato_1, Vagas);
+export function MostrarCalculoComparacao(candidato, vagas) {
+  const ResultadosCompatibilidade = [];
 
-// será exibida a mensagem em um campo separado onde ira ser um foco a parte 
+  vagas.forEach((vaga, index) => {
+    CriarContadorAnalises.ContarAnalise();
 
-// - Mensagem da RecomendacaoEstudos
+    let HabilidadesCandidato = candidato.habilidades;
+    let RequisitosVaga = vaga.GetRequisitos();
 
-const RecomendacaoMensagem = `
-=================== RECOMENDAÇÃO DE ESTUDOS ====================
-    Priorize os estudos em: ${("\n") + RecomendacaoPior.HabilidadesImcompativeisFormatas.join ("\n")} 
-`;
+    let HabilidadesCompativeis = HabilidadesCandidato.filter((habilidade) =>
+      RequisitosVaga.includes(habilidade),
+    );
 
-console.log(RecomendacaoMensagem);
+    let HabilidadesIncompativeisVaga = RequisitosVaga.filter(
+      (requisito) => HabilidadesCandidato.includes(requisito) === false,
+    );
 
-//==============================MELHOR-VAGA==================================================
+    const RequisitosAtendidos = HabilidadesCompativeis.length;
+    const TotalRequisitos = RequisitosVaga.length;
 
-// - Função MelhorVaga
+    let TaxaCompatibilidade = CalculoCompatibilidade(
+      RequisitosAtendidos,
+      TotalRequisitos,
+    );
 
-const MelhorVaga = (Candidato, Vagas) => {
+    ResultadosCompatibilidade.push({
+      id: index,
+      resultado: TaxaCompatibilidade,
+      RecomendacaoEstudos: HabilidadesIncompativeisVaga,
+    });
+  });
 
-    let RecomendacaoMelhorVaga = {};
+  CriarContadorAnalises.InformacoesAnalise();
 
-    let MaiorCompatibilidade = -1;
-
-    for (const VagaTecnologia of Vagas) {
-
-        let RequisitosVagaAtual = VagaTecnologia.GetRequisitos();
-
-        let HabilidadesCompativeisVaga = HabilidadesCandidato.filter(habilidade => RequisitosVagaAtual.includes(habilidade));
-
-        let HabilidadesIncompativeisVaga = RequisitosVagaAtual.filter(requisito => HabilidadesCandidato.includes(requisito) === false);
-
-        let TotalRequisitosAtual = RequisitosVagaAtual.length;
-
-        let TotalCompativeis = HabilidadesCompativeisVaga.length;
-        
-        let CompatibilidadeCandidato = CalcularCompatibilidade(TotalCompativeis, TotalRequisitosAtual);
-
-        CriarContadorAnalises.ContarAnalise();
-
-        if (CompatibilidadeCandidato > MaiorCompatibilidade) {
-            MaiorCompatibilidade = CompatibilidadeCandidato;
-
-            let HabilidadesCompativeisFormatas = HabilidadesCompativeisVaga.map(habilidade => `    -${habilidade}`);
-
-            let HabilidadesImcompativeisFormatas = HabilidadesIncompativeisVaga.map(habilidade => `    -${habilidade}`);
-               
-                RecomendacaoMelhorVaga = {
-                    VagaTecnologia,
-                    CompatibilidadeCandidato,
-                    HabilidadesCompativeisFormatas,
-                    HabilidadesImcompativeisFormatas
-                };
-        }
-    }
-    return RecomendacaoMelhorVaga;
-};
-
-const Recomendacao = MelhorVaga(Candidato_1, Vagas);
-
-// - Mensagem da MelhorVaga
-
-console.log(`
-================= MELHOR VAGA =================
-
-Empresa: ${Recomendacao.VagaTecnologia.GetEmpresa()}
-Cargo: ${Recomendacao.VagaTecnologia.GetCargo()}
-Compatibilidade: ${Recomendacao.CompatibilidadeCandidato}%
-Classificação: ${ClassificarCompatibilidade(Recomendacao.CompatibilidadeCandidato)}
-
-Habilidades Compatíveis:
-${Recomendacao.HabilidadesCompativeisFormatas.join("\n")}
-
-${Recomendacao.HabilidadesImcompativeisFormatas.length > 0 ? `Habilidades Faltantes:${("\n") + Recomendacao.HabilidadesImcompativeisFormatas.join("\n")}` : ``} 
-
-`);
-
-CriarContadorAnalises.InformacoesAnalise();
-
-//==============================CALLBACK==================================================
-
-const AnaliseFinal = "Análise finalizada.";
-const NomeCandidato = Candidato_1.GetNome();
-
-function MensagemFinal(Nome, analise) {
-    console.log(`${Nome}, revise suas Habilidades faltantes e atualize seu plano de estudos.`);
-    console.log(analise);
+  return ResultadosCompatibilidade;
 }
 
-function FinalizarAnalise(callback) {
-    callback(NomeCandidato, AnaliseFinal);
+export function SalvarCandidato(dadosCandidato) {
+  let CandidatoSalvo = {
+    nome: dadosCandidato.nome,
+    area: dadosCandidato.area,
+    habilidades: dadosCandidato.habilidades,
+  };
+
+  localStorage.setItem("Usuário", JSON.stringify(CandidatoSalvo));
 }
 
-FinalizarAnalise(MensagemFinal);
+export function LembraCandidato(candidato, vagas, funcao1, funcao2) {
 
+  console.log("unucia funcao")
 
+  if (candidato) {
+    const resultadoCalculoSalvo = funcao1(candidato, vagas);
+    const resultadoClassificacaoSalvo = funcao2(resultadoCalculoSalvo);
+    return resultadoClassificacaoSalvo, resultadoCalculoSalvo;
+  }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function Dados() {
-//     return new Promise((resolve, reject) => {
-
-//         console.log("Procurando dados do usuário");
-
-//         setTimeout((arrayVagas, perfilCandidato) => {
-
-//             console.log("Dentro do Timeout");
-
-//             if(perfilCandidato.nome === "Raia") {
-//                 resolve(arrayVagas(), perfilCandidato())
-//                 console.log("sdal");
-//             } else {
-//                 reject(console.log("Dados não encontrados"));
-//             }
-//         });
-//     });
-// }
-
-
-// export async function IniciandoBusca() {
-//     const ProcuraDados = Dados(arrayVagas, perfilCandidato);
-//     console.log(`
-//         Dados obtidos com sucesso
-//     `);
-//     return ProcuraDados;
-// }
-
-// IniciandoBusca();
-*/
+// que funções diferentes vão ter que executar

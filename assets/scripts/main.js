@@ -2,33 +2,52 @@
 
 // - Importações: Funções
 
-import { BuscarVagas } from "./dados.js";
+import { BuscarVagas, Candidato } from "./dados.js";
 
-import {CandidatoFormulario} from "./ui.js";
+import {
+  CandidatoFormulario,
+  ExibeRecomendacaoEstudos,
+  CriarCardsVaga,
+  ExibirMensagemErro,
+  ExibeCalculoComparacao,
+  ExibeCalculoCompatibilidade,
+} from "./ui.js";
 
-import {ExibirMensagemErro} from "./ui.js";
+import {
+  ClassificarCompatibilidade,
+  MostrarCalculoComparacao,
+  SalvarCandidato,
+  LembraCandidato
+} from "./motor.js";
 
-import {CalculoCompatibilidade} from "./motor.js";
+export const VagasJson = await BuscarVagas();
 
-import { MostrarCalculoComparacao } from "./ui.js";
+if (VagasJson === `Erro ao carregar as vagas`) {
+  ExibirMensagemErro(VagasJson, "Texto-vermelho");
+} else if (VagasJson === `Array Vazio`) {
+  ExibirMensagemErro(VagasJson, "Texto-vermelho");
+}
 
-import { VagasJson } from "./ui.js";
-
-import { ClassificarCompatibilidade } from "./motor.js";
-
-import { IdentificaMaiorCompatibilidade } from "./ui.js";
-
-import { RecomendacaoEstudos } from "./ui.js";
-
-import { Footer } from "./ui.js";
-
-// - Importações: Exportações
-
-let i = 0;
+CriarCardsVaga(VagasJson);
 
 CandidatoFormulario((candidato) => {
-    console.log(candidato);
-    MostrarCalculoComparacao(candidato, VagasJson, i);
-    IdentificaMaiorCompatibilidade(candidato, VagasJson, i);
-    RecomendacaoEstudos(candidato, VagasJson);
-});
+  console.log(candidato);
+  const resultadoCalculo = MostrarCalculoComparacao(candidato, VagasJson);
+  console.log(resultadoCalculo);
+  const resultadoClassificacao = ClassificarCompatibilidade(resultadoCalculo);
+  SalvarCandidato(candidato);
+
+  ExibeCalculoComparacao(resultadoCalculo);
+  ExibeCalculoCompatibilidade(resultadoClassificacao);
+  ExibeRecomendacaoEstudos(resultadoCalculo);
+}, Candidato);
+
+const respostaSalva = JSON.parse(localStorage.getItem("Usuário"));
+
+console.log(LembraCandidato(respostaSalva, VagasJson, MostrarCalculoComparacao, ClassificarCompatibilidade));
+
+// if (LembraCandidato) {
+//     ExibeCalculoComparacao(resultadoCalculo);
+//     ExibeCalculoCompatibilidade(resultadoClassificacao);
+//     ExibeRecomendacaoEstudos(resultadoCalculo);
+// }
