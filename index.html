@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Skillmatch - Sistema de compatibilidade</title>
+    <title>Skillmatch</title>
     <link rel="stylesheet" href="./assets/styles/index.style.css" />
     <meta name="description" content="Site do projeto Skillmatch" />
   </head>
@@ -23,27 +23,27 @@
           alt="Ícone de engrenagem"
           style="height: 30px; max-width: 100%"
         />
-        <a href="#SessaoForm" tabindex="0" aria-label="Menu: Área de Formulário"
+        <a href="#sessaoForm" tabindex="0" aria-label="Menu: Área de Formulário"
           >Formulário</a
         >
-        <a href="#SessaoVagas" aria-label="Menu: Área de Vagas">Vagas</a>
+        <a href="#sessaoVagas" aria-label="Menu: Área de Vagas">Vagas</a>
       </nav>
     </header>
 
     <main>
-      <section id="SessaoForm">
-        <form method="" id="FormCandidato">
+      <section id="sessaoForm">
+        <form method="" id="formCandidato">
 
           <h3>Formulário</h3>
 
           <fieldset>
             <legend>Dados Pessoais:</legend>
-            <label for="CampoNome" aria-label="Formulário: Insira o seu nome">
+            <label for="campoNome" aria-label="Formulário: Insira o seu nome">
               <input
                 type="text"
                 value=""
-                name="CampoNome"
-                id="CampoNome"
+                name="campoNome"
+                id="campoNome"
                 placeholder="Insira o seu nome"
                 required
                 min="3"
@@ -51,14 +51,14 @@
               />
             </label>
             <label
-              for="CampoArea"
+              for="campoArea"
               aria-label="Formulário: Insira a sua área profissional"
             >
               <input
                 type="text"
                 value=""
-                name="CampoArea"
-                id="CampoArea"
+                name="campoArea"
+                id="campoArea"
                 placeholder="Insira a sua área profissional"
                 required
                 min="4"
@@ -73,7 +73,7 @@
               <input
                 type="checkbox"
                 value="JavaScript"
-                name="Habilidade"
+                name="habilidade"
                 id="JavaScript"
               />
               JavaScript
@@ -86,7 +86,7 @@
               <input
                 type="checkbox"
                 value="GitHub"
-                name="Habilidade"
+                name="habilidade"
                 id="GitHub"
               />
               GitHub
@@ -99,7 +99,7 @@
               <input
                 type="checkbox"
                 value="Lógica de Programação"
-                name="Habilidade"
+                name="habilidade"
                 id="LogicaProgramacao"
               />
               Lógica de Programação
@@ -112,7 +112,7 @@
               <input
                 type="checkbox"
                 value="Kanban"
-                name="Habilidade"
+                name="habilidade"
                 id="Kanban"
               />
               Kanban
@@ -125,7 +125,7 @@
               <input
                 type="checkbox"
                 value="Arrays"
-                name="Habilidade"
+                name="habilidade"
                 id="Arrays"
               />
               Arrays
@@ -138,7 +138,7 @@
               <input
                 type="checkbox"
                 value="Objetos"
-                name="Habilidade"
+                name="habilidade"
                 id="Objetos"
               />
               Objetos
@@ -151,7 +151,7 @@
               <input
                 type="checkbox"
                 value="Funções"
-                name="Habilidade"
+                name="habilidade"
                 id="Funcoes"
               />
               Funções
@@ -164,7 +164,7 @@
               <input
                 type="checkbox"
                 value="Node.js"
-                name="Habilidade"
+                name="habilidade"
                 id="NodeJS"
               />
               Node.js
@@ -174,7 +174,7 @@
               for="APIs"
               aria-label="Formulário: Escolha as suas habilidades profissionais"
             >
-              <input type="checkbox" value="APIs" name="Habilidade" id="APIs" />
+              <input type="checkbox" value="APIs" name="habilidade" id="APIs" />
               APIs
             </label>
 
@@ -182,7 +182,7 @@
               for="HTML"
               aria-label="Formulário: Escolha as suas habilidades profissionais"
             >
-              <input type="checkbox" value="HTML" name="Habilidade" id="HTML" />
+              <input type="checkbox" value="HTML" name="habilidade" id="HTML" />
               HTML
             </label>
 
@@ -190,7 +190,7 @@
               for="CSS"
               aria-label="Formulário: Escolha as suas habilidades profissionais"
             >
-              <input type="checkbox" value="CSS" name="Habilidade" id="CSS" />
+              <input type="checkbox" value="CSS" name="habilidade" id="CSS" />
               CSS
             </label>
 
@@ -201,7 +201,7 @@
               <input
                 type="checkbox"
                 value="React"
-                name="Habilidade"
+                name="habilidade"
                 id="React"
               />
               React
@@ -211,26 +211,26 @@
               for="Git"
               aria-label="Formulário: Escolha as suas habilidades profissionais"
             >
-              <input type="checkbox" value="Git" name="Habilidade" id="Git" />
+              <input type="checkbox" value="Git" name="habilidade" id="Git" />
               Git
             </label>
 
-            <label for="CampoModelo">
-              <select name="CampoModelo" id="CampoModelo" required>
+            <label for="campoModelo">
+              <select name="campoModelo" id="campoModelo" required>
                 <option value="">Selecione...</option>
                 <option value="Presencial">Presencial</option>
                 <option value="Híbrido">Híbrido</option>
                 <option value="Remoto">Remoto</option>
               </select>
               <label
-                for="CampoAnos"
+                for="campoAnos"
                 aria-label="Formulário: Insira os seus anos de experiência"
               >
                 <input
                   type="number"
                   value="0"
-                  name="CampoAnos"
-                  id="CampoAnos"
+                  name="campoAnos"
+                  id="campoAnos"
                   placeholder="Anos de experiência"
                   required
                   min="0"
@@ -241,13 +241,13 @@
             <button type="submit" id="SubmitCandidato">Enviar</button>
           </fieldset>
         </form>
-        <p id="MensagemJson" aria-live="polite"></p>
-        <p id="MensagemUsuario" aria-live="polite"></p>
+        <p id="mensagemJson" aria-live="polite"></p>
+        <p id="mensagemUsuario" aria-live="polite"></p>
       </section>
-      <section id="SessaoVagas"></section>
+      <section id="sessaoVagas"></section>
     </main>
 
-    <footer id="RodaPe">
+    <footer id="rodape">
       <p>© Todos os direitos reservados.</p>
     </footer>
 

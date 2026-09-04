@@ -20,19 +20,19 @@ import {
   LembraCandidato
 } from "./motor.js";
 
-export const VagasJson = await BuscarVagas();
+export const respostaJson = await BuscarVagas();
 
-if (VagasJson === `Erro ao carregar as vagas`) {
-  ExibirMensagemErro(VagasJson, "Texto-vermelho");
-} else if (VagasJson === `Array Vazio`) {
-  ExibirMensagemErro(VagasJson, "Texto-vermelho");
+if (respostaJson === `Erro ao carregar as vagas`) {
+  ExibirMensagemErro(respostaJson, "texto-vermelho");
+} else if (respostaJson === `Array Vazio`) {
+  ExibirMensagemErro(respostaJson, "texto-vermelho");
 }
 
-CriarCardsVaga(VagasJson);
+CriarCardsVaga(respostaJson);
 
 CandidatoFormulario((candidato) => {
   console.log(candidato);
-  const resultadoCalculo = MostrarCalculoComparacao(candidato, VagasJson);
+  const resultadoCalculo = MostrarCalculoComparacao(candidato, respostaJson);
   console.log(resultadoCalculo);
   const resultadoClassificacao = ClassificarCompatibilidade(resultadoCalculo);
   SalvarCandidato(candidato);
@@ -42,12 +42,6 @@ CandidatoFormulario((candidato) => {
   ExibeRecomendacaoEstudos(resultadoCalculo);
 }, Candidato);
 
-const respostaSalva = JSON.parse(localStorage.getItem("Usuário"));
+const respostaSalva = JSON.parse(localStorage.getItem("usuario"));
 
-console.log(LembraCandidato(respostaSalva, VagasJson, MostrarCalculoComparacao, ClassificarCompatibilidade));
-
-// if (LembraCandidato) {
-//     ExibeCalculoComparacao(resultadoCalculo);
-//     ExibeCalculoCompatibilidade(resultadoClassificacao);
-//     ExibeRecomendacaoEstudos(resultadoCalculo);
-// }
+console.log(LembraCandidato(respostaSalva, respostaJson, MostrarCalculoComparacao, ClassificarCompatibilidade));

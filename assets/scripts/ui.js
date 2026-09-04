@@ -2,77 +2,77 @@
 
 // - Exportações
 
-export const Formulario = document.getElementById("FormCandidato");
+export const formulario = document.getElementById("formCandidato");
 
-export const Mensagem = document.getElementById("MensagemUsuario");
+export const mensagem = document.getElementById("mensagemUsuario");
 
-export const MensagemJson = document.getElementById("MensagemJson");
+export const mensagemJson = document.getElementById("mensagemJson");
 
-export const SessaoCards = document.getElementById("SessaoVagas");
+export const sessaoCards = document.getElementById("sessaoVagas");
 
-export const Footer = document.getElementById("RodaPe");
+export const footer = document.getElementById("rodape");
 
 // - Função CandidatoFormulario
 
 export function CandidatoFormulario(callback, classeSelecionada) {
-  Formulario.addEventListener("submit", (evento) => {
+  formulario.addEventListener("submit", (evento) => {
     evento.preventDefault();
 
     console.log("Formulário enviado!");
 
     const habilidadesMarcadas = document.querySelectorAll(
-      'input[name="Habilidade"]:checked',
+      'input[name="habilidade"]:checked',
     );
 
     const candidato = {
-      nome: document.getElementById("CampoNome").value,
-      area: document.getElementById("CampoArea").value,
+      nome: document.getElementById("campoNome").value,
+      area: document.getElementById("campoArea").value,
       habilidades: Array.from(habilidadesMarcadas).map(
         (checkbox) => checkbox.value,
       ),
-      modeloTrabalho: document.getElementById("CampoModelo").value,
-      anosExperiencia: document.getElementById("CampoAnos").value,
+      modeloTrabalho: document.getElementById("campoModelo").value,
+      anosExperiencia: document.getElementById("campoAnos").value,
     };
 
     console.log("Validando formulário...");
 
     function Validacao() {
       if (candidato.nome.length <= 2) {
-        Mensagem.textContent = `Nome: "${candidato.nome}" é muito pequeno(a), insira um nome maior.`;
-        Mensagem.classList.add("Texto-vermelho");
-        Mensagem.classList.remove("Texto-verde");
+        mensagem.textContent = `Nome: "${candidato.nome}" é muito pequeno(a), insira um nome maior.`;
+        mensagem.classList.add("texto-vermelho");
+        mensagem.classList.remove("texto-verde");
         return false;
       } else if (candidato.nome.length >= 31) {
-        Mensagem.textContent = `Nome: "${candidato.nome}" é muito grande, insira um nome menor.`;
-        Mensagem.classList.add("Texto-vermelho");
-        Mensagem.classList.remove("Texto-verde");
+        mensagem.textContent = `Nome: "${candidato.nome}" é muito grande, insira um nome menor.`;
+        mensagem.classList.add("texto-vermelho");
+        mensagem.classList.remove("texto-verde");
         return false;
       }
 
       if (candidato.area.length <= 3) {
-        Mensagem.textContent = `Área: "${candidato.area}" é muito pequeno(a), insira uma nome de área maior.`;
-        Mensagem.classList.add("Texto-vermelho");
-        Mensagem.classList.remove("Texto-verde");
+        mensagem.textContent = `Área: "${candidato.area}" é muito pequeno(a), insira uma nome de área maior.`;
+        mensagem.classList.add("texto-vermelho");
+        mensagem.classList.remove("texto-verde");
         return false;
       } else if (candidato.area.length >= 31) {
-        Mensagem.textContent = `Área: "${candidato.area}" é muito grande, insira um nome de área menor.`;
-        Mensagem.classList.add("Texto-vermelho");
-        Mensagem.classList.remove("Texto-verde");
+        mensagem.textContent = `Área: "${candidato.area}" é muito grande, insira um nome de área menor.`;
+        mensagem.classList.add("texto-vermelho");
+        mensagem.classList.remove("texto-verde");
         return false;
       }
 
       if (habilidadesMarcadas.length == 0) {
-        Mensagem.textContent = `Escolha ao menos uma habilidade.`;
-        Mensagem.classList.add("Texto-vermelho");
-        Mensagem.classList.remove("Texto-verde");
+        mensagem.textContent = `Escolha ao menos uma habilidade.`;
+        mensagem.classList.add("texto-vermelho");
+        mensagem.classList.remove("texto-verde");
         return false;
       }
 
       console.log("Formulário validado com sucesso!");
 
-      Mensagem.textContent = "Cadastro realizado com sucesso!";
-      Mensagem.classList.add("Texto-verde");
-      Mensagem.classList.remove("Texto-vermelho");
+      mensagem.textContent = "Cadastro realizado com sucesso!";
+      mensagem.classList.add("texto-verde");
+      mensagem.classList.remove("texto-vermelho");
 
       return true;
     }
@@ -81,7 +81,7 @@ export function CandidatoFormulario(callback, classeSelecionada) {
       return;
     }
 
-    const ObjetoCandidato = (perfilCandidato) => {
+    const objetoCandidato = (perfilCandidato) => {
       return new classeSelecionada(
         perfilCandidato.nome,
         perfilCandidato.area,
@@ -91,42 +91,42 @@ export function CandidatoFormulario(callback, classeSelecionada) {
       );
     };
 
-    callback(ObjetoCandidato(candidato));
+    callback(objetoCandidato(candidato));
   });
 }
 
 export function ExibirMensagemErro(mensagem, tema) {
-  MensagemJson.textContent = mensagem;
-  MensagemJson.classList.remove("Texto-verde", "Texto-vermelho");
-  MensagemJson.classList.add(tema);
+  mensagemJson.textContent = mensagem;
+  mensagemJson.classList.remove("texto-verde", "texto-vermelho");
+  mensagemJson.classList.add(tema);
 }
 
 export async function CriarCardsVaga(vagas) {
   let i = 0;
 
   vagas.forEach((vaga) => {
-    let Card = document.createElement("div");
-    let Texto = document.createElement("p");
+    let card = document.createElement("div");
+    let texto = document.createElement("p");
 
-    Card.classList.add("Card");
-    Texto.classList.add("Texto");
+    card.classList.add("card");
+    texto.classList.add("texto");
 
-    Texto.textContent = `
-            Id: ${vaga.GetId()} |
-            empresa: ${vaga.GetEmpresa()} |
-            cargo: ${vaga.GetCargo()} |
-            requisitos: ${vaga.GetRequisitos()} |
-            salario: ${vaga.GetSalario()} |
-            modeloTrabalho: ${vaga.GetModeloTrabalho()} |
-            anosExperiencia: ${vaga.GetAnosExperiencia()}
+    texto.textContent = `
+            Id: ${vaga.getId()} |
+            empresa: ${vaga.getEmpresa()} |
+            cargo: ${vaga.getCargo()} |
+            requisitos: ${vaga.getRequisitos()} |
+            salario: ${vaga.getSalario()} |
+            modeloTrabalho: ${vaga.getModeloTrabalho()} |
+            anosExperiencia: ${vaga.getAnosExperiencia()}
         `;
 
-    Texto.id = i;
+    texto.id = i;
 
     i++;
 
-    SessaoCards.appendChild(Card);
-    Card.appendChild(Texto);
+    sessaoCards.appendChild(card);
+    card.appendChild(texto);
   });
 }
 
@@ -134,13 +134,13 @@ export function ExibeCalculoComparacao(arrayResposta) {
   arrayResposta.forEach((resposta) => {
     let CardAtual = document.getElementById(resposta.id);
 
-    let Texto = document.createElement("p");
+    let texto = document.createElement("p");
 
-    Texto.textContent = `
+    texto.textContent = `
   Esta é a sua porcentagem de compatibilidade com a vaga atual: ${resposta.resultado}%
   `;
 
-    CardAtual.appendChild(Texto);
+    CardAtual.appendChild(texto);
   });
 }
 
@@ -148,28 +148,28 @@ export function ExibeCalculoCompatibilidade(arrayResposta) {
   arrayResposta.forEach((resposta) => {
     let CardAtual = document.getElementById(resposta.id);
 
-    let Texto = document.createElement("span");
+    let texto = document.createElement("span");
 
-    Texto.textContent = `
+    texto.textContent = `
   Classificação de compatibilidade: ${resposta.classificacao}
   `;
 
-    CardAtual.appendChild(Texto);
+    CardAtual.appendChild(texto);
   });
 }
 
 export function ExibeRecomendacaoEstudos(arrayResposta) {
   arrayResposta.forEach((resposta) => {
 
-    let Texto = document.createElement("p");
+    let texto = document.createElement("p");
 
-    Texto.classList.add("Texto-vermelho");
+    texto.classList.add("texto-vermelho");
 
-    Texto.innerHTML = `
-  ${resposta.RecomendacaoEstudos == "" ? "" : `Recomendação de estudos, para a vaga com o index ${resposta.id} opte por estudar as seguintes tecnologias:
-  ${resposta.RecomendacaoEstudos}
+    texto.innerHTML = `
+  ${resposta.recomendacaoEstudos == "" ? "" : `Recomendação de estudos, para a vaga com o index ${resposta.id} opte por estudar as seguintes tecnologias:
+  ${resposta.recomendacaoEstudos}
   `}`;
 
-    Footer.appendChild(Texto);
+    footer.appendChild(texto);
   });
 }

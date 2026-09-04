@@ -8,19 +8,19 @@ export class Candidato {
         this.estiloTrabalho = estiloTrabalho;
         this.tempoExperiencia = tempoExperiencia;
     };
-    GetNome(){
+    getNome(){
         return this.nome;
     };
-    GetArea(){
+    getArea(){
         return this.area;
     };
-    GetEstiloTrabalho(){
+    getEstiloTrabalho(){
         return this.estiloTrabalho;
     };
-    GetHabilidades(){
+    getHabilidades(){
         return this.habilidades;
     };
-    GetTempoExperiencia(){
+    getTempoExperiencia(){
         return this.tempoExperiencia;
     };
 }
@@ -36,25 +36,25 @@ class Vaga {
         this.salario = salario;
         this.modeloTrabalho = modeloTrabalho;
     };
-    GetId() {
+    getId() {
         return this.id;
     };
-    GetEmpresa() {
+    getEmpresa() {
         return this.empresa;
     };
-    GetCargo() {
+    getCargo() {
         return this.cargo;
     };
-    GetRequisitos() {
+    getRequisitos() {
         return this.requisitos;
     };
-    GetSalario() {
+    getSalario() {
         return this.salario;
     };
-    GetModeloTrabalho() {
+    getModeloTrabalho() {
         return this.modeloTrabalho;
     };
-    ApresentacaoVaga() {
+    apresentacaoVaga() {
         return `A empresa ${this.empresa} está contratando para o cargo de ${this.cargo} (ID: ${this.id}). Procuramos profissionais com os requisitos: ${this.requisitos}. Oferecemos salário de ${this.salario} e modelo de trabalho ${this.modeloTrabalho}.`;
     }
 }
@@ -66,10 +66,10 @@ export class VagaTecnologia extends Vaga {
         super(id, empresa, cargo, requisitos, salario, modeloTrabalho);
         this.anosExperiencia = anosExperiencia;
     };
-    GetAnosExperiencia(){
+    getAnosExperiencia(){
         return this.anosExperiencia;
     };
-    ApresentacaoVaga() {
+    apresentacaoVaga() {
         return `A empresa ${this.empresa} está contratando para o cargo de ${this.cargo} (ID: ${this.id}). É necessário possuir ${this.anosExperiencia} de experiência e conhecimentos em ${this.requisitos}. Oferecemos salário de ${this.salario} e modelo de trabalho ${this.modeloTrabalho}.`;
     }
 }
@@ -82,37 +82,37 @@ export async function BuscarVagas() {
 
     try {
 
-        const Resposta = await fetch("/assets/data/vagas.json");
+        const resposta = await fetch("/assets/data/vagas.json");
 
-        if (!Resposta.ok) {
-            const MensagemErro = `Erro ao carregar as vagas`;
-            console.log(MensagemErro);
-            return MensagemErro;
+        if (!resposta.ok) {
+            const mensagemErro = `Erro ao carregar as vagas`;
+            console.log(mensagemErro);
+            return mensagemErro;
         }
 
-        const VagasJson = await Resposta.json();
+        const vagasJson = await resposta.json();
 
-        if (VagasJson.length === 0) {
-            const ErroVazio = `Array Vazio`;
-            console.log(ErroVazio);
-            return ErroVazio;
+        if (vagasJson.length === 0) {
+            const erroVazio = `Array Vazio`;
+            console.log(erroVazio);
+            return erroVazio;
         }
 
         console.log("Vagas encontradas com sucesso!");
 
-        const Vagas = VagasJson.map(Vaga =>
+        const vagas = vagasJson.map(vaga =>
             new VagaTecnologia(
-                Vaga.id,
-                Vaga.empresa,
-                Vaga.cargo,
-                Vaga.requisitos,
-                Vaga.salario,
-                Vaga.modeloTrabalho,
-                Vaga.anosExperiencia
+                vaga.id,
+                vaga.empresa,
+                vaga.cargo,
+                vaga.requisitos,
+                vaga.salario,
+                vaga.modeloTrabalho,
+                vaga.anosExperiencia
             )
         );
 
-        return Vagas;
+        return vagas;
 
     } catch (erro) {
         console.error("Erro:", erro.message);
