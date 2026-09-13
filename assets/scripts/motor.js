@@ -19,8 +19,7 @@ export const CriarContadorAnalises = (() => {
 
 // - Função CalcularCompatibilidade
 
-export const CalculoCompatibilidade = (valorA, valorB) =>
-  Math.round((valorA / valorB) * 100);
+export const CalculoCompatibilidade = (valorA, valorB) => Math.round((valorA / valorB) * 100);
 
 export const ClassificarCompatibilidade = (arrayCompatibilidade) => {
   let arrayResposta = [];
@@ -111,6 +110,22 @@ export function MostrarCalculoComparacao(candidato, vagas) {
   return resultadosCompatibilidade;
 }
 
+// export function EsquecerCandidato () {
+//   let novoUsuario = "";
+//     localStorage.setItem("usuario", (novoUsuario));            
+//   }
+
+// export function ManipulaCandidato() {
+
+//   return {
+//     SalvarCandidato(dadosCandidato) {
+//       let candidatoSalvo = {
+//         habilidades: dadosCandidato.habilidades
+//       };
+//       localStorage.setItem("usuario", JSON.stringify(candidatoSalvo));      
+//     }
+//   }
+// }
 export function SalvarCandidato(dadosCandidato) {
   let candidatoSalvo = {
     nome: dadosCandidato.nome,
@@ -121,14 +136,22 @@ export function SalvarCandidato(dadosCandidato) {
   localStorage.setItem("usuario", JSON.stringify(candidatoSalvo));
 }
 
-export function LembraCandidato(candidato, vagas, funcao1, funcao2) {
-
-  console.log("unucia funcao")
+export function LembraCandidato(candidato) {
 
   if (candidato) {
-    const resultadoCalculoSalvo = funcao1(candidato, vagas);
-    const resultadoClassificacaoSalvo = funcao2(resultadoCalculoSalvo);
-    return resultadoClassificacaoSalvo, resultadoCalculoSalvo;
+    return {
+      executaFuncao1 (funcao, candidato, vagas) {
+        const resultadoCalculoSalvo = funcao(candidato, vagas);
+        return (resultadoCalculoSalvo);
+      },
+      executaFuncao2 (funcao1, funcao2, candidato, vagas) {
+        const resultadoCalculoSalvo = funcao1(candidato, vagas);
+        const resultadoClassificacaoSalvo = funcao2(resultadoCalculoSalvo); 
+        return (resultadoClassificacaoSalvo);
+      }
+    }
+  } else if (!candidato) {
+    console.log("O candidato não existe");
   }
 }
 

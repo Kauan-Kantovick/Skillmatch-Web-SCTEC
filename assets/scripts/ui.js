@@ -151,7 +151,7 @@ export function ExibeCalculoCompatibilidade(arrayResposta) {
     let texto = document.createElement("span");
 
     texto.textContent = `
-  Classificação de compatibilidade: ${resposta.classificacao}
+  Nível de compatibilidade: ${resposta.classificacao}
   `;
 
     CardAtual.appendChild(texto);

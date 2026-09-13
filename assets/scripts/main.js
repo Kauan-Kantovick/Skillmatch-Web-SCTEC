@@ -44,4 +44,9 @@ CandidatoFormulario((candidato) => {
 
 const respostaSalva = JSON.parse(localStorage.getItem("usuario"));
 
-console.log(LembraCandidato(respostaSalva, respostaJson, MostrarCalculoComparacao, ClassificarCompatibilidade));
+let coisa = LembraCandidato(respostaSalva).executaFuncao1(MostrarCalculoComparacao, respostaSalva, respostaJson);
+let coisa2 = LembraCandidato(respostaSalva).executaFuncao2(MostrarCalculoComparacao, ClassificarCompatibilidade, respostaSalva, respostaJson);
+// 
+ExibeCalculoComparacao(coisa);
+ExibeCalculoCompatibilidade(coisa2);
+ExibeRecomendacaoEstudos(coisa);
