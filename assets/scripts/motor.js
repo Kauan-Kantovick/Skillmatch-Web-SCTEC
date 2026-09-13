@@ -110,31 +110,23 @@ export function MostrarCalculoComparacao(candidato, vagas) {
   return resultadosCompatibilidade;
 }
 
-// export function EsquecerCandidato () {
-//   let novoUsuario = "";
-//     localStorage.setItem("usuario", (novoUsuario));            
-//   }
+export const ManipulaCandidato = (() => {
 
-// export function ManipulaCandidato() {
+  return {
+    SalvarCandidato(dadosCandidato) {
+      let candidatoSalvo = {
+        habilidades: dadosCandidato.habilidades
+      };
+      localStorage.setItem("usuario", JSON.stringify(candidatoSalvo));      
+    },
 
-//   return {
-//     SalvarCandidato(dadosCandidato) {
-//       let candidatoSalvo = {
-//         habilidades: dadosCandidato.habilidades
-//       };
-//       localStorage.setItem("usuario", JSON.stringify(candidatoSalvo));      
-//     }
-//   }
-// }
-export function SalvarCandidato(dadosCandidato) {
-  let candidatoSalvo = {
-    nome: dadosCandidato.nome,
-    area: dadosCandidato.area,
-    habilidades: dadosCandidato.habilidades,
-  };
-
-  localStorage.setItem("usuario", JSON.stringify(candidatoSalvo));
+    EsquecerCandidato () {
+      console.log("Candidato foi esquecido");
+      let novoUsuario = "";
+      localStorage.setItem("usuario", (novoUsuario));            
 }
+  }
+})();
 
 export function LembraCandidato(candidato) {
 
@@ -154,5 +146,3 @@ export function LembraCandidato(candidato) {
     console.log("O candidato não existe");
   }
 }
-
-// que funções diferentes vão ter que executar

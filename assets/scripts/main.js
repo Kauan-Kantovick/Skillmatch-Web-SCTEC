@@ -16,8 +16,8 @@ import {
 import {
   ClassificarCompatibilidade,
   MostrarCalculoComparacao,
-  SalvarCandidato,
-  LembraCandidato
+  LembraCandidato,
+  ManipulaCandidato
 } from "./motor.js";
 
 export const respostaJson = await BuscarVagas();
@@ -35,18 +35,20 @@ CandidatoFormulario((candidato) => {
   const resultadoCalculo = MostrarCalculoComparacao(candidato, respostaJson);
   console.log(resultadoCalculo);
   const resultadoClassificacao = ClassificarCompatibilidade(resultadoCalculo);
-  SalvarCandidato(candidato);
+  ManipulaCandidato.SalvarCandidato(candidato);
 
   ExibeCalculoComparacao(resultadoCalculo);
   ExibeCalculoCompatibilidade(resultadoClassificacao);
   ExibeRecomendacaoEstudos(resultadoCalculo);
 }, Candidato);
 
+// ManipulaCandidato.EsquecerCandidato();
+
 const respostaSalva = JSON.parse(localStorage.getItem("usuario"));
 
 let coisa = LembraCandidato(respostaSalva).executaFuncao1(MostrarCalculoComparacao, respostaSalva, respostaJson);
 let coisa2 = LembraCandidato(respostaSalva).executaFuncao2(MostrarCalculoComparacao, ClassificarCompatibilidade, respostaSalva, respostaJson);
-// 
+
 ExibeCalculoComparacao(coisa);
 ExibeCalculoCompatibilidade(coisa2);
 ExibeRecomendacaoEstudos(coisa);
