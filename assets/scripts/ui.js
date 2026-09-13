@@ -12,6 +12,8 @@ export const sessaoCards = document.getElementById("sessaoVagas");
 
 export const footer = document.getElementById("rodape");
 
+export const botaoRemover = document.getElementById("btnRemover")
+
 // - Função CandidatoFormulario
 
 export function CandidatoFormulario(callback, classeSelecionada) {

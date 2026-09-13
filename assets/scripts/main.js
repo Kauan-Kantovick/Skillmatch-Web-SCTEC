@@ -11,13 +11,14 @@ import {
   ExibirMensagemErro,
   ExibeCalculoComparacao,
   ExibeCalculoCompatibilidade,
+  botaoRemover,
 } from "./ui.js";
 
 import {
   ClassificarCompatibilidade,
   MostrarCalculoComparacao,
   LembraCandidato,
-  ManipulaCandidato
+  ManipulaCandidato,
 } from "./motor.js";
 
 export const respostaJson = await BuscarVagas();
@@ -27,6 +28,11 @@ if (respostaJson === `Erro ao carregar as vagas`) {
 } else if (respostaJson === `Array Vazio`) {
   ExibirMensagemErro(respostaJson, "texto-vermelho");
 }
+
+botaoRemover.addEventListener("click", () => {
+  ManipulaCandidato.EsquecerCandidato();
+  location.reload();
+});
 
 CriarCardsVaga(respostaJson);
 
@@ -46,9 +52,20 @@ CandidatoFormulario((candidato) => {
 
 const respostaSalva = JSON.parse(localStorage.getItem("usuario"));
 
-let coisa = LembraCandidato(respostaSalva).executaFuncao1(MostrarCalculoComparacao, respostaSalva, respostaJson);
-let coisa2 = LembraCandidato(respostaSalva).executaFuncao2(MostrarCalculoComparacao, ClassificarCompatibilidade, respostaSalva, respostaJson);
+if (respostaSalva) {
+  let coisa = LembraCandidato(respostaSalva).executaFuncao1(
+    MostrarCalculoComparacao,
+    respostaSalva,
+    respostaJson,
+  );
+  let coisa2 = LembraCandidato(respostaSalva).executaFuncao2(
+    MostrarCalculoComparacao,
+    ClassificarCompatibilidade,
+    respostaSalva,
+    respostaJson,
+  );
 
-ExibeCalculoComparacao(coisa);
-ExibeCalculoCompatibilidade(coisa2);
-ExibeRecomendacaoEstudos(coisa);
+  ExibeCalculoComparacao(coisa);
+  ExibeCalculoCompatibilidade(coisa2);
+  ExibeRecomendacaoEstudos(coisa);
+}
