@@ -2,15 +2,15 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.Texto-vermelho {
+.texto-vermelho {
     color: red;
 }
 
-.Texto-verde {
+.texto-verde {
     color: green;
 }
 
-.Card {
+.card {
     display: flex;
     justify-content: center;
     margin: 5px;
@@ -22,27 +22,27 @@
     gap: 0, 30px;
 }
 
-.Texto {
+.texto {
     color: white;
 }
 
-.VagaCompTotal {
+.vagaCompTotal {
     background-color: gold;
     color: black;
 }
 
-.VagaCompAlta {
+.vagaCompAlta {
     background-color: green;
 }
 
-.VagaCompMedia {
+.vagaCompMedia {
     background-color: orangered;
 }
 
-.VagaCompBaixa {
+.vagaCompBaixa {
     background-color: red;
 }
 
-.VagaCompNula {
+.vagaCompNula {
     background-color: black;
 }
