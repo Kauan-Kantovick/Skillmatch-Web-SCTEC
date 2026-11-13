@@ -11,43 +11,61 @@ import {
   ExibirMensagemErro,
   ExibeCalculoComparacao,
   ExibeCalculoCompatibilidade,
+  botaoRemover,
 } from "./ui.js";
 
 import {
   ClassificarCompatibilidade,
   MostrarCalculoComparacao,
-  SalvarCandidato,
-  LembraCandidato
+  LembraCandidato,
+  ManipulaCandidato,
 } from "./motor.js";
 
-export const VagasJson = await BuscarVagas();
+export const respostaJson = await BuscarVagas();
 
-if (VagasJson === `Erro ao carregar as vagas`) {
-  ExibirMensagemErro(VagasJson, "Texto-vermelho");
-} else if (VagasJson === `Array Vazio`) {
-  ExibirMensagemErro(VagasJson, "Texto-vermelho");
+if (respostaJson === `Erro ao carregar as vagas`) {
+  ExibirMensagemErro(respostaJson, "texto-vermelho");
+} else if (respostaJson === `Array Vazio`) {
+  ExibirMensagemErro(respostaJson, "texto-vermelho");
 }
 
-CriarCardsVaga(VagasJson);
+botaoRemover.addEventListener("click", () => {
+  ManipulaCandidato.EsquecerCandidato();
+  location.reload();
+});
+
+CriarCardsVaga(respostaJson);
 
 CandidatoFormulario((candidato) => {
   console.log(candidato);
-  const resultadoCalculo = MostrarCalculoComparacao(candidato, VagasJson);
+  const resultadoCalculo = MostrarCalculoComparacao(candidato, respostaJson);
   console.log(resultadoCalculo);
   const resultadoClassificacao = ClassificarCompatibilidade(resultadoCalculo);
-  SalvarCandidato(candidato);
+  ManipulaCandidato.SalvarCandidato(candidato);
 
   ExibeCalculoComparacao(resultadoCalculo);
   ExibeCalculoCompatibilidade(resultadoClassificacao);
   ExibeRecomendacaoEstudos(resultadoCalculo);
 }, Candidato);
 
-const respostaSalva = JSON.parse(localStorage.getItem("Usuário"));
+// ManipulaCandidato.EsquecerCandidato();
 
-console.log(LembraCandidato(respostaSalva, VagasJson, MostrarCalculoComparacao, ClassificarCompatibilidade));
+const respostaSalva = JSON.parse(localStorage.getItem("usuario"));
 
-// if (LembraCandidato) {
-//     ExibeCalculoComparacao(resultadoCalculo);
-//     ExibeCalculoCompatibilidade(resultadoClassificacao);
-//     ExibeRecomendacaoEstudos(resultadoCalculo);
-// }
+if (respostaSalva) {
+  let coisa = LembraCandidato(respostaSalva).executaFuncao1(
+    MostrarCalculoComparacao,
+    respostaSalva,
+    respostaJson,
+  );
+  let coisa2 = LembraCandidato(respostaSalva).executaFuncao2(
+    MostrarCalculoComparacao,
+    ClassificarCompatibilidade,
+    respostaSalva,
+    respostaJson,
+  );
+
+  ExibeCalculoComparacao(coisa);
+  ExibeCalculoCompatibilidade(coisa2);
+  ExibeRecomendacaoEstudos(coisa);
+}
